@@ -22,6 +22,11 @@ export default function SectionRecipes() {
     return (
         <div>
             <p>Les 10 dernières recettes</p>
+            {lastestRecipes.map(lastestRecipe => (
+                <p>{lastestRecipe.title}</p>
+            ))}
+
+            
         </div>
     )
 }
