@@ -1,25 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import Home from './pages/Home'
+import Categories from './pages/Recettes/Categories';
+import InterCat from './pages/Recettes/InterCat';
+import Subcat from './pages/Recettes/SubCat';
+import RecipeList from './pages/Recettes/RecipeList';
+import Connexion from './pages/espaceUser/Connexion';
+import Recipes from './components/Recipes';
+import Profile from './pages/espaceUser/Profile';
 
 function App() {
   return (
+    <Router>
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   
     </div>
+    <Route exact path="/home" component={Home}/>
+    <Route exact path="/categories" component={Categories}/>
+    <Route exact path="/interCat/:id" component={InterCat}/>
+
+    <Route exact path="/subCat/:idInter/:idCat" component={Subcat}/>
+    
+    <Route exact path="/recipelist" component={RecipeList}/>
+    <Route exact path="/connexion" component={Connexion}/>
+    <Route exact path="/recipes/:id" component={Recipes}/>
+    <Route exact path="/user/:id" component={Profile}/>
+    
+
+    </Router>
   );
 }
 
