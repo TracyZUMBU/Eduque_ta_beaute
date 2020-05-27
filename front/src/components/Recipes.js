@@ -6,10 +6,6 @@ import RecipeList from '../pages/Recettes/RecipeList'
 export default function Recipes(props) {
 
     const [recipes, setRecipes] = useState([])
-
-    const [test] = useState("text")
-
-  
     
     
     useEffect(() => {

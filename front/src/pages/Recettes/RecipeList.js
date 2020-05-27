@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function RecipeList(props) {
     console.log('rrrrr',props);
+
+
     
     return (
         <div>
@@ -11,6 +13,16 @@ export default function RecipeList(props) {
                 <li>{props.materiel}</li>
                 <li>{props.ingredient}</li>
             </ul>
+    
+
+         
+
+            
         </div>
+  
+
+      
+
+        
     )
 }

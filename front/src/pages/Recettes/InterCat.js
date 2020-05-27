@@ -47,8 +47,7 @@ render() {
                 <li><div key={interCatRecipe.cat_inter_id
             
             }>{interCatRecipe.name_cat_inter}</div></li></Link>)}
-            {/* <SubCat
-            idCat={() => this.state.idCat} /> */}
+            
            
         </ul>
         
