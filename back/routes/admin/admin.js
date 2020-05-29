@@ -4,8 +4,8 @@ const connection = require('../../conf')
 const router = express.Router()
 
 
-//Retrieve the 10 lastest recipes
-router.get('/recipes', (req, res) => {
+//Retrieve the lastest recipes
+router.get('/lastestRecipes', (req, res) => {
     connection.query('SELECT * FROM recipes ORDER BY created_at DESC LIMIT 3' , (err, results) => {
         if(err) {
             res.status(500).send('Error retrieving recipes')
@@ -39,5 +39,16 @@ router.get('/interCat/:id', (req, res) => {
 })
 
 
-
+// Retrieve all the subcategories of recipes depending on id's category and id's intermediate category
+router.get('/subCat/:idInter/:idCat', (req,res) => {
+    const idInter = req.params.idInter
+    const idCat = req.params.idCat
+    connection.query('SELECT * FROM sub_cat_recipes WHERE cat_inter_id = ?  AND cat_id = ?', [idInter,idCat], (err,results) => {
+        if (err) {
+            res.status(500).send('Error retrieving cat_repices')
+        } else {
+            res.status(200).json(results)
+        }
+    })
+})
 module.exports = router;

@@ -11,15 +11,23 @@ export default function SectionRecipes() {
     const [showCat, setShowCat] = useState(false)
     //Retrieve all the intermediate category based on category's id
     const [interCatRecipes, setInterCatRecipes] = useState ([])
+    //Retrieve subcategories 
+    const [subCatRecipes, setSubCatRecipes] = useState([])
     //Display the intermediate category name
-    const [showInterCat, setShowInterCat] = useState(true)
+    const [showInterCat, setShowInterCat] = useState(false)
+    // display the subcategory name
+    const [showSubCat, setShowSubCat] = useState(false)
+    // Retrieve the id of category
+    const [idCat, setIdCat] = useState('')
     
-
+    
+    
+//Retrieve the lastest recipes
     useEffect(() => {
        
         const getLatestRecipes = async () => {
 
-            const url = 'http://localhost:8000/admin/recipes/'
+            const url = 'http://localhost:8000/admin/lastestRecipes/'
             const result = await axios.get(url)
 
             setLatestRecipes(result.data)
@@ -28,6 +36,7 @@ export default function SectionRecipes() {
         getLatestRecipes()
     }, [])
     
+    // Retrieve all the categories of recipes
     useEffect(() => {
         
         const getCatRecipes = async () => {
@@ -36,32 +45,45 @@ export default function SectionRecipes() {
             const result = await axios.get(url)
             
             setCatRecipes(result.data)
-            //console.log(result.data);
-           
-            //console.log(result.data[0].id);
+        
         }
 
         getCatRecipes()
     }, [])
 
+    // Display
+    const toggleDropDown = () => {
+        setShowCat(!showCat)
+        console.log('heelo');
+        setShowInterCat(!showInterCat)
+       
+        
+    }
 
-    //Retrieve the id of the category clicked
+    // Retrieve the id of the category clicked and stock it
     const getIdCat = async (id) => {
      
         const url = `http://localhost:8000/admin/interCat/${id}`
         const result = await axios.get(url)
     
         setInterCatRecipes(result.data)
-      
+        setIdCat(id)
+        //console.log(id);
         
-        
-        
-        
-
-
 
     }
 
+    // Retrieve the subcategories 
+    const getIdInterCat = async (idInter) => {
+
+        const url = `http://localhost:8000/admin/subCat/${idInter}/${idCat}`
+        const result = await axios.get(url)
+        
+        setSubCatRecipes(result.data)
+        console.log(idCat, idInter);
+        console.log(result.data);
+          
+    }
     
 
     return (
@@ -72,22 +94,30 @@ export default function SectionRecipes() {
             ))}
 
         <div className="dropdown">
-            <button onClick={() => setShowCat(!showCat) 
+            <button onClick={toggleDropDown 
             } className="dropdown__btn">Catégorie</button>
 
-            <div className="dropdown__content">
+            <div className="dropdown__content--cat">
             {showCat === true ? 
             catRecipes.map(catRecipe => 
-            <p key={catRecipe.id} onClick={ () => getIdCat(catRecipe.id)
+            <p key={catRecipe.id} onClick={() => getIdCat(catRecipe.id)
             }>{catRecipe.name}</p>
-            ) : <div></div> }</div>
+            ) : '' }</div>
 
-            <div>
+            <div className="dropdown__content--interCat">
             {showInterCat === true ? 
             interCatRecipes.map(interCatRecipe => 
-            <p key={interCatRecipe.cat_inter_id} >{interCatRecipe.name_cat_inter}</p>
-            ) : <div></div> }
+            <p key={interCatRecipe.cat_inter_id} onClick={() => getIdInterCat(interCatRecipe.cat_inter_id)} >{interCatRecipe.name_cat_inter}</p>
+            ) : '' }
             </div>
+
+            <div className="dropdown__content--subCat">
+                { showSubCat === true && showInterCat === true ? 
+                subCatRecipes.map(subCatRecipe => 
+                <p key={subCatRecipe.id}>{subCatRecipe.name}</p>
+                ) : ''}
+            </div>
+
 
         </div>
 
