@@ -55,7 +55,8 @@ export default function SectionRecipes() {
     const toggleDropDown = () => {
         setShowCat(!showCat)
         console.log('heelo');
-        setShowInterCat(!showInterCat)
+        setShowInterCat(false)
+        setShowSubCat(false)
        
         
     }
@@ -68,9 +69,9 @@ export default function SectionRecipes() {
     
         setInterCatRecipes(result.data)
         setIdCat(id)
-        //console.log(id);
-        
-
+        console.log('rrr', id);
+        setShowInterCat(true)
+      
     }
 
     // Retrieve the subcategories 
@@ -82,6 +83,7 @@ export default function SectionRecipes() {
         setSubCatRecipes(result.data)
         console.log(idCat, idInter);
         console.log(result.data);
+        setShowSubCat(true)
           
     }
     
