@@ -51,4 +51,17 @@ router.get('/subCat/:idInter/:idCat', (req,res) => {
         }
     })
 })
+
+// Retrieve all recipes depending on sub category's id
+router.get('/recipes/:idSub', (req,res) => {
+    const idSub = req.params.idSub
+    connection.query('SELECT * FROM ETB.recipes WHERE sub_cat_id = ?', idSub, (err,results) =>{
+        if (err) {
+            res.sendStatus(500).send('Error retrieving recipes')
+        } else {
+            res.status(200).json(results)
+        }
+    })
+})
+
 module.exports = router;

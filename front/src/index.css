@@ -1,3 +1,13 @@
-.dropdown {
+.dropdown__content--cat {
+    background-color: red;
     
+}
+
+.dropdown__content--interCat {
+    background-color: blue;
+    
+}
+
+.dropdown__content--subCat{
+    background-color: yellow;
 }
