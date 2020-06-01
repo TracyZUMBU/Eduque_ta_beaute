@@ -64,4 +64,29 @@ router.get('/recipes/:idSub', (req,res) => {
     })
 })
 
+// Retrieve all users by ascendant order
+router.get('/allUsers', (req,res) => {
+    connection.query('SELECT * FROM ETB.users ORDER BY created_at DESC', (err,results) => {
+        if(err) {
+            res.sendStatus(500).send('Error retrieving users')
+        }else {
+            res.status(200).json(results)
+        }
+    })
+
+})
+
+// Retrieve all users by ascendant order
+router.get('/allUsersASC', (req,res) => {
+    connection.query('SELECT * FROM ETB.users ORDER BY created_at ASC', (err,results) => {
+        if(err) {
+            res.sendStatus(500).send('Error retrieving users')
+        }else {
+            res.status(200).json(results)
+        }
+    })
+
+})
+
+
 module.exports = router;

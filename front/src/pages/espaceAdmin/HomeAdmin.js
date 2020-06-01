@@ -7,7 +7,7 @@ export default function HomeAdmin() {
             <p>Espace administarteur</p>
             <Link to={'/admin/recipes'}><div>RECETTES</div></Link>
             
-            <div>UTILISATEUR</div>
+            <Link to={'/admin/AllUsers'}><div>UTILISATEUR</div></Link>
         </div>
     )
 }

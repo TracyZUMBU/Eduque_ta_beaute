@@ -11,6 +11,7 @@ import Recipes from './components/Recipes';
 import Profile from './pages/espaceUser/Profile';
 import EspaceAdmin from './pages/espaceAdmin/HomeAdmin';
 import SectionRecipes from './pages/espaceAdmin/SectionRecipes';
+import SectionUsers from './pages/espaceAdmin/SectionUsers'
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
     
     <Route exact path="/admin" component={EspaceAdmin}/>
     <Route exact path="/admin/recipes" component={SectionRecipes}/>
-    <Route exact path="/recipelist" component={RecipeList}/>
+    <Route exact path="/admin/allUsers" component={SectionUsers}/>
+
     <Route exact path="/connexion" component={Connexion}/>
     <Route exact path="/recipes/:id" component={Recipes}/>
     <Route exact path="/user/:id" component={Profile}/>
