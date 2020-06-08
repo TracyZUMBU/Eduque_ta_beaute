@@ -3,10 +3,13 @@ const express = require("express")
 const connection = require('../../conf')
 const router = express.Router()
 
+/**
+ * GET
+ */
 
 //Retrieve the lastest recipes
 router.get('/lastestRecipes', (req, res) => {
-    connection.query('SELECT * FROM recipes ORDER BY created_at DESC LIMIT 3' , (err, results) => {
+    connection.query('SELECT * FROM recipes ORDER BY created_at DESC LIMIT 10' , (err, results) => {
         if(err) {
             res.status(500).send('Error retrieving recipes')
             
@@ -88,5 +91,41 @@ router.get('/allUsersASC', (req,res) => {
 
 })
 
+router.get('/allUsersDESC', (req,res) => {
+    connection.query('SELECT * FROM ETB.users ORDER BY created_at DESC', (err,results) => {
+        if(err) {
+            res.sendStatus(500).send('Error retrieving users')
+        }else {
+            res.status(200).json(results)
+        }
+    })
+
+})
+
+/**
+ * DELETE
+ */
+
+router.delete('/recipeDelete/:id', (req,res) => {
+    const id = req.params.id
+    connection.query('DELETE FROM ETB.recipes WHERE id = ?', id, (err,results) => {
+        if(err) {
+            res.sendStatus(500).send('The recipe has not been deleted')
+        }else {
+            res.status(200).send('The recipes has been deleted')
+        }
+    })
+})
+
+router.delete('/userDelete/:id', (req,res) => {
+    const id = req.params.id
+    connection.query('DELETE FROM ETB.users WHERE id = ?', id, (err,results) => {
+        if(err) {
+            res.sendStatus(500).send('The user has not been deleted')
+        }else {
+            res.status(200).send('The user has been deleted')
+        }
+    })
+})
 
 module.exports = router;

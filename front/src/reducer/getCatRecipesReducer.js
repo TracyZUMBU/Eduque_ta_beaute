@@ -1,13 +1,13 @@
-const initState = {
+// const initState = {
 
-    catRecipes : []
+//     catRecipes : []
 
-}
+// }
 
-const getApi = async () => {
+// const getApi = async () => {
 
     
-}
+// }
 
 
-export default getCatRecipesReducer
+// export default getCatRecipesReducer

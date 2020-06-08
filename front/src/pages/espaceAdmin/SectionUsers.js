@@ -6,7 +6,7 @@ export default function SectionUser() {
 
     // retrieve all users
     const [users, setUsers] = useState([])
-    const [asc, setAsc] = useState (true)
+    const [asc, setAsc] = useState ("plus récent")
 
     useEffect(() => {
 
@@ -16,7 +16,6 @@ export default function SectionUser() {
         const result = await axios.get(url)
 
         setUsers(result.data)
-        console.log(result);
         
         
         
@@ -36,6 +35,17 @@ export default function SectionUser() {
         
     }
 
+    const older = async () => {
+
+        const url = 'http://localhost:8000/admin/allUsersDESC'
+        const result = await axios.get(url)
+
+        setUsers(result.data)
+        console.log(result);
+        
+        
+    }
+
     return (
         <div>
             <button onClick={recent}>{asc}</button>
@@ -45,6 +55,7 @@ export default function SectionUser() {
                 name={user.name}
                 email={user.email}
                 date={user.created_at}
+                id={user.id}
                 />
             ))}
           
