@@ -106,6 +106,7 @@ router.get('/allUsersDESC', (req,res) => {
  * DELETE
  */
 
+// Delete a recipe
 router.delete('/recipeDelete/:id', (req,res) => {
     const id = req.params.id
     connection.query('DELETE FROM ETB.recipes WHERE id = ?', id, (err,results) => {
@@ -117,6 +118,7 @@ router.delete('/recipeDelete/:id', (req,res) => {
     })
 })
 
+// Delete a user
 router.delete('/userDelete/:id', (req,res) => {
     const id = req.params.id
     connection.query('DELETE FROM ETB.users WHERE id = ?', id, (err,results) => {
@@ -127,5 +129,23 @@ router.delete('/userDelete/:id', (req,res) => {
         }
     })
 })
+
+
+/**
+ * ********************************** Post
+ */
+
+ // Add a new recipe
+ router.post('/createArticle', (req, res) => {
+     const content = req.body
+     connection.query('INSERT INTO ETB.recipes SET ?', content, (err, results) => {
+         if (err) {
+             res.status(500).send("the recipes has not been created")
+         } else {
+             res.status(200).json(results)
+         }
+     })
+
+ })
 
 module.exports = router;
