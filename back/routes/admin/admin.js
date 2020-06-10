@@ -148,4 +148,18 @@ router.delete('/userDelete/:id', (req,res) => {
 
  })
 
+
+ // Add a image of a recipe
+ router.post('/addImage', (req, res) => {
+    const content = req.body
+    connection.query('INSERT INTO ETB.photos SET ?', content, (err, results) => {
+        if (err) {
+            res.status(500).send("the recipes has not been created")
+        } else {
+            res.status(200).json(results)
+        }
+    })
+
+})
+
 module.exports = router;

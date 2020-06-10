@@ -81,6 +81,20 @@ router.post('/userCreate', (req, res) => {
 
 } )
 
+// Register 
+router.post('/register', async (req,res) =>{
+    const {email, password} = req.body
+
+    try {
+
+        const hashedPassword = await hash(password, 10);
+        console.log(hashedPassword);
+        
+    }catch (err) {
+        
+    }
+})
+
 module.exports = router
 
 

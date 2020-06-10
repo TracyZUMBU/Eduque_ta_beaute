@@ -7,12 +7,16 @@ var cors = require('cors')
 const morgan = require('morgan')
 const port = 8000
 
+
 app.use(morgan('dev'))
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+
 app.use("/user", router.user)
 app.use("/admin", router.admin)
+
+
 
 
 app.listen(port, () => {
