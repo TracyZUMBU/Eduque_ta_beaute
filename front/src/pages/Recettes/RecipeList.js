@@ -11,8 +11,9 @@ export default function RecipeList(props) {
                 
                 <li>{props.title}</li>
                 <li>{props.materiel}</li>
-                <li>{props.ingredient}</li>
+                <li>{props.text}</li>
             </ul>
+                <img src={props.photo}/>
     
 
          

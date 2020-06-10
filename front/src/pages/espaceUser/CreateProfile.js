@@ -8,12 +8,12 @@ export default function CreateProfile() {
     const [password, setPassword] = useState();
     const [email, setEmail] = useState();
     const [response, setResponse] = useState();
-    const content = {lastname, firstname, email, password}
+    const content = {email, password}
 
     const handlePost = () => {
         console.log(content);
         
-        const url = 'http://localhost:8000/user/userCreate';
+        const url = 'http://localhost:8000/auth';
         axios.post(url, content)
         .then(res => setResponse(res))
     }

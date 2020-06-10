@@ -4,7 +4,7 @@ import DisplayModale from '../DisplayModale'
 import axios from 'axios'
 
 
-export default function SectionRecipes() {
+export default function SectionRecipes(props) {
 
     // lastest added recipes
     const [lastestRecipes, setLatestRecipes] = useState ([])
@@ -12,17 +12,19 @@ export default function SectionRecipes() {
     const [toggleModale, setToggleModale] = useState (false)
     const [curId, setCurId] = useState ("")
 
+    const params = props.match.params.view
     
     
     
 // Retrieve the lastest recipes
     useEffect(() => {
-       
+        
         const getLatestRecipes = async () => {
 
             const url = 'http://localhost:8000/admin/lastestRecipes/'
             const result = await axios.get(url)
-
+            console.log(params);
+            
             setLatestRecipes(result.data)
         }
         
@@ -55,7 +57,7 @@ export default function SectionRecipes() {
             ))}
             {toggleModale ? <DisplayModale closeFunc={closeModale}/> : ""}
 
-            <FilterRecipes/>
+            <FilterRecipes params={params}/>
          
         </div>
 

@@ -34,8 +34,9 @@ export default function Recipes(props) {
             <RecipeList
             key={recipe.id}
             title={recipe.title}
+            photo={recipe.photo}
             materiel={recipe.materiel}
-            ingredient={recipe.ingredient}/>
+            text={recipe.text}/>
               
             ))}
 

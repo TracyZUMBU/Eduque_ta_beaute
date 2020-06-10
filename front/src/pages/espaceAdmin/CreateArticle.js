@@ -1,27 +1,36 @@
-import React, {useState} from 'react'
-import { Editor } from "@tinymce/tinymce-react";
+import React, {useState, useEffect} from 'react'
+// import { Editor } from "@tinymce/tinymce-react";
+import EditorJs from "react-editor-js";
+import FilterRecipes from '../../components/FilterRecipes'
+
+
+
 import axios from 'axios'
 
-export default function CreateArticle() {
+export default function CreateArticle(props) {
+ 
     
-    const [text, setText] = useState('')
+    const [text, setText] = useState()
     const [title, setTitle] = useState()
     const [materiel, setMateriel] = useState()
+    const [photo, setPhoto] = useState()
     const [response, setResponse] = useState()
-    const content = { title, materiel, text}
-
+    const content = { title, photo ,materiel, text}
+  
     const handlePost = () => {
         const url = `http://localhost:8000/admin/createArticle`
-        axios.post(url,content)
+        axios.post(url, content)
         .then(res => setResponse(res))
+        window.location.reload();
     }
-
 
 
     return (
         <div>
             <h1>Taper l'article</h1>
             
+            <FilterRecipes/>
+            {props.children}
             <input
                 type="text"
                 id="title"
@@ -31,17 +40,35 @@ export default function CreateArticle() {
 
             <input
                 type="text"
-                id="title"
-                placeholder="quel contenant."
+                id="image"
+                placeholder="Saisir l'URL de l'image"
+                onChange={(e) => setPhoto(e.target.value)}
+            ></input>
+
+            <input
+                type="text"
+                id="Materiel"
+                placeholder="quel contenant ?"
                 onChange={(e) => setMateriel(e.target.value)}
             ></input>
 
             <input 
-                type="button" 
+                type="text" 
                 id="button-blue" 
                 className="feedback-input" 
+                onChange={(e) => setText(e.target.value)}>
+            </input>
+
+            <input 
+                type="button" 
+                id="text" 
+                className="feedback-input" 
                 value="Créer l'article" onClick={() => handlePost()} />
-            <Editor
+            
+
+            
+
+            {/* <Editor
             initialValue={text}
             init={{
                 forced_root_block : false,
@@ -60,7 +87,7 @@ export default function CreateArticle() {
             onChange={(e) => setText(e.target.getContent())}
           />
 
-        <p>{text}</p>
+        <p>{text}</p> */}
         </div>
     )
 }

@@ -29,7 +29,7 @@ function App() {
     <Route exact path="/subCat/:idInter/:idCat" component={Subcat}/>
     
     <Route exact path="/admin" component={EspaceAdmin}/>
-    <Route exact path="/admin/recipes" component={SectionRecipes}/>
+    <Route exact path="/admin/allRecipes/:view" component={SectionRecipes}/>
     <Route exact path="/admin/allUsers" component={SectionUsers}/>
 
     <Route exact path="/connexion" component={Connexion}/>
