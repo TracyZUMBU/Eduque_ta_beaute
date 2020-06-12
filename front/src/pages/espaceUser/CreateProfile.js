@@ -4,8 +4,9 @@ import axios from 'axios'
 export default function CreateProfile() {
 
     const [firstname, setFirstname] = useState();
-    const [lastname, setLastname] = useState();
+    const [username, setUsername] = useState();
     const [password, setPassword] = useState();
+    const [password_repeat, setPassword_repeat] = useState();
     const [email, setEmail] = useState();
     const [response, setResponse] = useState();
     const content = {email, password}
@@ -13,8 +14,8 @@ export default function CreateProfile() {
     const handlePost = () => {
         console.log(content);
         
-        const url = 'http://localhost:8000/auth';
-        axios.post(url, content)
+        const url = 'http://localhost:8000/register/sign-up';
+        axios.post(url, {username, password, email, password_repeat})
         .then(res => setResponse(res))
     }
 
@@ -23,12 +24,8 @@ export default function CreateProfile() {
             <p>Créer votre compte</p>
             <form>
                 <label>
-                    Nom :
-                    <input type="text" name="lastname" onChange={(e)=> setLastname(e.target.value)} />
-                </label>
-                <label>
-                    Prénom :
-                    <input type="text" name="firstname" onChange={(e)=> setFirstname(e.target.value)}/>
+                    username :
+                    <input type="text" name="username" onChange={(e)=> setUsername(e.target.value)} />
                 </label>
                 <label>
                     Email :
@@ -37,6 +34,10 @@ export default function CreateProfile() {
                 <label>
                     Mot de passe :
                     <input type="password" name="password" onChange={(e)=> setPassword(e.target.value)} />
+                </label>
+                <label>
+                    Répétez le mot de passe :
+                    <input type="password_repeat" name="password_repeat" onChange={(e)=> setPassword_repeat(e.target.value)} />
                 </label>
                 <input  type="button" value="Envoyer" onClick={() => handlePost()} />
             </form>
