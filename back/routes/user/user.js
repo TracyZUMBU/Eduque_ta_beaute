@@ -68,32 +68,21 @@ router.get('/user/:id', (req,res) => {
 /////////////////////////////// POST ///////////////////////////////////
 
 // Send a new profile to the BDD
-router.post('/userCreate', (req, res) => {
-    const content = req.body
-    console.log(content);
-    connection.query('INSERT INTO ETB.users SET ?', content, (err, results) => {
-        if(err){
-            res.status(500).send('Error creating a user')
-        }else {
-            res.status(200).json(results)
-        }
-    })
+// router.post('/userCreate', (req, res) => {
+//     const content = req.body
+//     console.log(content);
+//     connection.query('INSERT INTO ETB.users SET ?', content, (err, results) => {
+//         if(err){
+//             res.status(500).send('Error creating a user')
+//         }else {
+//             res.status(200).json(results)
+//         }
+//     })
 
-} )
+// } )
 
-// Register 
-router.post('/register', async (req,res) =>{
-    const {email, password} = req.body
 
-    try {
 
-        const hashedPassword = await hash(password, 10);
-        console.log(hashedPassword);
-        
-    }catch (err) {
-        
-    }
-})
 
 module.exports = router
 

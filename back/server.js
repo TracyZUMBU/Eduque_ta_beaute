@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 app.use("/user", router.user)
 app.use("/admin", router.admin)
-
+app.use("/register", router.register)
 
 
 
