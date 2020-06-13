@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 
-export default function SectionRecipes() {
+export default function SectionRecipes(props) {
     //Retrieve all the categories of recipes
     const [catRecipes, setCatRecipes] = useState ([])
     //Display the categories name
@@ -25,12 +25,16 @@ export default function SectionRecipes() {
     // Retrieve all the categories of recipes
     useEffect(() => {
         
+       
+        console.log("ggg", props.params);
         const getCatRecipes = async () => {
             
             const url = 'http://localhost:8000/admin/catRecipes/'
             const result = await axios.get(url)
             
             setCatRecipes(result.data)
+            
+            
         
         }
 
@@ -114,8 +118,9 @@ return (
     ) : '' }
 </div>
 
+
 <div className="dropdown__content--subCat">
-    { showSubCat === true && showInterCat === true ? 
+    { showSubCat === true && showInterCat === true && props.params === "recipes" ? 
     subCatRecipes.map(subCatRecipe => 
     <p key={subCatRecipe.id} onClick={()=> getRecipes(subCatRecipe.id)}>{subCatRecipe.name}</p>
     ) : ''}

@@ -29,7 +29,7 @@ export default function UsersList(props) {
         <div>
             <ul>
                 
-                <li>{props.name} <i onClick={()=> openModale(props.id)}>{props.id}</i> </li>
+                <li>{props.name} <i onClick={() => openModale(props.id)}>{props.id}</i> </li>
                 <li>{props.email}</li>
                 <li>{props.date}</li>
                 
