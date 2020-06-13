@@ -3,19 +3,17 @@ import axios from 'axios'
 
 export default function CreateProfile() {
 
-    const [firstname, setFirstname] = useState();
+    
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [password_repeat, setPassword_repeat] = useState();
     const [email, setEmail] = useState();
     const [response, setResponse] = useState();
-    const content = {email, password}
+    const content = {username, email, password, password_repeat}
 
     const handlePost = () => {
-        console.log(content);
-        
         const url = 'http://localhost:8000/register/sign-up';
-        axios.post(url, {username, password, email, password_repeat})
+        axios.post(url, content)
         .then(res => setResponse(res))
     }
 
@@ -37,7 +35,7 @@ export default function CreateProfile() {
                 </label>
                 <label>
                     Répétez le mot de passe :
-                    <input type="password_repeat" name="password_repeat" onChange={(e)=> setPassword_repeat(e.target.value)} />
+                    <input type="password" name="password_repeat" onChange={(e)=> setPassword_repeat(e.target.value)} />
                 </label>
                 <input  type="button" value="Envoyer" onClick={() => handlePost()} />
             </form>

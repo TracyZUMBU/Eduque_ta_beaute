@@ -65,23 +65,6 @@ router.get('/user/:id', (req,res) => {
     
 })
 
-/////////////////////////////// POST ///////////////////////////////////
-
-// Send a new profile to the BDD
-// router.post('/userCreate', (req, res) => {
-//     const content = req.body
-//     console.log(content);
-//     connection.query('INSERT INTO ETB.users SET ?', content, (err, results) => {
-//         if(err){
-//             res.status(500).send('Error creating a user')
-//         }else {
-//             res.status(200).json(results)
-//         }
-//     })
-
-// } )
-
-
 
 
 module.exports = router

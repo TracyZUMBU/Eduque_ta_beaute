@@ -9,10 +9,16 @@ export default function Connexion() {
        //state qui recoit la réponse du back
        const [backRes, setRes] = useState(false)
        //message sur le login en cas d'erreur
-       const [message, setMessage] = useState()
-   
+    
+       const [email, setEmail] = useState();
+       const [password, setPassword] = useState();
+       const [response, setResponse] = useState();
+       //const isConnect = response.data.auth
+       //console.log(isConnect);
+       
 
     useEffect(() => {
+        
         if (localStorage.getItem('myConnection') === 'true') {
             setAdmin(true);
             console.log('yes');
@@ -28,31 +34,14 @@ export default function Connexion() {
         
     }, [])
 
-    let pathApi = process.env.REACT_APP_PATH_API_DEV 
-    if (process.env.NODE_ENV === 'production') {
-      pathApi = process.env.REACT_APP_PATH_API_PROD
-      console.log('ttt');
-       
-    }else {
-        console.log('yyyy');
 
-    console.log(process.env.NODE_ENV);
-    
-        
-    }
-     
-        
-  
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [response, setResponse] = useState();
 
-    const handlePost = () => {
-        
-        
+const handlePost = () => {
+
         const url = 'http://localhost:8000/register/login';
         axios.post(url, {password, email})
         .then(res => setResponse(res))
+
     }
 
     return (

@@ -7,6 +7,8 @@ module.exports = {
         return res.status(400).send({
           msg: 'Please enter a username with min. 3 chars'
         });
+        console.log('cool');
+        
       }
   
       // password min 6 chars

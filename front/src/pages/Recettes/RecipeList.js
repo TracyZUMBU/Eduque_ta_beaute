@@ -13,7 +13,7 @@ export default function RecipeList(props) {
                 <li>{props.materiel}</li>
                 <li>{props.text}</li>
             </ul>
-                <img src={props.photo}/>
+                <img alt='recipe' src={props.photo}/>
     
 
          

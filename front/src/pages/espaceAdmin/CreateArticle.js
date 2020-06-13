@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 // import { Editor } from "@tinymce/tinymce-react";
-import EditorJs from "react-editor-js";
+
 import FilterRecipes from '../../components/FilterRecipes'
 
 

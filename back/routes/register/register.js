@@ -13,12 +13,13 @@ require('dotenv').config(process.cwd(), '../../.env')
 const secret = process.env.JWT_SECRET
 
 router.post('/sign-up', userMiddleware.validateRegister,(req, res,next) => {
-    const username = req.body.username;
+    const content = req.body                
+    console.log(content);
     
-    console.log(req.body);
-    connection.query('SELECT * FROM ETB.users WHERE LOWER(username) = ?', username,
+    connection.query('SELECT * FROM ETB.users WHERE LOWER(username) = ?', content.username,
     (err, resultat) => {
        console.log(resultat);
+       
         if (resultat.length) {
           return res.status(409).send({
             msg: 'This username is already in use!'
@@ -28,11 +29,12 @@ router.post('/sign-up', userMiddleware.validateRegister,(req, res,next) => {
           console.log('username is available');
         }})
 
-        const password = bcrypt.hashSync(req.body.password)
-        console.log('tee', password);
+    const password = bcrypt.hashSync(content.password)
         
-    connection.query( 
-    `INSERT INTO ETB.users (username, password) VALUES ( ?, ?)`, [username, password],
+    console.log(password);
+    connection.query(  
+      
+    `INSERT INTO ETB.users (username, email, password) VALUES ('${content.username}', '${content.email}', '${password}')`, 
     (err, result) => { 
         if (err) {
             return res.status(500).send('Cannot register the user')
@@ -49,7 +51,7 @@ router.post('/sign-up', userMiddleware.validateRegister,(req, res,next) => {
 router.post('/login', (req, res, next) => {
     const email = req.body.email
     const password = req.body.password
-    connection.query(
+    connection.query( 
         `SELECT * FROM ETB.users WHERE email = ?;`, email,
         (err, result) => {
             console.log(result[0]);
