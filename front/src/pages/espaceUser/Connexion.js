@@ -19,6 +19,8 @@ export default function Connexion() {
 
     useEffect(() => {
         
+        console.log(response);
+        
         if (localStorage.getItem('myConnection') === 'true') {
             setAdmin(true);
             console.log('yes');
