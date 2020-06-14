@@ -7,10 +7,8 @@ module.exports = {
         return res.status(400).send({
           msg: 'Please enter a username with min. 3 chars'
         });
-        console.log('cool');
-        
       }
-  
+
       // password min 6 chars
       if (!req.body.password || req.body.password.length < 6) {
         return res.status(400).send({
@@ -29,5 +27,18 @@ module.exports = {
       }
   
       next();
-    }
-  };
+    },
+
+    isLoggedIn: (req, res, next) => {
+      console.log(req.headers);
+      
+      const authHeader = req.headers['authorization']
+      const token = authHeader && authHearder.split('')[1]
+      if (token == null) return res.sendStatus(401)
+
+      jwt.verify(token, secret, (err, user) => {
+        if(err) return res.sendStatus(403)
+      })
+  }
+
+};

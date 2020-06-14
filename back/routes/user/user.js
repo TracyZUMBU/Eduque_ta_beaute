@@ -1,6 +1,7 @@
 // Ici sont toutes les routes qui concernent les users
 const express = require("express")
 const connection = require('../../conf')
+const { Router } = require("express")
 
 const router = express.Router()
 
@@ -65,6 +66,22 @@ router.get('/user/:id', (req,res) => {
     
 })
 
+
+////////////////////////// POST //////////////////////
+
+router.post('/postComment', (req, res) => { 
+    const comment = req.body.comment
+  
+    
+    connection.query(`INSERT INTO ETB.comments (comments, user_id, recipe_id) VALUES ('${comment}', '1', '2')`,(err, result) => { 
+        if(err) {
+            return res.status(500).send('The comments has not been post')
+        } else {
+            res.status(200).send('the comments has been post')
+        }
+
+    }) 
+})
 
 
 module.exports = router

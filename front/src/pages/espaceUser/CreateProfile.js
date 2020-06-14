@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export default function CreateProfile() {
 
-    
+    console.log(response);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [password_repeat, setPassword_repeat] = useState();
@@ -15,6 +15,8 @@ export default function CreateProfile() {
         const url = 'http://localhost:8000/register/sign-up';
         axios.post(url, content)
         .then(res => setResponse(res))
+        console.log('tt', response);
+        
     }
 
     return (

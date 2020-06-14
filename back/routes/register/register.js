@@ -8,8 +8,9 @@ const jwt = require('jsonwebtoken');
 const userMiddleware = require('../middleware/user.js');
 
 
+
 //Authentification
-require('dotenv').config(process.cwd(), '../../.env')
+require('dotenv').config(process.cwd(), '../.env')
 const secret = process.env.JWT_SECRET
 
 router.post('/sign-up', userMiddleware.validateRegister,(req, res,next) => {
@@ -75,8 +76,8 @@ router.post('/login', (req, res, next) => {
           // Token creation 
           console.log('1', result[0].id);
           const token = jwt.sign(// on utilise sign de jwt pour creer le token
-            {id : result[0].id, email: result[0].email}, // on rentre les information de l'utilisateur dont on a besoin en front 
-            'secret_key', // correspond a une chaine de caractere permettant de chiffrer la signature du token
+            {id : result[0].id, email: result[0].email, type : result[0].type}, // on rentre les information de l'utilisateur dont on a besoin en front 
+            secret, // correspond a une chaine de caractere permettant de chiffrer la signature du token
             {
               expiresIn: '24h'// fixe la duree de vie du token
             },
@@ -94,9 +95,10 @@ router.post('/login', (req, res, next) => {
 })
 
 
-router.get('/secret-route', (req, res, next) => {
+router.get('/secret-route', userMiddleware.isLoggedIn, (req, res, next) => {
+  console.log(req.userData);
   res.send('This is the secret content. Only logged in users can see that!');
-});
+}); 
 
 
 
