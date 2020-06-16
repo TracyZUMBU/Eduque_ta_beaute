@@ -1,29 +1,91 @@
-.banner {
-    height: 50px;
-    background-color: blue;
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    //grid-template-rows: 2rem 1rem 20rem 5rem;
+    grid-template-areas: 
+    "banner"
+    "navigation"
+    "main";
 }
 
-.nav {
-    &__ list {
+.header{
+    height: 18rem;
+    background-color: magenta;
+    grid-area:banner;
+    background-image: url(../img/almond.jpg);
+    background-size: cover;
+    background-position: center;
+    
+}
+.navigation {
+    background-color: white;
+    grid-area: navigation;
+    height: 7rem;
+    border: 2px solid $color-light-grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    &__list{
+        display: flex;
+        flex-direction: row;
+        list-style: none;
 
     }
- 
+
     &__item {
-
+        
+        margin-right: 2rem;
     }
-
+    
+    
 }
+
+.main {
+    &--home{
+        grid-area:main;
+    }
+}
+
 
 .center {
+    background-color:white;
+   
+    
     &__img-box {
-
-    }
-
+        background-color: lightcoral;
+        display: flex;
+        justify-content: center; 
+    } 
+    
     &__img {
-
+        object-fit: cover;
+    height: 100%;
+    width: 100%;
     }
 }
 
-.slide {
+.center__img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+   }
 
+
+
+.slide {
+    
+    display: flex;
+    justify-content: center;
+    margin-top:3rem;
+    
+
+    &__box {
+    }
+
+    &__list{
+
+    }
 }

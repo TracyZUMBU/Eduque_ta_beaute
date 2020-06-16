@@ -1,3 +1,70 @@
-.banner {
-  height: 50px;
-  background-color: red; }
+@charset "UTF-8";
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+  color: inherit; }
+
+html {
+  font-size: 62.5%; }
+
+main {
+  padding: 6rem 11rem; }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "banner" "navigation" "main"; }
+
+.header {
+  height: 18rem;
+  background-color: magenta;
+  grid-area: banner;
+  background-image: url(../img/almond.jpg);
+  background-size: cover;
+  background-position: center; }
+
+.navigation {
+  background-color: white;
+  grid-area: navigation;
+  height: 7rem;
+  border: 2px solid #00000029;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+  .navigation__list {
+    display: flex;
+    flex-direction: row;
+    list-style: none; }
+  .navigation__item {
+    margin-right: 2rem; }
+
+.main--home {
+  grid-area: main; }
+
+.center {
+  background-color: white; }
+  .center__img-box {
+    background-color: lightcoral;
+    display: flex;
+    justify-content: center; }
+  .center__img  {
+    object-fit: cover;
+    height: 100%;
+    width: 100%; }
+
+.center__img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%; }
+
+.slide {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem; }

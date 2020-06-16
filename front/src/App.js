@@ -22,7 +22,7 @@ function App() {
   return (
     <Router>
 
-    <div className="App">
+    <div className="">
    
     </div>
     <Route exact path="/home" component={Home}/>
