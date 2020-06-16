@@ -1,4 +1,4 @@
-// middleware/users.js
+const jwt = require('jsonwebtoken')
 
 module.exports = {
     validateRegister: (req, res, next) => {
@@ -27,18 +27,21 @@ module.exports = {
       }
   
       next();
-    },
+    }, 
 
     isLoggedIn: (req, res, next) => {
-      console.log(req.headers);
-      
-      const authHeader = req.headers['authorization']
-      const token = authHeader && authHearder.split('')[1]
-      if (token == null) return res.sendStatus(401)
+     
+      const token = req.header("x-access-token")
+      if (!token) return res.status(401).send('Access Denied');
+ 
+      try {
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = verified;  
+      } catch (err) {
+        res.status(400).send('Invalid Token')
+      }  
 
-      jwt.verify(token, secret, (err, user) => {
-        if(err) return res.sendStatus(403)
-      })
+   next();  
   }
 
-};
+}; 
