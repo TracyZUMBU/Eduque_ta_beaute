@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './css/style.css';
+
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Home from './pages/Home'
 import Categories from './pages/Recettes/Categories';

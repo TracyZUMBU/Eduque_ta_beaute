@@ -2,8 +2,8 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 export default function home() {
-    return (
-        <div>
+    return ( 
+        <div class="grid-container">
             <section class="banner"></section>
             <nav class="nav">
 
@@ -18,7 +18,7 @@ export default function home() {
 
             <section class="center">
                 <div class="center__img-box">
-                    <img src={} class="center__img" ></img>
+                    <img src={''} class="center__img" ></img>
                 </div>
             </section>
             
