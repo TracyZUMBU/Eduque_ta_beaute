@@ -1,4 +1,4 @@
-// middleware/users.js
+const jwt = require('jsonwebtoken')
 
 module.exports = {
     validateRegister: (req, res, next) => {
@@ -7,10 +7,8 @@ module.exports = {
         return res.status(400).send({
           msg: 'Please enter a username with min. 3 chars'
         });
-        console.log('cool');
-        
       }
-  
+
       // password min 6 chars
       if (!req.body.password || req.body.password.length < 6) {
         return res.status(400).send({
@@ -29,5 +27,31 @@ module.exports = {
       }
   
       next();
-    }
-  };
+    }, 
+
+    isLoggedIn: (req, res, next) => {
+     //console.log("jjj", req);
+     
+  //     const token = req.headers["x-access-token"]
+  //     if (!token) return res.status(401).send('Access Denied');
+ 
+  //     try {
+  //       const verified = jwt.verify(token, process.env.JWT_SECRET);
+  //       req.user = verified;  
+  //     } catch (err) {
+  //       res.status(400).send('Invalid Token')
+  //     }  
+
+  //  next();  
+  const bearerHeader = req.headers["Authorization"]
+  if (typeof bearerHearder !== 'undefined') {
+    const bearer = bearerHeader.split(' ');
+    const bearerToken = bearer[1];
+    req.token = bearerToken;
+    next();
+  }else {
+    res.sendStatus(403)
+  }
+  }
+
+};  

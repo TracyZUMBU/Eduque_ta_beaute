@@ -54,6 +54,7 @@ export default function SectionRecipes(props) {
             <p>Les 10 dernières recettes</p>
             {lastestRecipes.map(lastestRecipe => (
                 <p key={lastestRecipe.id}>{lastestRecipe.title} <i onClick={()=> openModale(lastestRecipe.id)}>x</i></p>
+           
             ))}
             {toggleModale ? <DisplayModale closeFunc={closeModale}/> : ""}
 

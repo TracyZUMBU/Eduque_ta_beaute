@@ -1,22 +1,66 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, {useEffect, useState} from 'react'
+import axios from 'axios'
+import '../css/style.css';
 
-export default function home() {
-    return (
-        <div>
-            <ul>
-            <Link to="/categories"><li>Recette</li></Link>
-            <li>Alternative</li>
-            <li>Mode</li>
-            <li>Blog</li>
-            <Link to="/connexion"><li>Se connecter</li></Link>
-            </ul>
+import Header from '../components/Header'
+import Slider from '../components/Slider'
+import photo from '../img/flacon_white.jpg'
+import recipe from '../img/lotion.jpg'
+import imgAlternative from '../img/lotion.jpg'
+import imgBlog from '../img/bottle_white.jpg'
 
-            <div className="slide"></div>
+import { Slide } from 'react-slideshow-image'
 
-            <h1>Dernièrement</h1>
 
-            <div></div>
+
+
+export default function Home() {
+
+    const [lastestRecipes, setLatestRecipes] = useState ([])
+    
+    useEffect(() => {
+        
+        const getLatestRecipes = async () => {
+            const url = 'http://localhost:8000/admin/lastestRecipes/'
+            const result = await axios.get(url)
+            setLatestRecipes(result.data)
+            console.log(lastestRecipes);
+            }
+            getLatestRecipes();
+    }, [])
+
+    return ( 
+        <div class="grid-container">
+            <Header/>
+
+            <main class="main main--home">
+                <section class="center">
+                    <div class="center__image-box">
+                        <img src={photo} class="center__image"></img>
+                    </div>
+                </section>
+     
+                <section class="slider">
+                    <div class="slider__box">
+                        <h3 class="heading-tertiary headlines">Features news</h3>
+                        <div class="slider__list">
+                            {lastestRecipes.map(latestRecipe => (
+                                <Slider
+                                    key={latestRecipe.id}
+                                    title={latestRecipe.title}
+                                    photo={latestRecipe.photo}
+                                    name={latestRecipe.name}
+                                    text={latestRecipe.text}/>            
+                            ))}                      
+                        </div>
+                    </div>
+                </section>
+            </main>
+      
+            <footer class="footer">
+
+            </footer>
+
         </div>
     )
 }

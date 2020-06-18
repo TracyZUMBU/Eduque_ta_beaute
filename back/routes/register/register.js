@@ -1,5 +1,7 @@
 const express = require("express")
+const app = express ();
 const connection = require('../../conf')
+require('dotenv').config(process.cwd(), '../.env')
 
 const router = express.Router()
 
@@ -7,10 +9,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userMiddleware = require('../middleware/user.js');
 
+const expressJwt = require('express-jwt');
 
 //Authentification
-require('dotenv').config(process.cwd(), '../../.env')
 const secret = process.env.JWT_SECRET
+
+app.use(expressJwt({ secret : secret}).unless({path : ['/Connexion']}))
+
+
 
 router.post('/sign-up', userMiddleware.validateRegister,(req, res,next) => {
     const content = req.body                
@@ -58,8 +64,9 @@ router.post('/login', (req, res, next) => {
             
             if (err) {
                 return res.status(500).send(err)
-              } else if (!result[0]){ // on verifie la presnec d'un resultat dans la reponse
-                return res.status(409).send('Unknown user') // si pas de resultat l'email n'est pas enregistre en base donc l'utilisateur est inconnu
+              } else if (!result[0]){ 
+              
+                return res.status(409).send('Unknown user') 
               } 
 
           // check password
@@ -74,30 +81,45 @@ router.post('/login', (req, res, next) => {
 
           // Token creation 
           console.log('1', result[0].id);
-          const token = jwt.sign(// on utilise sign de jwt pour creer le token
-            {id : result[0].id, email: result[0].email}, // on rentre les information de l'utilisateur dont on a besoin en front 
-            'secret_key', // correspond a une chaine de caractere permettant de chiffrer la signature du token
+          const token = jwt.sign(
+            {id : result[0].id, email: result[0].email, type : result[0].type},  
+            secret, 
             {
-              expiresIn: '24h'// fixe la duree de vie du token
-            },
-            { algorithm: 'RS256' }// specifie l'algorithme de chiffrage utilise 
-          );
-            console.log(token); 
-            res.header("Access-Control-Expose-Headers", "x-access-token") // On crer le header de la reponse
-            res.set("x-access-token", token) // on ajoute le token au header
-            res.status(200).send({ auth: true }) // on envoie la reponse
+              expiresIn: '1h'
+            }, 
+            { algorithm: 'RS256' }
+          );            console.log(token); 
+
+            //res.header("Access-Control-Expose-Headers", "x-access-token") 
+        
             
-            
+            //res.header("x-access-token", token); 
+            //res.status(200).send({mytoken : token}) 
+            res.status(200).send({ auth: true, token : token })
+          
             connection.query(`UPDATE ETB.users SET last_login = now() WHERE id = '${result[0].id}'` )
 
     }); 
 })
 
+router.get('/secret-route', userMiddleware.isLoggedIn, (req, res, next) => {
+  jwt.verify(req.token, secret, (err, data) => {
+    if (err) {
+      res.sendStatus(403);
+    }else {
 
-router.get('/secret-route', (req, res, next) => {
-  res.send('This is the secret content. Only logged in users can see that!');
-});
+      res.json({
+        posts: {
+         title: "my first post",
+          description: 'blabla',
+          data: data
+        }
+      }); 
+    }
+  } )
 
-
-
-module.exports = router
+ 
+  
+}); 
+ 
+module.exports = router 

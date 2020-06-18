@@ -1,8 +1,22 @@
 // Ici sont toutes les routes qui concernent les users
 const express = require("express")
 const connection = require('../../conf')
+const { Router } = require("express")
 
 const router = express.Router()
+
+// Retrieve all recipes
+router.get('/allrecipes', (req, res) => {
+    connection.query('SELECT recipes.id, recipes.title, recipes.photo, recipes.text, recipes.introduction, recipes.created_at, cat_recipes.name  FROM recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC' , (err, results) => {
+        if(err) {
+            res.status(500).send('Error retrieving recipes')
+            
+        }else {
+            res.status(200).json(results)
+        }
+    }) 
+
+})
 
 // Retrieve all the categories of recipes
 router.get('/catRecipes', (req, res) => {
@@ -65,6 +79,22 @@ router.get('/user/:id', (req,res) => {
     
 })
 
+
+////////////////////////// POST //////////////////////
+
+router.post('/postComment', (req, res) => { 
+    const comment = req.body.comment
+  
+    
+    connection.query(`INSERT INTO ETB.comments (comments, user_id, recipe_id) VALUES ('${comment}', '1', '2')`,(err, result) => { 
+        if(err) {
+            return res.status(500).send('The comments has not been post')
+        } else {
+            res.status(200).send('the comments has been post')
+        }
+
+    }) 
+})
 
 
 module.exports = router
