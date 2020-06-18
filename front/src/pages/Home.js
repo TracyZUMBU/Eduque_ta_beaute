@@ -1,51 +1,65 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, {useEffect, useState} from 'react'
+import axios from 'axios'
 import '../css/style.css';
+
+import Header from '../components/Header'
+import Slider from '../components/Slider'
 import photo from '../img/flacon_white.jpg'
-export default function home() {
+import recipe from '../img/lotion.jpg'
+import imgAlternative from '../img/lotion.jpg'
+import imgBlog from '../img/bottle_white.jpg'
+
+import { Slide } from 'react-slideshow-image'
+
+
+
+
+export default function Home() {
+
+    const [lastestRecipes, setLatestRecipes] = useState ([])
+    
+    useEffect(() => {
+        
+        const getLatestRecipes = async () => {
+            const url = 'http://localhost:8000/admin/lastestRecipes/'
+            const result = await axios.get(url)
+            setLatestRecipes(result.data)
+            console.log(lastestRecipes);
+            }
+            getLatestRecipes();
+    }, [])
+
     return ( 
         <div class="grid-container">
-
-            <section class="header">
-                <p>jjj</p>
-            </section>
-
-            <nav class="navigation">
-
-                <ul class="navigation__list">
-                    <Link to="/categories"><li class="navigation__item">Recettes</li></Link>
-                    <li class="navigation__item">Alternatives</li>
-                    <li class="navigation__item">Mode</li>
-                    <li class="navigation__item">Blog</li>
-                    <Link to="/connexion"><li>Se connecter</li></Link>
-                </ul>
-            </nav>
+            <Header/>
 
             <main class="main main--home">
-
                 <section class="center">
-                    <div class="center__img-box">
-                        <img src={photo} class="center__img" ></img>
+                    <div class="center__image-box">
+                        <img src={photo} class="center__image"></img>
                     </div>
                 </section>
-                
-                <section class="slide">
-                    <div class="slide__box">
-                        <h1>Features news</h1>
-
-                        <div class="slide__list">
-                            <div class="slide__items">
-                                <img src={''}></img>
-                                <h2>nom de la catégorie de nav</h2>
-                                <h3>sous titre</h3>
-                            </div>
+     
+                <section class="slider">
+                    <div class="slider__box">
+                        <h3 class="heading-tertiary headlines">Features news</h3>
+                        <div class="slider__list">
+                            {lastestRecipes.map(latestRecipe => (
+                                <Slider
+                                    key={latestRecipe.id}
+                                    title={latestRecipe.title}
+                                    photo={latestRecipe.photo}
+                                    name={latestRecipe.name}
+                                    text={latestRecipe.text}/>            
+                            ))}                      
                         </div>
                     </div>
                 </section>
-
-
             </main>
       
+            <footer class="footer">
+
+            </footer>
 
         </div>
     )

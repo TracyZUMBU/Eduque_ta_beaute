@@ -7,9 +7,8 @@ import Home from './pages/Home'
 import Categories from './pages/Recettes/Categories';
 import InterCat from './pages/Recettes/InterCat';
 import Subcat from './pages/Recettes/SubCat';
-import RecipeList from './pages/Recettes/RecipeList';
 import Connexion from './pages/espaceUser/Connexion';
-import Recipes from './components/Recipes';
+import Recipes from './components/AllRecipes';
 import Profile from './pages/espaceUser/Profile';
 import EspaceAdmin from './pages/espaceAdmin/HomeAdmin';
 import SectionRecipes from './pages/espaceAdmin/SectionRecipes';
@@ -17,6 +16,7 @@ import SectionUsers from './pages/espaceAdmin/SectionUsers'
 import Comment from './components/Comment'
 import CreateProfile from './pages/espaceUser/CreateProfile';
 import Secret from './pages/espaceUser/Secret'
+import RecipesPage from './pages/espaceUser/RecipesPage';
 
 function App() {
   return (
@@ -41,6 +41,7 @@ function App() {
     <Route exact path="/comment" component={Comment}/>
     <Route exact path="/sign-up" component={CreateProfile}/>
     <Route exact path="/secret-route" component={Secret}/>
+    <Route exact path="/recipes-page" component={RecipesPage}/>
 
     </Router>
   );

@@ -1,0 +1,29 @@
+.heading-primary {
+    color: $color-white;
+    text-transform: uppercase;
+}
+
+.heading-secondary {
+    text-transform: capitalize ;
+    &--small{
+        font-size: $h2-small;
+    }
+    &--big{
+        font-size: $h2-big;
+    }
+}
+
+.heading-tertiary {
+    text-transform: uppercase;
+}
+
+.category_name {
+    color:orange;
+    padding: 1.5rem 0;
+    text-transform: uppercase;
+}
+
+
+.headlines {
+    padding: 2rem 0;
+}

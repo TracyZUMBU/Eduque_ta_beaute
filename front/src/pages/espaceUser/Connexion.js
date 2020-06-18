@@ -28,52 +28,74 @@ export default function Connexion() {
     //     }
     //     else if (backRes.auth === true && isAdmin === false) {
     //         console.log('eee');
-            
+    
     //         setAdmin(true)
     //         // on stocke le state en local
     //         localStorage.setItem('myConnection', backRes.auth)
     //     }
-        
+    
     // }, [])
-
+   
+    
     useEffect(() => {   
-        console.log("response.auth", response.auth)
-        console.log(isAdmin);
-        
-        console.log(response);       
-         if (localStorage.getItem('myConnection') === 'true') {
+        //console.log("response.auth", response.auth)
+
+        const token = response.token
+
+            
+         if (localStorage.getItem('token') === token) {
         setAdmin(true);
-        console.log('yes');        
+        console.log('get', isAdmin);
+            
     }else if (response.auth === true && isAdmin === false) {
-        console.log('eee');            setAdmin(true)
+        localStorage.setItem('token', response.token)
+                
+        setAdmin(true)
+        console.log('set', isAdmin);
+        
         // on stocke le state en local
-        localStorage.setItem('myConnection', response.auth)
-    }    }, [response])
+          
+    }    }, [response, isAdmin])
 
     useEffect(() => {
+       
         console.log("isAdmin", isAdmin)
-        }, [isAdmin])
+        }, [response, isAdmin])
 
 
 
-const handlePost = () => {
+    const handlePost = () => {
 
-        // const url = 'http://localhost:8000/register/login';
-        // axios.post(url, {password, email})
-        // .then(res => setResponse(res))
-        // console.log(response);
+            // const url = 'http://localhost:8000/register/login';
+            // axios.post(url, {password, email})
+            // .then(res => setResponse(res))
+            // console.log(response);
+            console.log('hhhh',response);
 
-        const url = 'http://localhost:8000/register/login';
-        axios.post(url, {password, email})
-        .then(res => setResponse(res.data))
-
+            const url = 'http://localhost:8000/register/login';
+            axios.post(url, {password, email})
+            .then(res => setResponse(res.data))
+            
         
 
+            
+
+        }
+
+    const disconnect = () => {
+
+        localStorage.removeItem('token')
+        
     }
+
+
+  
+
 
     return (
         <div>
-            <label>
+            <form id="login">
+                <label>
                     Email :
                     <input type="email" name="email" onChange={(e)=> setEmail(e.target.value)}/>
                 </label>
@@ -81,7 +103,12 @@ const handlePost = () => {
                     Mot de passe :
                     <input type="password" name="password" onChange={(e)=> setPassword(e.target.value)} />
                 </label>
-                <input  type="button" value="Envoyer" onClick={() => handlePost()} />
+                    <input  type="button" value="Envoyer" onClick={() => handlePost()} />
+            </form>
+
+            <input id="logout" type="button" value="Se déconnecter" onClick={() => disconnect()}/>
+
+            
         </div>
     )
 }

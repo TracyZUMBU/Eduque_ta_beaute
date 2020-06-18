@@ -1,5 +1,7 @@
 const express = require("express")
+const app = express ();
 const connection = require('../../conf')
+require('dotenv').config(process.cwd(), '../.env')
 
 const router = express.Router()
 
@@ -7,11 +9,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userMiddleware = require('../middleware/user.js');
 
-
+const expressJwt = require('express-jwt');
 
 //Authentification
-require('dotenv').config(process.cwd(), '../.env')
 const secret = process.env.JWT_SECRET
+
+app.use(expressJwt({ secret : secret}).unless({path : ['/Connexion']}))
+
+
 
 router.post('/sign-up', userMiddleware.validateRegister,(req, res,next) => {
     const content = req.body                
@@ -80,33 +85,39 @@ router.post('/login', (req, res, next) => {
             {id : result[0].id, email: result[0].email, type : result[0].type},  
             secret, 
             {
-              expiresIn: '24h'
-            },
+              expiresIn: '1h'
+            }, 
             { algorithm: 'RS256' }
-          );
-            console.log(token);
+          );            console.log(token); 
 
             //res.header("Access-Control-Expose-Headers", "x-access-token") 
+        
             
-             
-            res.header("x-access-token", token); 
-            res.status(200).send({ auth: true })
-            
+            //res.header("x-access-token", token); 
+            //res.status(200).send({mytoken : token}) 
+            res.status(200).send({ auth: true, token : token })
+          
             connection.query(`UPDATE ETB.users SET last_login = now() WHERE id = '${result[0].id}'` )
 
     }); 
 })
 
-
-    
 router.get('/secret-route', userMiddleware.isLoggedIn, (req, res, next) => {
-  res.json({
-    posts: {
-     title: "my first post",
-      description: 'blabla'
+  jwt.verify(req.token, secret, (err, data) => {
+    if (err) {
+      res.sendStatus(403);
+    }else {
+
+      res.json({
+        posts: {
+         title: "my first post",
+          description: 'blabla',
+          data: data
+        }
+      }); 
     }
-  }); 
-   
+  } )
+
  
   
 }); 

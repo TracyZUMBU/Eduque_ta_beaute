@@ -3,6 +3,7 @@ import axios from 'axios'
 
 
 export default function SectionRecipes(props) {
+  
     //Retrieve all the categories of recipes
     const [catRecipes, setCatRecipes] = useState ([])
     //Display the categories name
@@ -22,22 +23,18 @@ export default function SectionRecipes(props) {
     // Display recipes 
     const [showRecipes, setShowRecipes] = useState(false)
 
-    // Retrieve all the categories of recipes
     useEffect(() => {
         
-       
+      
         console.log("ggg", props.params);
+        // Retrieve all the categories of recipes
         const getCatRecipes = async () => {
             
             const url = 'http://localhost:8000/admin/catRecipes/'
             const result = await axios.get(url)
-            
             setCatRecipes(result.data)
-            
-            
-        
-        }
 
+        }
         getCatRecipes()
     }, [])
 
@@ -96,6 +93,7 @@ export default function SectionRecipes(props) {
 
 
 return (
+    
 <div>
 
 <div className="dropdown">

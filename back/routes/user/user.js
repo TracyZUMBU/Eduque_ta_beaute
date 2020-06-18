@@ -5,6 +5,19 @@ const { Router } = require("express")
 
 const router = express.Router()
 
+// Retrieve all recipes
+router.get('/allrecipes', (req, res) => {
+    connection.query('SELECT recipes.id, recipes.title, recipes.photo, recipes.text, recipes.introduction, recipes.created_at, cat_recipes.name  FROM recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC' , (err, results) => {
+        if(err) {
+            res.status(500).send('Error retrieving recipes')
+            
+        }else {
+            res.status(200).json(results)
+        }
+    }) 
+
+})
+
 // Retrieve all the categories of recipes
 router.get('/catRecipes', (req, res) => {
     connection.query(`SELECT * FROM cat_recipes`, (err,results) => {

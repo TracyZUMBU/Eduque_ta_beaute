@@ -9,7 +9,7 @@ const router = express.Router()
 
 //Retrieve the lastest recipes
 router.get('/lastestRecipes', (req, res) => {
-    connection.query('SELECT * FROM recipes ORDER BY created_at DESC LIMIT 10' , (err, results) => {
+    connection.query('SELECT recipes.id, recipes.title, recipes.photo, recipes.text, cat_recipes.name  FROM recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC LIMIT 4' , (err, results) => {
         if(err) {
             res.status(500).send('Error retrieving recipes')
             

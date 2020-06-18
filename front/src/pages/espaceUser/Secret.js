@@ -7,12 +7,22 @@ export default function Secret() {
     // retrieve all users
     const [users, setUsers] = useState([])
     const [asc, setAsc] = useState ("plus récent")
+    const response = localStorage.getItem('token')
 
     useEffect(() => {
-
-        const getUsers = async () => {
-
-        const url = 'http://localhost:8000/register/secret-route'
+         
+        // const config = {};
+        // console.log(response);
+        // console.log(response.mytoken);
+        
+        
+        // config.headers= {"x-access-token" : response}
+        
+        // console.log(config);
+        
+         const getUsers = async () => {
+            
+        const url = 'http://localhost:8000/register/secret-route' 
         const result = await axios.get(url)
 
         setUsers(result.data)

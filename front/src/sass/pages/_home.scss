@@ -4,23 +4,27 @@
     grid-template-columns: 1fr;
     //grid-template-rows: 2rem 1rem 20rem 5rem;
     grid-template-areas: 
-    "banner"
-    "navigation"
-    "main";
+    "header"
+    "main"
+    "slider"
+    "footer";
 }
 
-.header{
+.header {
+    grid-area: header;
+}
+
+.banner{
     height: 18rem;
-    background-color: magenta;
-    grid-area:banner;
+   
     background-image: url(../img/almond.jpg);
     background-size: cover;
     background-position: center;
     
 }
+
 .navigation {
-    background-color: white;
-    grid-area: navigation;
+    
     height: 7rem;
     border: 2px solid $color-light-grey;
     display: flex;
@@ -36,7 +40,6 @@
     }
 
     &__item {
-        
         margin-right: 2rem;
     }
     
@@ -50,42 +53,66 @@
 }
 
 
+
 .center {
-    background-color:white;
-   
-    
-    &__img-box {
-        background-color: lightcoral;
-        display: flex;
-        justify-content: center; 
+    background-color: yellow;
+    height: 60rem;
+
+    &__image-box {   
+        height: 100%;
     } 
     
-    &__img {
-        object-fit: cover;
-    height: 100%;
-    width: 100%;
+    &__image {
+
     }
+    
 }
 
-.center__img {
-    object-fit: cover;
+.center__image {
+    object-fit: center;
     height: 100%;
     width: 100%;
-   }
+
+}
 
 
 
-.slide {
-    
-    display: flex;
+.slider {
+    grid-area: slider;
     justify-content: center;
     margin-top:3rem;
+    //background-color: gray;
     
-
     &__box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-
+    
     &__list{
-
+        display: flex;
+        width: 100%;
+        //background-color: blue;
     }
+
+    &__items {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% / 4);
+        height: auto;
+        &:not(:last-child){
+        margin-right: 4rem;
+        }
+       
+
+        &-image{
+            object-fit: cover;
+            width: 100%;
+            height: 21rem;
+        }
+    } 
+}
+
+.footer {
+    grid-area:footer;
 }
