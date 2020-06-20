@@ -26,19 +26,22 @@ export default function RecipesPage() {
         <div>
             <Header/>
             <Banner bannerName={bannerName} />
-            <div class="main">
-                <div class="recipes-list">
-                    {allRecipes.map(allRecipe => (
-                        <AllRecipes
-                            key={allRecipe.id}
-                            title={allRecipe.title}
-                            created_at={allRecipe.created_at}
-                            introduction={allRecipe.introduction}
-                            photo={allRecipe.photo}
-                            name={allRecipe.name}/>
-                    ))}
+            <main class="main main--recipesPage">
+                <div class="recipes-container">
+                    <div class="recipes-list">
+                        {allRecipes.map(allRecipe => (
+                            <AllRecipes
+                                key={allRecipe.id}
+                                title={allRecipe.title}
+                                created_at={allRecipe.created_at}
+                                introduction={allRecipe.introduction}
+                                photo={allRecipe.photo}
+                                name={allRecipe.name}/>
+                        ))}
+                    </div>
                 </div>
-            </div>
+                <aside class="aside__recipes"></aside>
+            </main>
          
         </div>
     )

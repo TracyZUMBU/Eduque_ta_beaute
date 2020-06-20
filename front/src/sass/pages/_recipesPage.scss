@@ -1,0 +1,16 @@
+.main--recipesPage{
+    display: grid;
+    grid-template-areas: 
+    "list aside";
+    grid-template-columns: 2fr 0.7fr;
+}
+
+.recipes-list {
+    grid-area: list;
+}
+
+.aside__recipes {
+ grid-area: aside;
+ background-color: black;
+ width: 100%;
+}

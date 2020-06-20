@@ -17,8 +17,8 @@
     text-transform: uppercase;
 }
 
-.category_name {
-    color:orange;
+aside[class*="category_name"] {
+    color:orange; 
     padding: 1.5rem 0;
     text-transform: uppercase;
 }
