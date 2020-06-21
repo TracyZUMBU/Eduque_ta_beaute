@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import AllRecipes from './AllRecipes'
 
 
-export default function SectionRecipes(props) {
+export default function SectionRecipes() {
   
     //Retrieve all the categories of recipes
     const [catRecipes, setCatRecipes] = useState ([])
@@ -18,24 +19,37 @@ export default function SectionRecipes(props) {
     const [showSubCat, setShowSubCat] = useState(false)
     // Retrieve the id of category
     const [idCat, setIdCat] = useState('')
-    // Retrieve recipes base on subcategories's id
-    const [recipes, setRecipes] = useState([])
+    // Retrieve the id of subcategory
+    const [idSub, setIdSub] = useState('')
+    // Retrieve all recipes on DB
+    const [allRecipes, setAllRecipes] = useState([])
     // Display recipes 
-    const [showRecipes, setShowRecipes] = useState(false)
+    const [showAllRecipes, setShowAllRecipes] = useState(true)
 
     useEffect(() => {
+        console.log(showAllRecipes);
         
-      
-        console.log("ggg", props.params);
         // Retrieve all the categories of recipes
         const getCatRecipes = async () => {
-            
             const url = 'http://localhost:8000/admin/catRecipes/'
             const result = await axios.get(url)
             setCatRecipes(result.data)
-
         }
         getCatRecipes()
+
+        //Retrieve all recipes on DB
+        const getAllRecipes = async () => {
+            const url = 'http://localhost:8000/user/allRecipes/'
+            const result = await axios.get(url)
+            setAllRecipes(result.data)
+            console.log('allRecipes', result.data);
+            
+        }
+        getAllRecipes()
+
+        //console.log(idSub);
+        
+        
     }, [])
 
     // Display categories
@@ -60,7 +74,9 @@ export default function SectionRecipes(props) {
         setIdCat(id)
         setShowInterCat(true)
         setShowSubCat(false)
-        setShowRecipes(false)
+        //setShowRecipes(false)
+        console.log(showInterCat, showCat);
+        
         
         
     
@@ -74,65 +90,81 @@ export default function SectionRecipes(props) {
         
         setSubCatRecipes(result.data)
         setShowSubCat(true)
-        setShowRecipes(false)
+        
+        
           
     }
 
-    // dISPLAY RECIPES
+    // display recipes
     const getRecipes = async (idSub) => {
-
-       
-        const url =`http://localhost:8000/admin/recipes/${idSub}`
-        console.log(url);
         
-        const result = await axios.get(url)
-        
-        setRecipes(result.data)
-        setShowRecipes(true)
+        setIdSub(idSub)
+        setShowAllRecipes(false)
+        console.log('tt',  idSub, showAllRecipes,'filter', allRecipes.title);
     }
+    const filterRecipes = allRecipes.filter(allRecipe => allRecipe.sub_cat_id = idSub)
+  
     
-
+    
+    
 
 return (
-    
 <div>
 
-<div className="dropdown">
+    <div className="dropdown">
 
-<button onClick={toggleDropDown 
-} className="dropdown__btn">Catégorie</button>
+    <button onClick={toggleDropDown 
+    } className="dropdown__btn">Catégorie</button>
 
-<div className="dropdown__content--cat">
-    {showCat === true ? 
-    catRecipes.map(catRecipe => 
-    <p key={catRecipe.id} onClick={() => getInterCat(catRecipe.id)
-    }>{catRecipe.name}</p>
-    ) : '' }
-</div>
+    <div className="dropdown__content--cat">
+        {showCat === true ? 
+        catRecipes.map(catRecipe => 
+        <p key={catRecipe.id} onClick={() => getInterCat(catRecipe.id)
+        }>{catRecipe.name}</p>
+        ) : '' }
+    </div>
 
-<div className="dropdown__content--interCat">
-    {showInterCat === true ? 
-    interCatRecipes.map(interCatRecipe => 
-    <p key={interCatRecipe.cat_inter_id} onClick={() => getSubCat(interCatRecipe.cat_inter_id)} >{interCatRecipe.name_cat_inter}</p>
-    ) : '' }
-</div>
+    <div className="dropdown__content--interCat">
+        {showInterCat === true ? 
+        interCatRecipes.map(interCatRecipe => 
+        <p key={interCatRecipe.cat_inter_id} onClick={() => getSubCat(interCatRecipe.cat_inter_id)} >{interCatRecipe.name_cat_inter}</p>
+        ) : '' }
+    </div>
 
 
-<div className="dropdown__content--subCat">
-    { showSubCat === true && showInterCat === true && props.params === "recipes" ? 
-    subCatRecipes.map(subCatRecipe => 
-    <p key={subCatRecipe.id} onClick={()=> getRecipes(subCatRecipe.id)}>{subCatRecipe.name}</p>
-    ) : ''}
-</div>
+    <div className="dropdown__content--subCat">
+        { showSubCat === true && showInterCat === true  ? 
+        subCatRecipes.map(subCatRecipe => 
+        <p key={subCatRecipe.id} onClick={()=> getRecipes(subCatRecipe.id)}>{subCatRecipe.name}</p>
+        ) : ''}
+    </div>
 
-</div>
+    </div>
 
-<div className="recipes">
-        { showRecipes === true ? 
-        recipes.map(recipe =>
-            <p key={recipe.id}>{recipe.title}</p>
-            ) : ''}
-</div>
+    <div class="recipes-list">
+            { showAllRecipes === true ? 
+                allRecipes.map(allRecipe => 
+                <AllRecipes
+                key={allRecipe.id}
+                id={allRecipe.id}
+                title={allRecipe.title}
+                created_at={allRecipe.created_at}
+                introduction={allRecipe.introduction}
+                photo={allRecipe.photo}
+                name={allRecipe.name}/>
+                ) :''
+                // filterRecipes.map(filterRecipe =>
+                //     <AllRecipes
+                //     key={filterRecipe.id}
+                //     title={filterRecipe.title}
+                //     created_at={filterRecipe.created_at}
+                //     introduction={filterRecipe.introduction}
+                //     photo={filterRecipe.photo}
+                //     name={filterRecipe.name}/>
+                //     )
+          
+            }
+    </div>
 </div>
 )
         }

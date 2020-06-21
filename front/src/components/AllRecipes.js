@@ -1,10 +1,15 @@
 import React from 'react'
+import { Link } from "react-router-dom";
+
 
 export default function AllRecipes(props) {
+    
+    
     return (
         <div class="recipes-list__items">
             <div class="recipes-list__image-box">
-                <img class="recipes-list__image" src={props.photo}/>
+                <Link to={`/recipe/${props.id}`}>
+                <img class="recipes-list__image" src={props.photo}/></Link>
             </div>
             <div class="recipes-list__content-box">
                 <div class="recipes-info">

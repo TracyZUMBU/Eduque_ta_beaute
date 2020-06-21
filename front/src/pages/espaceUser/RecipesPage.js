@@ -3,6 +3,7 @@ import axios from 'axios'
 import Header from '../../components/Header'
 import Banner from '../../components/BannerCategory'
 import AllRecipes from '../../components/AllRecipes'
+import FilterRecipes from '../../components/FilterRecipes'
 
 export default function RecipesPage() {
 
@@ -28,8 +29,8 @@ export default function RecipesPage() {
             <Banner bannerName={bannerName} />
             <main class="main main--recipesPage">
                 <div class="recipes-container">
-                    <div class="recipes-list">
-                        {allRecipes.map(allRecipe => (
+                    <FilterRecipes/>
+                        {/* {allRecipes.map(allRecipe => (
                             <AllRecipes
                                 key={allRecipe.id}
                                 title={allRecipe.title}
@@ -37,9 +38,9 @@ export default function RecipesPage() {
                                 introduction={allRecipe.introduction}
                                 photo={allRecipe.photo}
                                 name={allRecipe.name}/>
-                        ))}
+                        ))} */}
                     </div>
-                </div>
+                
                 <aside class="aside__recipes"> Des idées ? Des astuces ? Des recettes ?  Ecolo, Ecocome et Simplissime à faire ? Envoi-les nous. On les publiera sur le site</aside>
             </main>
          
