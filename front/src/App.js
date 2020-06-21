@@ -17,6 +17,7 @@ import Comment from './components/Comment'
 import CreateProfile from './pages/espaceUser/CreateProfile';
 import Secret from './pages/espaceUser/Secret'
 import RecipesPage from './pages/espaceUser/RecipesPage';
+import OneRecipePage from './pages/espaceUser/OneRecipePage';
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
     <Route exact path="/admin/allUsers" component={SectionUsers}/>
 
     <Route exact path="/connexion" component={Connexion}/>
-    <Route exact path="/recipes/:id" component={Recipes}/>
+    <Route exact path="/recipe/:id" component={OneRecipePage}/>
     <Route exact path="/user/:id" component={Profile}/>
     <Route exact path="/comment" component={Comment}/>
     <Route exact path="/sign-up" component={CreateProfile}/>
