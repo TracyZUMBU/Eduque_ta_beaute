@@ -3,10 +3,12 @@ import {useParams} from 'react-router-dom'
 import axios from 'axios'
 
 
-export default function Profile() {
+export default function Profile(props) {
 
     const [users, setUser] = useState([])
-    const { id } = useParams()
+    const id = props.match.params.id
+    console.log(id);
+    
 
     useEffect(() => {
 
@@ -16,17 +18,19 @@ export default function Profile() {
             const result = await axios.get(url)
 
             setUser(result.data)
+            console.log(users);
+            
 
         }
         getUsers()
-    }, [id])
+    }, [])
 
     return (
         
       
             <div>
             {users.map(user =>
-            <p key={user.id}>{user.name}</p>
+            <p key={user.id}>{user.username}</p>
            // <li>{user.name}</li>
            
             )}

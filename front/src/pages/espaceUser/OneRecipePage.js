@@ -1,13 +1,18 @@
 import React, { useEffect,useState } from 'react'
 import Header from '../../components/Header'
 import axios from 'axios'
+import Comment from '../../components/Comment'
 
 export default function OneRecipePage(props) {
 
     const [recipe, setrecipe] = useState([])
+    const [idRecipe, setIdRecipe] = useState()
+    const id = props.match.params.id
 
     useEffect(() => {
-        const id = props.match.params.id
+        setIdRecipe(id)
+        console.log('id',id,idRecipe);
+        
         const getRecipe = async () => {
 
             const url = `http://localhost:8000/user/recipe/${id}`
@@ -39,7 +44,7 @@ export default function OneRecipePage(props) {
                 </div>
 
                 <div class="recipes-details"></div>
-
+                <Comment idRecipe={id}/>
             </main>
             
         </div>
