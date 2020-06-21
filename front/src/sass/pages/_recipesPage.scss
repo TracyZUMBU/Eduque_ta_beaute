@@ -10,7 +10,20 @@
 }
 
 .aside__recipes {
- grid-area: aside;
- background-color: black;
- width: 100%;
+    grid-area: aside;
+    width: 100%;
+    position : relative;
+    overflow: hidden;
+    &::before{
+        background: url(https://images.unsplash.com/photo-1589125632234-718710bcbb12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+        //background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        content:"";
+        position: absolute;
+        transform: rotate(180deg);
+        width: 200%;
+        height: 200%;
+        z-index: -1;
+    }
 }

@@ -40,7 +40,7 @@ export default function RecipesPage() {
                         ))}
                     </div>
                 </div>
-                <aside class="aside__recipes"></aside>
+                <aside class="aside__recipes"> Des idées ? Des astuces ? Des recettes ?  Ecolo, Ecocome et Simplissime à faire ? Envoi-les nous. On les publiera sur le site</aside>
             </main>
          
         </div>

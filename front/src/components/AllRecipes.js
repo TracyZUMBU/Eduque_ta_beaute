@@ -14,8 +14,11 @@ export default function AllRecipes(props) {
                 </div>
                 <h2 class="heading-secondary heading-secondary--big">{props.title}</h2>
                 <p>{props.introduction}</p>
-                <div class="repices-like">
-                    
+                <div class="repices-icons">
+                    <img src="https://img.icons8.com/pastel-glyph/64/000000/facebook-like.png"/>
+                    <img src="https://img.icons8.com/dotty/80/000000/wish-list.png"/>
+                
+
                 </div>
             </div>
             
