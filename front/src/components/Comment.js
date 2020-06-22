@@ -24,8 +24,9 @@ const Comment =(props) => {
     },[]) 
 
     const handlePost = () => {
+        const valuesComment = {comment, idRecipe}
         const url = 'http://localhost:8000/user/postComment'
-        axios.post(url, {comment : comment})
+        axios.post(url, valuesComment)
         .then(res => setResponse(res))
     }
 

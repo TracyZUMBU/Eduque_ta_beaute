@@ -138,11 +138,12 @@ router.get('/favorite/:id', (req,res) => {
 
 ////////////////////////// POST //////////////////////
 
+// post a comment
 router.post('/postComment', (req, res) => { 
-    const comment = req.body.comment
-    console.log(comment);
+    const valuesComment = req.body
+    console.log(valuesComment.idRecipe);
     
-    connection.query(`INSERT INTO ETB.comments (comments, user_id, recipe_id) VALUES ('${comment}', '3', '10')`,(err, results) => { 
+    connection.query(`INSERT INTO ETB.comments (comments, recipe_id) VALUES ('${valuesComment.comment}', '${valuesComment.idRecipe}')`, (err, results) => { 
         if(err) {
             return res.status(500).send('The comments has not been post')
         } else {
@@ -150,7 +151,20 @@ router.post('/postComment', (req, res) => {
         }
     })
 })
-
+ 
+// add a recipe to the favorite list
+router.post('/addFavorite', (req, res) => {
+    const recipeID = req.body.recipeID
+    console.log(recipeID);
+    connection.query (`INSERT INTO ETB.favorites (recipe_id) VALUES ('${recipeID}')`,recipeID, (err, results) => {
+        if(err) { 
+            return res.status(500).send('The comments has not been post')
+        } else {
+            res.status(200).send('the recipe has been saved to favorite list')
+        }
+    })
+    
+})
 
 module.exports = router
 

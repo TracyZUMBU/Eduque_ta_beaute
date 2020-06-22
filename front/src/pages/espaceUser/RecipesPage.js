@@ -29,18 +29,8 @@ export default function RecipesPage() {
             <Banner bannerName={bannerName} />
             <main class="main main--recipesPage">
                 <div class="recipes-container">
-                    <FilterRecipes/>
-                        {/* {allRecipes.map(allRecipe => (
-                            <AllRecipes
-                                key={allRecipe.id}
-                                title={allRecipe.title}
-                                created_at={allRecipe.created_at}
-                                introduction={allRecipe.introduction}
-                                photo={allRecipe.photo}
-                                name={allRecipe.name}/>
-                        ))} */}
-                    </div>
-                
+                    <FilterRecipes/> 
+                </div>
                 <aside class="aside__recipes"> Des idées ? Des astuces ? Des recettes ?  Ecolo, Ecocome et Simplissime à faire ? Envoi-les nous. On les publiera sur le site</aside>
             </main>
          

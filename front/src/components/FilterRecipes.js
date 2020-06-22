@@ -102,6 +102,7 @@ export default function SectionRecipes() {
         setShowAllRecipes(false)
         console.log('tt',  idSub, showAllRecipes,'filter', allRecipes.title);
     }
+
     const filterRecipes = allRecipes.filter(allRecipe => allRecipe.sub_cat_id = idSub)
   
     
@@ -135,7 +136,8 @@ return (
     <div className="dropdown__content--subCat">
         { showSubCat === true && showInterCat === true  ? 
         subCatRecipes.map(subCatRecipe => 
-        <p key={subCatRecipe.id} onClick={()=> getRecipes(subCatRecipe.id)}>{subCatRecipe.name}</p>
+        <p key={subCatRecipe.id} 
+        onClick={()=> getRecipes(subCatRecipe.id)}>{subCatRecipe.name}</p>
         ) : ''}
     </div>
 
@@ -152,16 +154,16 @@ return (
                 introduction={allRecipe.introduction}
                 photo={allRecipe.photo}
                 name={allRecipe.name}/>
-                ) :''
-                // filterRecipes.map(filterRecipe =>
-                //     <AllRecipes
-                //     key={filterRecipe.id}
-                //     title={filterRecipe.title}
-                //     created_at={filterRecipe.created_at}
-                //     introduction={filterRecipe.introduction}
-                //     photo={filterRecipe.photo}
-                //     name={filterRecipe.name}/>
-                //     )
+                ) :
+            filterRecipes.map(filterRecipe =>
+                <AllRecipes
+                key={filterRecipe.id}
+                title={filterRecipe.title}
+                created_at={filterRecipe.created_at}
+                introduction={filterRecipe.introduction}
+                photo={filterRecipe.photo}
+                name={filterRecipe.name}/>
+                )
           
             }
     </div>
