@@ -3,34 +3,48 @@ import {useParams} from 'react-router-dom'
 import axios from 'axios'
 
 
-export default function Profile() {
-
+export default function Profile(props) {
+    // Retrieve user's details
     const [users, setUser] = useState([])
-    const { id } = useParams()
+    //Retrieve the user's favorite recipes
+    const [favorite, setFavorite] = useState([])
+    //Retrieve the user's id
+    const id = props.match.params.id
+    
 
     useEffect(() => {
-
-        const getUsers = async () => {
-            
+        const getUser = async () => {
             const url = `http://localhost:8000/user/user/${id}`;
             const result = await axios.get(url)
-
             setUser(result.data)
+        }
+        getUser();
+
+        const getFavorite = async () => {
+            const url = `http://localhost:8000/user/favorite/${id}`
+            const result = await axios.get(url)
+            setFavorite(result.data)
 
         }
-        getUsers()
-    }, [id])
+        getFavorite();
+    }, [])
 
     return (
-        
-      
-            <div>
+        <div>
             {users.map(user =>
-            <p key={user.id}>{user.name}</p>
-           // <li>{user.name}</li>
-           
-            )}
+            
+            <div key={user.id}>
+                <p>{user.username}</p>
+                <p>{user.email}</p>
             </div>
-        
+            )}
+
+            {favorite.map(el => 
+            <div key={el.id}>
+                <p>{el.title}</p>
+                <img src={el.photo}/>
+            </div>
+            )}
+        </div> 
     )
 }

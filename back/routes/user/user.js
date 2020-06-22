@@ -5,18 +5,21 @@ const { Router } = require("express")
 
 const router = express.Router()
 
-// Retrieve all recipes
-router.get('/allrecipes', (req, res) => {
-    connection.query('SELECT recipes.id, recipes.title, recipes.photo, recipes.text, recipes.introduction, recipes.created_at, cat_recipes.name  FROM recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC' , (err, results) => {
-        if(err) {
-            res.status(500).send('Error retrieving recipes')
+// Retrieve all recipes based on subcategory's id
+// router.get('/allrecipes/:idSub', (req, res) => {
+//     const idSub = req.params.idSub
+//     console.log(idSub);
+    
+//     connection.query('SELECT recipes.id, recipes.title, recipes.photo, recipes.text, recipes.introduction, recipes.created_at, recipes.sub_cat_id, cat_recipes.name  FROM recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id AND recipes.sub_cat_id = ? ORDER BY created_at DESC' , idSub, (err, results) => {
+//         if(err) {
+//             res.status(500).send('Error retrieving recipes')
             
-        }else {
-            res.status(200).json(results)
-        }
-    }) 
+//         }else {
+//             res.status(200).json(results)
+//         }
+//     })  
 
-})
+// }) 
 
 // Retrieve all the categories of recipes
 router.get('/catRecipes', (req, res) => {
@@ -57,8 +60,31 @@ router.get('/recipes/:id', (req,res) => {
     const id = req.params.id
     connection.query('SELECT * FROM ETB.recipes WHERE sub_cat_id = ?', id, (err,results) =>{
         if (err) {
-            res.sendStatus(500).send('Error retrieving recipes')
+            res.status(500).send('Error retrieving recipes')
         } else {
+            res.status(200).json(results)
+        }
+    })
+})
+ 
+// Retrieves all recipes
+router.get('/allRecipes', (req,res) => {
+    connection.query('SELECT recipes.id, recipes.title, recipes.photo, recipes.text, recipes.introduction, recipes.created_at, recipes.sub_cat_id, cat_recipes.name  FROM recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC', (err, results) => {
+        if (err) {
+            res.status(500).send('Error retrieving recipes')
+        } else {
+            res.status(200).json(results)
+        }
+    }) 
+})
+
+// Retrieve one recipe 
+router.get('/recipe/:id', (req,res) => {
+    const id = req.params.id
+    connection.query('SELECT * from ETB.recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id AND recipes.id = ?', id, (err, results) => {
+        if (err) {
+            res.status(500).send('Error retrieving the recipe')
+        }else {
             res.status(200).json(results)
         }
     })
@@ -71,8 +97,38 @@ router.get('/user/:id', (req,res) => {
     
     connection.query('SELECT * FROM ETB.users WHERE id = ?', id, (err,results) => {
         if(err){ 
-            res.sendStatus(500).send('Error retrieving recipes')
+            res.status(500).send('Error retrieving recipes')
         } else {
+            res.status(200).json(results)
+        }
+    })
+    
+})
+
+// Retrieve all comments based on recipe's id
+router.get('/comment/:id', (req,res) => {
+    const id = req.params.id 
+    console.log(id);
+
+    connection.query('SELECT comments.id, comments.comments, comments.created_at, users.username FROM ETB.comments INNER JOIN users ON comments.user_id = users.id AND  recipe_id = ?', id, (err,results) => {
+        if(err){
+            res.status(500).send('Error retrieving comments')
+        }else {
+            res.status(200).json(results)
+        }
+    })
+    
+})
+
+// Retrieve favorite recipes
+router.get('/favorite/:id', (req,res) => {
+    const userID = req.params.id
+    console.log(userID);
+
+    connection.query(`SELECT favorites.id, recipes.title, recipes.photo FROM ETB.recipes INNER JOIN favorites ON recipes.id = favorites.recipe_id AND favorites.user_id = ? `, userID, (err, results) => {
+        if(err){
+            res.status(500).send('Error retrieving comments')
+        }else {
             res.status(200).json(results)
         }
     })
@@ -84,16 +140,15 @@ router.get('/user/:id', (req,res) => {
 
 router.post('/postComment', (req, res) => { 
     const comment = req.body.comment
-  
+    console.log(comment);
     
-    connection.query(`INSERT INTO ETB.comments (comments, user_id, recipe_id) VALUES ('${comment}', '1', '2')`,(err, result) => { 
+    connection.query(`INSERT INTO ETB.comments (comments, user_id, recipe_id) VALUES ('${comment}', '3', '10')`,(err, results) => { 
         if(err) {
             return res.status(500).send('The comments has not been post')
         } else {
             res.status(200).send('the comments has been post')
         }
-
-    }) 
+    })
 })
 
 
