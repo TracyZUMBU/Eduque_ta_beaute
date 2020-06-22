@@ -81,7 +81,7 @@ router.get('/allRecipes', (req,res) => {
 // Retrieve one recipe 
 router.get('/recipe/:id', (req,res) => {
     const id = req.params.id
-    connection.query('SELECT * from ETB.recipes WHERE id = ?', id, (err, results) => {
+    connection.query('SELECT * from ETB.recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id AND recipes.id = ?', id, (err, results) => {
         if (err) {
             res.status(500).send('Error retrieving the recipe')
         }else {
@@ -110,7 +110,22 @@ router.get('/comment/:id', (req,res) => {
     const id = req.params.id 
     console.log(id);
 
-    connection.query('SELECT * FROM ETB.comments WHERE recipe_id = ?', id, (err,results) => {
+    connection.query('SELECT comments.id, comments.comments, comments.created_at, users.username FROM ETB.comments INNER JOIN users ON comments.user_id = users.id AND  recipe_id = ?', id, (err,results) => {
+        if(err){
+            res.status(500).send('Error retrieving comments')
+        }else {
+            res.status(200).json(results)
+        }
+    })
+    
+})
+
+// Retrieve favorite recipes
+router.get('/favorite/:id', (req,res) => {
+    const userID = req.params.id
+    console.log(userID);
+
+    connection.query(`SELECT favorites.id, recipes.title, recipes.photo FROM ETB.recipes INNER JOIN favorites ON recipes.id = favorites.recipe_id AND favorites.user_id = ? `, userID, (err, results) => {
         if(err){
             res.status(500).send('Error retrieving comments')
         }else {

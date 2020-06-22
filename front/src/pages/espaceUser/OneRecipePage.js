@@ -30,21 +30,26 @@ export default function OneRecipePage(props) {
         <div>
             <Header/>
             <main class="main">
+
+            {recipe.map(recipeItem => (
+                <>
+                <div class="image-box">
+                    <img class="image" src={recipeItem.photo}/>
+                </div>
                 <div class="heading">
-                    <aside class="recipes-info__category_name">{recipe.name}
+                    <aside class="recipes-info__category_name">{recipeItem.name}
                     </aside>
-                    <aside class="recipes-info__date">{recipe.created_at}
+                    <aside class="recipes-info__date">{recipeItem.created_at}
                     </aside>
-                    <h2 class="heading-secondary heading-secondary--big">{recipe.title}</h2>
+                    <h2 class="heading-secondary heading-secondary--big">{recipeItem.title}</h2>
                     <p>by author</p>
                 </div>
-
-                <div class="image-box">
-                    <img class="image" src={recipe.photo}/>
-                </div>
-
                 <div class="recipes-details"></div>
-                <Comment idRecipe={id}/>
+                </>
+
+
+            ))}
+            <Comment idRecipe={id}/>
             </main>
             
         </div>

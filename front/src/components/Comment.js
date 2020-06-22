@@ -3,50 +3,47 @@ import axios from 'axios'
 
 const Comment =(props) => {
     
-    
+    // stock the comment
     const [comment, setComment] = useState()
+    //send the comment to the back
     const [response, setResponse] = useState();
+    // Retrieve all recipes's comments
     const [displayComment, setDisplayComment] = useState([])
-    console.log(props.idRecipe);
+    // Retrieve the id of the recipe from the OnePAgeRecipe.js
     const idRecipe = props.idRecipe;
-    
-    //const idCurRecipe = props.match.params.id
 
-useEffect(()=> {
-    const getComments = async () => {
-        const url = `http://localhost:8000/user/comment/${idRecipe}`
-        const result = await axios.get(url)
-        setDisplayComment(result.data)
-        console.log('from back', result.data, 'displayComment', displayComment);
+    useEffect(()=> {
+        const getComments = async () => {
+            const url = `http://localhost:8000/user/comment/${idRecipe}`
+            const result = await axios.get(url)
+            setDisplayComment(result.data)
+            console.log('from back', result.data, 'displayComment', displayComment);
+        }
+        getComments()
+
+    },[]) 
+
+    const handlePost = () => {
+        const url = 'http://localhost:8000/user/postComment'
+        axios.post(url, {comment : comment})
+        .then(res => setResponse(res))
     }
-    getComments()
-
-},[])
-
-const handlePost = () => {
-    //console.log(idCurRecipe);
-    
-    const url = 'http://localhost:8000/user/postComment'
-    axios.post(url, {comment : comment})
-    .then(res => setResponse(res))
-    console.log('gg',comment);
-}
 
     return (
         <div class="commentSection">
             <div class="displayComment">
-   
-    <p>date {displayComment.created_at}</p>
-                <p>nom</p>
-  
+                {displayComment.map(item => (
+                    <>
+                    <p>{item.username}</p>
+                    <p>{item.created_at}</p>
+                    <p>{item.comments}</p>
+                    </>
+                ))}
             </div>
-
-        <div>
-            
-            <textarea name="comments" onChange={(e)=> setComment(e.target.value)} rows="5" cols="33"/>
-            <input  type="button" value="Envoyer" onClick={() => handlePost()} />
-            
-        </div>
+            <div>
+                <textarea name="comments" onChange={(e)=> setComment(e.target.value)} rows="5" cols="33"/>
+                <input  type="button" value="Envoyer" onClick={() => handlePost()} />
+            </div>
         </div>
     )
 }
