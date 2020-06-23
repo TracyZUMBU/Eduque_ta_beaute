@@ -3,7 +3,7 @@ import Header from '../../components/Header'
 import axios from 'axios'
 import Comment from '../../components/Comment'
 
-export default function OneRecipePage(props) {
+const OneRecipePage = (props) => {
 
     const [recipe, setrecipe] = useState([])
     const [idRecipe, setIdRecipe] = useState()
@@ -20,8 +20,6 @@ export default function OneRecipePage(props) {
             setrecipe(result.data)
             console.log('recipe',recipe)
             console.log('from back', result.data);
-             
-            
         }
         getRecipe()
     },[])
@@ -30,7 +28,6 @@ export default function OneRecipePage(props) {
         <div>
             <Header/>
             <main class="main">
-
             {recipe.map(recipeItem => (
                 <>
                 <div class="image-box">
@@ -46,8 +43,6 @@ export default function OneRecipePage(props) {
                 </div>
                 <div class="recipes-details"></div>
                 </>
-
-
             ))}
             <Comment idRecipe={id}/>
             </main>
@@ -55,3 +50,5 @@ export default function OneRecipePage(props) {
         </div>
     )
 }
+
+export default OneRecipePage

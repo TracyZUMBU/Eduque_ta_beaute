@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import UsersList from '../espaceAdmin/UsersList'
 
-export default function Secret() {
+const Secret = () => {
 
     // retrieve all users
     const [users, setUsers] = useState([])
@@ -71,3 +71,5 @@ export default function Secret() {
         </div>
     )
 }
+
+export default Secret

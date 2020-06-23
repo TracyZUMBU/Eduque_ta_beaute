@@ -3,7 +3,7 @@ import axios from 'axios'
 import AllRecipes from './AllRecipes'
 
 
-export default function SectionRecipes() {
+const FilterRecipes = () => {
   
     //Retrieve all the categories of recipes
     const [catRecipes, setCatRecipes] = useState ([])
@@ -46,10 +46,6 @@ export default function SectionRecipes() {
             
         }
         getAllRecipes()
-
-        //console.log(idSub);
-        
-        
     }, [])
 
     // Display categories
@@ -76,95 +72,85 @@ export default function SectionRecipes() {
         setShowSubCat(false)
         //setShowRecipes(false)
         console.log(showInterCat, showCat);
-        
-        
-        
-    
     }
 
     // Display subcategories 
     const getSubCat = async (idInter) => {
-
         const url = `http://localhost:8000/admin/subCat/${idInter}/${idCat}`
         const result = await axios.get(url)
-        
         setSubCatRecipes(result.data)
         setShowSubCat(true)
-        
-        
-          
     }
 
     // display recipes
     const getRecipes = async (idSub) => {
-        
         setIdSub(idSub)
         setShowAllRecipes(false)
         console.log('tt',  idSub, showAllRecipes,'filter', allRecipes.title);
     }
+
     const filterRecipes = allRecipes.filter(allRecipe => allRecipe.sub_cat_id = idSub)
   
-    
-    
-    
+    return (
+    <div>
 
-return (
-<div>
+        <div className="dropdown">
 
-    <div className="dropdown">
+        <button onClick={toggleDropDown 
+        } className="dropdown__btn">Catégorie</button>
 
-    <button onClick={toggleDropDown 
-    } className="dropdown__btn">Catégorie</button>
+        <div className="dropdown__content--cat">
+            {showCat === true ? 
+            catRecipes.map(catRecipe => 
+            <p key={catRecipe.id} onClick={() => getInterCat(catRecipe.id)
+            }>{catRecipe.name}</p>
+            ) : '' }
+        </div>
 
-    <div className="dropdown__content--cat">
-        {showCat === true ? 
-        catRecipes.map(catRecipe => 
-        <p key={catRecipe.id} onClick={() => getInterCat(catRecipe.id)
-        }>{catRecipe.name}</p>
-        ) : '' }
+        <div className="dropdown__content--interCat">
+            {showInterCat === true ? 
+            interCatRecipes.map(interCatRecipe => 
+            <p key={interCatRecipe.cat_inter_id} onClick={() => getSubCat(interCatRecipe.cat_inter_id)} >{interCatRecipe.name_cat_inter}</p>
+            ) : '' }
+        </div>
+
+
+        <div className="dropdown__content--subCat">
+            { showSubCat === true && showInterCat === true  ? 
+            subCatRecipes.map(subCatRecipe => 
+            <p key={subCatRecipe.id} 
+            onClick={()=> getRecipes(subCatRecipe.id)}>{subCatRecipe.name}</p>
+            ) : ''}
+        </div>
+
+        </div>
+
+        <div class="recipes-list">
+                { showAllRecipes === true ? 
+                    allRecipes.map(allRecipe => 
+                    <AllRecipes
+                    key={allRecipe.id}
+                    id={allRecipe.id}
+                    title={allRecipe.title}
+                    created_at={allRecipe.created_at}
+                    introduction={allRecipe.introduction}
+                    photo={allRecipe.photo}
+                    name={allRecipe.name}/>
+                    ) :
+                filterRecipes.map(filterRecipe =>
+                    <AllRecipes
+                    key={filterRecipe.id}
+                    title={filterRecipe.title}
+                    created_at={filterRecipe.created_at}
+                    introduction={filterRecipe.introduction}
+                    photo={filterRecipe.photo}
+                    name={filterRecipe.name}/>
+                    )
+            
+                }
+        </div>
     </div>
+    )
+}
 
-    <div className="dropdown__content--interCat">
-        {showInterCat === true ? 
-        interCatRecipes.map(interCatRecipe => 
-        <p key={interCatRecipe.cat_inter_id} onClick={() => getSubCat(interCatRecipe.cat_inter_id)} >{interCatRecipe.name_cat_inter}</p>
-        ) : '' }
-    </div>
-
-
-    <div className="dropdown__content--subCat">
-        { showSubCat === true && showInterCat === true  ? 
-        subCatRecipes.map(subCatRecipe => 
-        <p key={subCatRecipe.id} onClick={()=> getRecipes(subCatRecipe.id)}>{subCatRecipe.name}</p>
-        ) : ''}
-    </div>
-
-    </div>
-
-    <div class="recipes-list">
-            { showAllRecipes === true ? 
-                allRecipes.map(allRecipe => 
-                <AllRecipes
-                key={allRecipe.id}
-                id={allRecipe.id}
-                title={allRecipe.title}
-                created_at={allRecipe.created_at}
-                introduction={allRecipe.introduction}
-                photo={allRecipe.photo}
-                name={allRecipe.name}/>
-                ) :''
-                // filterRecipes.map(filterRecipe =>
-                //     <AllRecipes
-                //     key={filterRecipe.id}
-                //     title={filterRecipe.title}
-                //     created_at={filterRecipe.created_at}
-                //     introduction={filterRecipe.introduction}
-                //     photo={filterRecipe.photo}
-                //     name={filterRecipe.name}/>
-                //     )
-          
-            }
-    </div>
-</div>
-)
-        }
+export default FilterRecipes

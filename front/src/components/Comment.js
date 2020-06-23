@@ -13,6 +13,7 @@ const Comment =(props) => {
     const idRecipe = props.idRecipe;
 
     useEffect(()=> {
+        //Retrieve all recipes' comments
         const getComments = async () => {
             const url = `http://localhost:8000/user/comment/${idRecipe}`
             const result = await axios.get(url)
@@ -23,9 +24,11 @@ const Comment =(props) => {
 
     },[]) 
 
+    // Send user's comment to the back
     const handlePost = () => {
+        const valuesComment = {comment, idRecipe}
         const url = 'http://localhost:8000/user/postComment'
-        axios.post(url, {comment : comment})
+        axios.post(url, valuesComment)
         .then(res => setResponse(res))
     }
 

@@ -1,12 +1,14 @@
 import React from 'react'
-import recipe from '../img/lotion.jpg'
+import {Link} from 'react-router-dom'
 
-export default function Slider(props) {
+const Slider = (props) => {
     return (
         <div class="slider__items">
-            <img class="slider__items-image" src={props.photo}></img>
+            <Link to={`/recipe/${props.id}`}><img class="slider__items-image" src={props.photo}/></Link>
             <aside class="category_name">{props.name}</aside>
-            <h2 class="heading-secondary heading-secondary--small">{props.title}</h2>
+            <Link to={`/recipe/${props.id}`}><h2 class="heading-secondary heading-secondary--small">{props.title}</h2></Link>
         </div>      
     )
 }
+
+export default Slider

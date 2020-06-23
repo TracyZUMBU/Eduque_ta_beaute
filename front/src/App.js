@@ -1,14 +1,13 @@
 import React from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 import './css/style.css';
 
-import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Home from './pages/Home'
 import Categories from './pages/Recettes/Categories';
 import InterCat from './pages/Recettes/InterCat';
 import Subcat from './pages/Recettes/SubCat';
 import Connexion from './pages/espaceUser/Connexion';
-import Recipes from './components/AllRecipes';
 import Profile from './pages/espaceUser/Profile';
 import EspaceAdmin from './pages/espaceAdmin/HomeAdmin';
 import SectionRecipes from './pages/espaceAdmin/SectionRecipes';
@@ -22,10 +21,6 @@ import OneRecipePage from './pages/espaceUser/OneRecipePage';
 function App() {
   return (
     <Router>
-
-    <div className="">
-   
-    </div>
     <Route exact path="/home" component={Home}/>
     <Route exact path="/categories" component={Categories}/>
     <Route exact path="/interCat/:id" component={InterCat}/>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Banner_category(props) {
+const Banner_category = (props) => {
     
     return (
         
@@ -10,3 +10,5 @@ export default function Banner_category(props) {
         
     )
 }
+ 
+export default Banner_category

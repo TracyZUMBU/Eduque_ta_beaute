@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {useParams} from 'react-router-dom'
 import axios from 'axios'
 
 
-export default function Profile(props) {
+const Profile = (props) => {
     // Retrieve user's details
     const [users, setUser] = useState([])
     //Retrieve the user's favorite recipes
@@ -48,3 +47,5 @@ export default function Profile(props) {
         </div> 
     )
 }
+
+export default Profile

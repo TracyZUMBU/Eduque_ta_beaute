@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-export default function HomeAdmin() {
+const HomeAdmin = () => {
     return (
         <div>
             <p>Espace administarteur</p>
@@ -11,3 +11,5 @@ export default function HomeAdmin() {
         </div>
     )
 }
+
+export default HomeAdmin

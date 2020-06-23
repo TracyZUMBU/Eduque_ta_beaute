@@ -1,10 +1,16 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 
-export default function AllRecipes(props) {
+const  AllRecipes = (props) => {
     
     
+    const handlePost = (recipeID) => {
+        const url = 'http://localhost:8000/user/addFavorite';
+        axios.post(url, {recipeID: recipeID})  
+    }
+
     return (
         <div class="recipes-list__items">
             <div class="recipes-list__image-box">
@@ -17,16 +23,16 @@ export default function AllRecipes(props) {
                     <aside class="recipes-info__date">{props.created_at
                     }</aside>
                 </div>
-                <h2 class="heading-secondary heading-secondary--big">{props.title}</h2>
+                <Link to={`/recipe/${props.id}`}><h2 class="heading-secondary heading-secondary--big">{props.title}</h2></Link>
                 <p>{props.introduction}</p>
                 <div class="repices-icons">
                     <img src="https://img.icons8.com/pastel-glyph/64/000000/facebook-like.png"/>
-                    <img src="https://img.icons8.com/dotty/80/000000/wish-list.png"/>
-                
-
+                    <img onClick={()=> handlePost(props.id)} src="https://img.icons8.com/dotty/80/000000/wish-list.png"/>
                 </div>
             </div>
             
         </div>
     )
 }
+
+export default AllRecipes
