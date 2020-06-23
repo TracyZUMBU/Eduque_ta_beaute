@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+import Header from '../../components/Header'
+import Banner_category from '../../components/BannerCategory'
+import Navigation from '../../components/Navigation'
 
 
 const Profile = (props) => {
@@ -30,20 +33,24 @@ const Profile = (props) => {
 
     return (
         <div>
-            {users.map(user =>
-            
-            <div key={user.id}>
-                <p>{user.username}</p>
-                <p>{user.email}</p>
-            </div>
-            )}
+            <Header/>
+            <div class="profileSection">
+                <p>bienvenue sur votre profile</p>
+                {users.map(user =>
+                <div class="userDetails" key={user.id}>
+                    <p class="userDetails__name">{user.username}</p>
+                    <p class="userDetails__email">{user.email}</p>
+                </div>
+                )}
 
-            {favorite.map(el => 
-            <div key={el.id}>
-                <p>{el.title}</p>
-                <img src={el.photo}/>
+                <p>Mes recettes favorites</p>
+                {favorite.map(el => 
+                <div class="favoriteList" key={el.id}>
+                    <p>{el.title}</p>
+                    <img src={el.photo}/>
+                </div>
+                )}
             </div>
-            )}
         </div> 
     )
 }

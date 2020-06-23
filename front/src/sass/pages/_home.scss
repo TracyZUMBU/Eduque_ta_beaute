@@ -14,17 +14,18 @@
     grid-area: header;
 }
 
-.banner{
-    height: 18rem;
-    background-image: url(../img/almond.jpg);
+.bannerHeader{
+    height: $HBannerHeader;
+    background: url(../img/bannerHeader2.jpeg) no-repeat;
     background-size: cover;
     background-position: center;
+    width: 100%;
     
 }
 
 .navigation {
     
-    height: 7rem;
+    height: $HNav;
     border: 2px solid $color-light-grey;
     display: flex;
     flex-direction: row;

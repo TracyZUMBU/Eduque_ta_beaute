@@ -1,0 +1,30 @@
+.profileSection {
+    text-transform: uppercase;
+    font-size: 5rem;
+    //background: url(../img/backgroundProfile.jpeg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: calc(100vh - #{$HNav});
+    //padding-top: 60%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+
+    position: relative;
+  
+} 
+
+.userDetails {
+    
+    //color: $color-white;
+    &__name{
+        text-align: center;
+        font-size: 5rem;
+    }
+    &__email {
+        font-size: 3rem;
+    }
+}

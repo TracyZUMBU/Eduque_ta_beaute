@@ -14,7 +14,6 @@ import SectionRecipes from './pages/espaceAdmin/SectionRecipes';
 import SectionUsers from './pages/espaceAdmin/SectionUsers'
 import Comment from './components/Comment'
 import CreateProfile from './pages/espaceUser/CreateProfile';
-import Secret from './pages/espaceUser/Secret'
 import RecipesPage from './pages/espaceUser/RecipesPage';
 import OneRecipePage from './pages/espaceUser/OneRecipePage';
 
@@ -36,7 +35,6 @@ function App() {
     <Route exact path="/user/:id" component={Profile}/>
     <Route exact path="/comment" component={Comment}/>
     <Route exact path="/sign-up" component={CreateProfile}/>
-    <Route exact path="/secret-route" component={Secret}/>
     <Route exact path="/recipes-page" component={RecipesPage}/>
 
     </Router>

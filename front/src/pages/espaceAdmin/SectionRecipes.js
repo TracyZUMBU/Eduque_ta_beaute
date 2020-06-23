@@ -1,40 +1,40 @@
 import React, {useState, useEffect} from 'react'
-import FilterRecipes from '../../components/FilterRecipes'
+
 import DisplayModale from '../DisplayModale'
 import axios from 'axios'
+import CreateRecipe from './CreateRecipe'
 
 
 const SectionRecipes = () => {
 
     // lastest added recipes
-    const [lastestRecipes, setLatestRecipes] = useState ([])
+    const [recipes, setRecipes] = useState ([])
 
     const [toggleModale, setToggleModale] = useState (false)
-    const [curId, setCurId] = useState ("")
+    const [recipeID, setrecipeID] = useState ("")
 
     // Retrieve the lastest recipes
     useEffect(() => {
         
-        const getLatestRecipes = async () => {
-            const url = 'http://localhost:8000/admin/lastestRecipes/'
+        const getRecipes = async () => {
+            const url = 'http://localhost:8000/user/allRecipes/'
             const result = await axios.get(url)
-            setLatestRecipes(result.data)
+            setRecipes(result.data)
         }
-        getLatestRecipes()
+        getRecipes()
     }, [])
 
-    // open the modale
+    // open the modal
     const openModale = (id) => {
         setToggleModale(true)
         console.log(toggleModale);
-         setCurId(id)
+         setrecipeID(id)
         console.log(id);
     }
 
-    //close the modale
+    //close the modal
     const closeModale = () => {
-        console.log(curId);
-       const url = `http://localhost:8000/admin/recipeDelete/${curId}`
+        const url = `http://localhost:8000/admin/recipeDelete/${recipeID}`
         axios.delete(url)
         window.location.reload()
     }
@@ -42,16 +42,18 @@ const SectionRecipes = () => {
 
     return (
         <div>
-            <p>Les 10 dernières recettes</p>
-            {lastestRecipes.map(lastestRecipe => (
-                <p key={lastestRecipe.id}>{lastestRecipe.title} <i onClick={()=> openModale(lastestRecipe.id)}>x</i></p>
-           
+            <h1>Les recettes</h1>
+            {recipes.map(recipe => (
+                <div key={recipe.id}>
+                    <p>{recipe.title}</p>
+                    <img src= {recipe.photo} alt="image of recipe"/>
+                     <i onClick={()=> openModale(recipe.id)}>x</i></div>
             ))}
             {toggleModale ? <DisplayModale closeFunc={closeModale}/> : ""}
-
-            <FilterRecipes />
+            <div class="create-recipe">
+                <CreateRecipe/>
+            </div>
         </div>
-
     )
 }
 export default SectionRecipes

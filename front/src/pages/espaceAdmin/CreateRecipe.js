@@ -4,7 +4,7 @@ import axios from 'axios'
 import FilterRecipes from '../../components/FilterRecipes'
 
 
-const CreateArticle = (props) => {
+const CreateRecipe = (props) => {
  
     
     const [text, setText] = useState()
@@ -25,8 +25,6 @@ const CreateArticle = (props) => {
     return (
         <div>
             <h1>Taper l'article</h1>
-            
-            <FilterRecipes/>
             {props.children}
             <input
                 type="text"
@@ -65,4 +63,4 @@ const CreateArticle = (props) => {
     )
 }
 
-export default CreateArticle
+export default CreateRecipe

@@ -5,3 +5,8 @@ $color-light-grey:#eaeaea;
 //font-size
 $h2-small:2rem;
 $h2-big:3.5rem;
+
+//Height
+$HBannerHeader: 18rem;
+$HNav: 7rem;
+$HTotalHeader: calc(#{$HBannerHeader} + #{$HNav});
