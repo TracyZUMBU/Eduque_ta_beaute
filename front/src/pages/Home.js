@@ -5,16 +5,8 @@ import '../css/style.css';
 import Header from '../components/Header'
 import Slider from '../components/Slider'
 import photo from '../img/flacon_white.jpg'
-import recipe from '../img/lotion.jpg'
-import imgAlternative from '../img/lotion.jpg'
-import imgBlog from '../img/bottle_white.jpg'
 
-import { Slide } from 'react-slideshow-image'
-
-
-
-
-export default function Home() {
+const Home = () => {
 
     const [lastestRecipes, setLatestRecipes] = useState ([])
     
@@ -42,11 +34,12 @@ export default function Home() {
      
                 <section class="slider">
                     <div class="slider__box">
-                        <h3 class="heading-tertiary headlines">Features news</h3>
+                        <h3 class="heading-tertiary headlines">derniers posts</h3>
                         <div class="slider__list">
                             {lastestRecipes.map(latestRecipe => (
                                 <Slider
                                     key={latestRecipe.id}
+                                    id={latestRecipe.id}
                                     title={latestRecipe.title}
                                     photo={latestRecipe.photo}
                                     name={latestRecipe.name}
@@ -64,3 +57,4 @@ export default function Home() {
         </div>
     )
 }
+ export default Home

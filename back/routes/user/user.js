@@ -2,24 +2,7 @@
 const express = require("express")
 const connection = require('../../conf')
 const { Router } = require("express")
-
 const router = express.Router()
-
-// Retrieve all recipes based on subcategory's id
-// router.get('/allrecipes/:idSub', (req, res) => {
-//     const idSub = req.params.idSub
-//     console.log(idSub);
-    
-//     connection.query('SELECT recipes.id, recipes.title, recipes.photo, recipes.text, recipes.introduction, recipes.created_at, recipes.sub_cat_id, cat_recipes.name  FROM recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id AND recipes.sub_cat_id = ? ORDER BY created_at DESC' , idSub, (err, results) => {
-//         if(err) {
-//             res.status(500).send('Error retrieving recipes')
-            
-//         }else {
-//             res.status(200).json(results)
-//         }
-//     })  
-
-// }) 
 
 // Retrieve all the categories of recipes
 router.get('/catRecipes', (req, res) => {
@@ -150,7 +133,7 @@ router.post('/postComment', (req, res) => {
             res.status(200).send('the comments has been post')
         }
     })
-})
+}) 
  
 // add a recipe to the favorite list
 router.post('/addFavorite', (req, res) => {

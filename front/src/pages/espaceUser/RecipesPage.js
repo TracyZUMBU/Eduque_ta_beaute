@@ -1,27 +1,27 @@
 import React, {useState, useEffect } from 'react'
 import axios from 'axios'
+
 import Header from '../../components/Header'
 import Banner from '../../components/BannerCategory'
-import AllRecipes from '../../components/AllRecipes'
 import FilterRecipes from '../../components/FilterRecipes'
 
-export default function RecipesPage() {
+const RecipesPage = () => {
 
-      // Retrieve all recipes
-      const [allRecipes, setAllRecipes] = useState([])
-      // 
-      const bannerName = "recettes"
+    // Retrieve all recipes
+    const [allRecipes, setAllRecipes] = useState([])
+    // 
+    const bannerName = "recettes"
 
-      useEffect(() => {
+    useEffect(() => {
+        // Retrive all the recipes
         const getAllRecipes = async () => {
-            const url = 'http://localhost:8000/user/allrecipes/'
-            const result = await axios.get(url)
-            setAllRecipes(result.data);
-            console.log('tt', allRecipes, result.data); // tableau vide dans la console ?
-        }
-        getAllRecipes();
-
-      }, [])
+        const url = 'http://localhost:8000/user/allrecipes/'
+        const result = await axios.get(url)
+        setAllRecipes(result.data);
+        console.log('tt', allRecipes, result.data); // tableau vide dans la console ?
+    }
+    getAllRecipes();
+    },[])
 
     return (
         <div>
@@ -37,3 +37,5 @@ export default function RecipesPage() {
         </div>
     )
 }
+
+export default RecipesPage

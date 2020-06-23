@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 
-export default function Connexion() {
+const Connexion = () => {
 
        // state Admin
        const [isAdmin, setAdmin] = useState(false)
@@ -112,3 +112,5 @@ export default function Connexion() {
         </div>
     )
 }
+
+export default Connexion

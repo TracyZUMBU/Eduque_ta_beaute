@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function DisplayModale(props) {
+const DisplayModale = (props) => {
 
     return (
         <div  className='overlay'>
@@ -12,3 +12,4 @@ export default function DisplayModale(props) {
     </div>
     )
 }
+export default DisplayModale

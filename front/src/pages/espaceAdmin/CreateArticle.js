@@ -1,13 +1,10 @@
 import React, {useState} from 'react'
-// import { Editor } from "@tinymce/tinymce-react";
+import axios from 'axios'
 
 import FilterRecipes from '../../components/FilterRecipes'
 
 
-
-import axios from 'axios'
-
-export default function CreateArticle(props) {
+const CreateArticle = (props) => {
  
     
     const [text, setText] = useState()
@@ -64,30 +61,8 @@ export default function CreateArticle(props) {
                 id="text" 
                 className="feedback-input" 
                 value="Créer l'article" onClick={() => handlePost()} />
-            
-
-            
-
-            {/* <Editor
-            initialValue={text}
-            init={{
-                forced_root_block : false,
-              height: 500,
-              menubar: false,
-              plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount'
-              ],
-              toolbar:
-                'undo redo | formatselect | bold italic backcolor | \
-             alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | help'
-            }}
-            onChange={(e) => setText(e.target.getContent())}
-          />
-
-        <p>{text}</p> */}
         </div>
     )
 }
+
+export default CreateArticle

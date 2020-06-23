@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 
-export default function CreateProfile() {
+const CreateProfile = () => {
 
     console.log(response);
     const [username, setUsername] = useState();
@@ -44,3 +44,5 @@ export default function CreateProfile() {
         </div>
     )
 }
+
+export default CreateProfile

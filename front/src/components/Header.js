@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-export default function Header() {
+const Header = () => {
     return (
         <header class="header">
             <div class="banner"></div>
@@ -17,3 +17,5 @@ export default function Header() {
         </header>
     )
 }
+
+export default Header
