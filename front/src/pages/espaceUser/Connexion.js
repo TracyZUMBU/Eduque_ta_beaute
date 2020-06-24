@@ -75,6 +75,7 @@ const Connexion = () => {
             const url = 'http://localhost:8000/register/login';
             axios.post(url, {password, email})
             .then(res => setResponse(res.data))
+          
             
         
 

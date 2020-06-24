@@ -4,7 +4,7 @@ import '../css/style.css';
 
 import Header from '../components/Header'
 import Slider from '../components/Slider'
-import photo from '../img/flacon_white.jpg'
+import mainSlide from '../img/main_slide.jpeg'
 
 const Home = () => {
 
@@ -12,6 +12,7 @@ const Home = () => {
     
     useEffect(() => {
         
+
         const getLatestRecipes = async () => {
             const url = 'http://localhost:8000/admin/lastestRecipes/'
             const result = await axios.get(url)
@@ -28,14 +29,20 @@ const Home = () => {
             <main class="main main--home">
                 <section class="center">
                     <div class="center__image-box">
-                        <img src={photo} class="center__image"></img>
+                        <img src={mainSlide} class="center__image"></img>
+                    </div>
+                    <div class="center__title">
+                        <div class="aside-box">
+                            <aside>Recettes</aside>
+                        </div>
+                        <h3 class="heading-tertiary ">Apprenez à faire vos produits du quoditien. <span>en un rien de temps.</span> <span>pour trois fois rien.</span></h3>
                     </div>
                 </section>
      
                 <section class="slider">
+                    <h5 class="heading-quinary headlines">derniers posts</h5>
                     <div class="slider__box">
-                        <h3 class="heading-tertiary headlines">derniers posts</h3>
-                        <div class="slider__list">
+                        <article class="slider__list">
                             {lastestRecipes.map(latestRecipe => (
                                 <Slider
                                     key={latestRecipe.id}
@@ -45,7 +52,7 @@ const Home = () => {
                                     name={latestRecipe.name}
                                     text={latestRecipe.text}/>            
                             ))}                      
-                        </div>
+                        </article>
                     </div>
                 </section>
             </main>

@@ -16,6 +16,7 @@ import Comment from './components/Comment'
 import CreateProfile from './pages/espaceUser/CreateProfile';
 import RecipesPage from './pages/espaceUser/RecipesPage';
 import OneRecipePage from './pages/espaceUser/OneRecipePage';
+import CreateRecipe from './pages/espaceAdmin/CreateRecipe';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
     <Route exact path="/comment" component={Comment}/>
     <Route exact path="/sign-up" component={CreateProfile}/>
     <Route exact path="/recipes-page" component={RecipesPage}/>
+    <Route exact path="/createrecipe" component={CreateRecipe}/>
 
     </Router>
   );

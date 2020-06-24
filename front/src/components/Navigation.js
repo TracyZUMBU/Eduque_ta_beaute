@@ -9,7 +9,7 @@ export default function Navigation() {
                     <li class="navigation__item">Alternatives</li>
                     <li class="navigation__item">Mode</li>
                     <li class="navigation__item">Blog</li>
-                    <Link to="/connexion"><li>Se connecter</li></Link>
+                    <Link to="/connexion"><li class="navigation__item">Se connecter</li></Link>
                 </ul>
             </nav>
     )

@@ -1,11 +1,15 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 
+import { Editor } from '@tinymce/tinymce-react';
 import FilterRecipes from '../../components/FilterRecipes'
 
 
 const CreateRecipe = (props) => {
  
+    const handleEditorChange = (content, editor) => {
+        console.log('Content was updated:', content);
+      }
     
     const [text, setText] = useState()
     const [title, setTitle] = useState()
@@ -59,7 +63,27 @@ const CreateRecipe = (props) => {
                 id="text" 
                 className="feedback-input" 
                 value="Créer l'article" onClick={() => handlePost()} />
+        <Editor
+        initialValue="<p>This is the initial content of the editor</p>"
+        init={{
+            height: 500,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar:
+            'undo redo | formatselect | bold italic backcolor | \
+            alignleft aligncenter alignright alignjustify | \
+            bullist numlist outdent indent | removeformat | help'
+        }}
+       
+        onEditorChange={handleEditorChange}
+        />
+
         </div>
+    
     )
 }
 

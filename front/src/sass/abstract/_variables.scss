@@ -1,12 +1,16 @@
 //color 
 $color-white : #fff;
 $color-light-grey:#eaeaea;
+$color-orange: #c9975f;
+$color-black: black;
 
 //font-size
 $h2-small:2rem;
 $h2-big:3.5rem;
 
 //Height
-$HBannerHeader: 18rem;
-$HNav: 7rem;
+$HBannerHeader: 13rem;
+$HNav: 5rem;
 $HTotalHeader: calc(#{$HBannerHeader} + #{$HNav});
+
+//font-family

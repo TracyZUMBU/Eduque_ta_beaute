@@ -3,14 +3,14 @@ import axios from 'axios'
 
 const CreateProfile = () => {
 
-    console.log(response);
+    
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [password_repeat, setPassword_repeat] = useState();
     const [email, setEmail] = useState();
-    const [response, setResponse] = useState();
     const content = {username, email, password, password_repeat}
-
+    const [response, setResponse] = useState();
+    
     const handlePost = () => {
         const url = 'http://localhost:8000/register/sign-up';
         axios.post(url, content)
@@ -18,7 +18,7 @@ const CreateProfile = () => {
         console.log('tt', response);
         
     }
-
+    
     return (
         <div>
             <p>Créer votre compte</p>
