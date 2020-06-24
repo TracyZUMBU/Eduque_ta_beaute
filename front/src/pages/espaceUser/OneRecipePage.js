@@ -30,9 +30,6 @@ const OneRecipePage = (props) => {
             <main class="main">
             {recipe.map(recipeItem => (
                 <>
-                <div class="image-box">
-                    <img class="image" src={recipeItem.photo}/>
-                </div>
                 <div class="heading">
                     <aside class="recipes-info__category_name">{recipeItem.name}
                     </aside>
@@ -40,6 +37,9 @@ const OneRecipePage = (props) => {
                     </aside>
                     <h2 class="heading-secondary heading-secondary--big">{recipeItem.title}</h2>
                     <p>by author</p>
+                </div>
+                <div class="image-box">
+                    <img class="image" src={recipeItem.photo}/>
                 </div>
                 <div class="recipes-details"></div>
                 </>
