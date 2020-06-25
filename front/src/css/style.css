@@ -79,19 +79,6 @@ aside[class*="category_name"] {
 span {
   display: inline-block; }
 
-.banner-box {
-  height: calc(11rem + 1rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4rem; }
-  .banner-box--recettes {
-    background-image: url(../img/baking.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    width: 100%; }
-
 .recipes-list {
   display: flex;
   flex-direction: column; }
@@ -160,6 +147,67 @@ span {
     margin-left: 1rem;
     color: #767676;
     text-transform: uppercase; }
+
+.banner-box {
+  height: calc(11rem + 1rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4rem; }
+  .banner-box--recettes {
+    background-image: url(../img/baking.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%; }
+
+.commentSection {
+  margin-top: 2rem;
+  border: 2px solid #eaeaea;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 2.5rem; }
+  .commentSection__displayComments-box {
+    display: flex;
+    flex-direction: column;
+    align-items: start; }
+  .commentSection__displayComments {
+    margin: 1rem 0;
+    width: 100%;
+    border-bottom: 1px solid #eaeaea; }
+    .commentSection__displayComments > * {
+      margin-bottom: 0.65rem; }
+  .commentSection__writeComment {
+    width: 100%; }
+
+.name_comment {
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: uppercase; }
+
+.comment {
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  word-break: break-word; }
+
+.type_comment {
+  width: 100%;
+  height: 20rem;
+  resize: none;
+  border: 1px solid #e7e7e7; }
+
+.submitComment {
+  display: inline-block;
+  width: 100%;
+  height: 4rem;
+  margin: 2.5rem 0;
+  border-radius: 0;
+  background-color: black;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  cursor: pointer; }
 
 .grid-container {
   display: grid;
@@ -272,6 +320,9 @@ span {
 
 .userDetails__email {
   font-size: 3rem; }
+
+.frame {
+  display: flex; }
 
 .main--recipesPage {
   display: grid;

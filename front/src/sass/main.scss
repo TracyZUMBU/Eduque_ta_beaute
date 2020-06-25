@@ -4,9 +4,11 @@
 @import "base/base";
 @import "base/typography";
 
-@import "components/bannerCategory";
 @import "components/allRecipes";  
+@import "components/bannerCategory";
+@import "components/comments"; 
  
 @import "pages/home"; 
 @import "pages/profile";
+@import "pages/oneRecipePage"; 
 @import "pages/recipesPage"; 

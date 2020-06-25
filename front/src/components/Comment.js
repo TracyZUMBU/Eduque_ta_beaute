@@ -11,7 +11,8 @@ const Comment =(props) => {
     const [displayComment, setDisplayComment] = useState([])
     // Retrieve the id of the recipe from the OnePAgeRecipe.js
     const idRecipe = props.idRecipe;
-
+    const valuesComment = {comment, idRecipe}
+    
     useEffect(()=> {
         //Retrieve all recipes' comments
         const getComments = async () => {
@@ -26,28 +27,29 @@ const Comment =(props) => {
 
     // Send user's comment to the back
     const handlePost = () => {
-        const valuesComment = {comment, idRecipe}
         const url = 'http://localhost:4000/user/postComment'
         axios.post(url, valuesComment)
         .then(res => setResponse(res))
+        //! Relance la fonction getComments
     }
 
     return (
-        <div class="commentSection">
-            <div class="displayComment">
+        <section class="commentSection">
+            <div class="commentSection__displayComments-box">
                 {displayComment.map(item => (
-                    <>
-                    <p>{item.username}</p>
-                    <p>{item.created_at}</p>
-                    <p>{item.comments}</p>
-                    </>
+                    <div class="commentSection__displayComments">
+                    <p class="name_comment"> {item.username}</p>
+                    <p class="comment">{item.comments}</p>
+                    <p class="date_comment">{item.created_at}</p>
+                    </div>
                 ))}
             </div>
-            <div>
-                <textarea name="comments" onChange={(e)=> setComment(e.target.value)} rows="5" cols="33"/>
-                <input  type="button" value="Envoyer" onClick={() => handlePost()} />
+            <div class="commentSection__writeComment">
+                <h4 class="">Laissez un commentaire</h4>
+                <textarea class="type_comment" name="comment" onChange={(e)=> setComment(e.target.value)} placeholder="Vous avez testé la recette ? Qu'en avez-vous pensé ? " rows="5" cols="33"/>
+                <input  class="submitComment"type="button" value="Envoyer" onClick={() => handlePost()} />
             </div>
-        </div>
+        </section>
     )
 }
 

@@ -93,7 +93,7 @@ router.get('/comment/:id', (req,res) => {
     const id = req.params.id 
     console.log(id);
 
-    connection.query('SELECT comments.id, comments.comments, comments.created_at, users.username FROM ETB.comments INNER JOIN users ON comments.user_id = users.id AND  recipe_id = ?', id, (err,results) => {
+    connection.query('SELECT comments.id, comments.comments, DATE_FORMAT(comments.created_at, "%M %d, %Y %H:%i AM") AS created_at, users.username FROM ETB.comments INNER JOIN users ON comments.user_id = users.id AND  recipe_id = ?', id, (err,results) => {
         if(err){
             res.status(500).send('Error retrieving comments')
         }else {
