@@ -18,7 +18,11 @@ body {
 }
 
 .main {
-  padding: 6rem 17rem;
+  padding: 0 17rem;
+}
+
+h1 {
+  font-size: 6rem;
 }
 
 h4 {
@@ -36,4 +40,8 @@ h5 {
   
 figure {
   margin-bottom: 1.3rem;
+}
+
+a {
+  cursor: pointer;
 }

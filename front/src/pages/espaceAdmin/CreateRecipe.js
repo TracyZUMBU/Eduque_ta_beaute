@@ -19,7 +19,7 @@ const CreateRecipe = (props) => {
     const content = { title, photo ,materiel, text}
   
     const handlePost = () => {
-        const url = `http://localhost:8000/admin/createArticle`
+        const url = `http://localhost:4000/admin/createArticle`
         axios.post(url, content)
         .then(res => setResponse(res))
         window.location.reload();

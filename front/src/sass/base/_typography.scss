@@ -3,7 +3,6 @@
 
 
 aside {
-    color: $color-orange; 
     text-transform: uppercase;
     font-size: 1.1rem;
     font-weight: 600;
@@ -12,6 +11,10 @@ aside {
         color: $color-black;
         @include hoverLink;
     }
+}
+
+aside[class*="category_name"]{
+    color: $color-orange; 
 }
 
 .aside-box{
@@ -37,6 +40,10 @@ aside {
     text-transform: uppercase;
     font-size: 3rem;
     font-weight: 400;
+    &--small {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
 }
 
 

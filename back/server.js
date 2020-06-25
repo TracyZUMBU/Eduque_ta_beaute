@@ -5,7 +5,7 @@ const bodyParser = require ('body-parser')
 const connection = require('./conf')
 var cors = require('cors')
 const morgan = require('morgan')
-const port = 8000
+const port = 4000
 
 
 app.use(morgan('dev'))

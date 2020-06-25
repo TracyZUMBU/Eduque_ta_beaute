@@ -17,7 +17,10 @@ body {
   font-family: 'Roboto Condensed', sans-serif; }
 
 .main {
-  padding: 6rem 17rem; }
+  padding: 0 17rem; }
+
+h1 {
+  font-size: 6rem; }
 
 h4 {
   font-size: 1.6rem;
@@ -33,8 +36,10 @@ h5 {
 figure {
   margin-bottom: 1.3rem; }
 
+a {
+  cursor: pointer; }
+
 aside {
-  color: #c9975f;
   text-transform: uppercase;
   font-size: 1.1rem;
   font-weight: 600;
@@ -42,6 +47,9 @@ aside {
   aside:hover {
     color: black;
     transition: all .25s linear; }
+
+aside[class*="category_name"] {
+  color: #c9975f; }
 
 .aside-box {
   margin-bottom: 1.5rem; }
@@ -61,6 +69,9 @@ aside {
   text-transform: uppercase;
   font-size: 3rem;
   font-weight: 400; }
+  .heading-tertiary--small {
+    font-size: 2rem;
+    margin-bottom: 1.5rem; }
 
 .headlines {
   padding: 2rem 0; }
@@ -69,10 +80,11 @@ span {
   display: inline-block; }
 
 .banner-box {
-  height: 15rem;
+  height: calc(11rem + 1rem);
   display: flex;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  margin-bottom: 4rem; }
   .banner-box--recettes {
     background-image: url(../img/baking.jpg);
     background-repeat: no-repeat;
@@ -90,27 +102,64 @@ span {
     margin-bottom: 2rem;
     border-bottom: 1px solid #eaeaea; }
   .recipes-list__image-box {
-    width: 40%;
-    height: 100%; }
+    width: 50%;
+    height: 100%;
+    padding-right: 1.5rem; }
   .recipes-list__image {
     width: 100%;
     height: 100%; }
   .recipes-list__content-box {
+    width: 50%;
     width: 60%;
-    padding-left: 3rem; }
+    padding-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
 
-.recipes-info {
-  display: flex; }
-  .recipes-info__category_name {
+.recipe-info {
+  display: flex;
+  line-height: 1;
+  align-items: center;
+  margin-bottom: 1.5rem; }
+  .recipe-info__category_name {
     padding: 0 !important; }
-  .recipes-info__date::before {
-    content: '';
-    height: 1px;
-    background: rgba(0, 0, 0, 0.2);
-    position: relative;
-    display: inline-block;
-    margin: 0 10px;
-    width: 2rem; }
+  .recipe-info__date {
+    color: #767676;
+    align-items: center;
+    display: inline-flex; }
+    .recipe-info__date::before {
+      content: '';
+      height: 1px;
+      background: rgba(0, 0, 0, 0.2);
+      position: relative;
+      display: inline-block;
+      margin: 0 10px;
+      width: 2rem; }
+
+.recipe-intro {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  margin-bottom: 2rem; }
+
+.repice-icons-box {
+  display: flex;
+  align-items: center;
+  position: relative; }
+  .repice-icons-box .repice-icons {
+    border: 1px solid #eaeaea;
+    padding: .8rem;
+    height: 2rem;
+    margin-right: 3px; }
+    .repice-icons-box .repice-icons:hover::before {
+      position: absolute;
+      content: "Liker l'article";
+      color: black;
+      background-color: blue; }
+  .repice-icons-box .like {
+    font-size: 10px;
+    margin-left: 1rem;
+    color: #767676;
+    text-transform: uppercase; }
 
 .grid-container {
   display: grid;
@@ -121,7 +170,7 @@ span {
   grid-area: header; }
 
 .bannerHeader {
-  height: 13rem;
+  height: 11rem;
   background: url(../img/bannerHeader2.jpeg) no-repeat;
   background-size: cover;
   background-position: center;
@@ -159,7 +208,8 @@ span {
   height: 66rem;
   position: relative; }
   .center__image-box {
-    height: 100%; }
+    height: 100%;
+    margin-top: 6rem; }
   .center__title {
     display: flex;
     flex-direction: column;
@@ -225,24 +275,44 @@ span {
 
 .main--recipesPage {
   display: grid;
-  grid-template-areas: "list aside";
-  grid-template-columns: 2fr 0.7fr; }
+  grid-template-areas: "list aside"; }
 
-.recipes-list {
-  grid-area: list; }
+.recipePage_blockLeft {
+  width: 75%; }
 
-.aside__recipes {
-  grid-area: aside;
-  width: 100%;
-  position: relative;
-  overflow: hidden; }
-  .aside__recipes::before {
-    background: url(https://images.unsplash.com/photo-1589125632234-718710bcbb12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
-    background-position: center;
-    background-size: contain;
+.recipes-container {
+  display: flex;
+  width: 100%; }
+
+.recipePage-blockRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 25%;
+  margin-left: 5rem;
+  height: 68rem;
+  background: url(../img/bathroocleaner.jpg) no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: sticky;
+  top: 2rem; }
+  .recipePage-blockRight::before {
     content: "";
     position: absolute;
-    transform: rotate(180deg);
-    width: 200%;
-    height: 200%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black background with opacity */
     z-index: -1; }
+
+.recipePage-blockRight__text {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 600;
+  z-index: 1;
+  line-height: 2; }

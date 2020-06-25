@@ -66,13 +66,13 @@ const Connexion = () => {
 
     const handlePost = () => {
 
-            // const url = 'http://localhost:8000/register/login';
+            // const url = 'http://localhost:4000/register/login';
             // axios.post(url, {password, email})
             // .then(res => setResponse(res))
             // console.log(response);
             console.log('hhhh',response);
 
-            const url = 'http://localhost:8000/register/login';
+            const url = 'http://localhost:4000/register/login';
             axios.post(url, {password, email})
             .then(res => setResponse(res.data))
           

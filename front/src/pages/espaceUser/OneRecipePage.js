@@ -15,7 +15,7 @@ const OneRecipePage = (props) => {
         
         const getRecipe = async () => {
 
-            const url = `http://localhost:8000/user/recipe/${id}`
+            const url = `http://localhost:4000/user/recipe/${id}`
             const result = await axios.get(url)
             setrecipe(result.data)
             console.log('recipe',recipe)

@@ -17,7 +17,7 @@ const SectionRecipes = () => {
     useEffect(() => {
         
         const getRecipes = async () => {
-            const url = 'http://localhost:8000/user/allRecipes/'
+            const url = 'http://localhost:4000/user/allRecipes/'
             const result = await axios.get(url)
             setRecipes(result.data)
         }
@@ -34,7 +34,7 @@ const SectionRecipes = () => {
 
     //close the modal
     const closeModale = () => {
-        const url = `http://localhost:8000/admin/recipeDelete/${recipeID}`
+        const url = `http://localhost:4000/admin/recipeDelete/${recipeID}`
         axios.delete(url)
         window.location.reload()
     }

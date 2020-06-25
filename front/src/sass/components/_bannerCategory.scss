@@ -1,8 +1,9 @@
 .banner-box {
-    height: 15rem;
+    height: calc(#{$HBannerHeader} + 1rem);
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 4rem;
     
     &--recettes{
         background-image: url(../img/baking.jpg);

@@ -18,7 +18,7 @@ componentDidMount() {
     const idInter = this.props.match.params.idInter
     const idCat = this.props.match.params.idCat
     
-axios.get(`http://localhost:8000/user/subCat/${idInter}/${idCat}`)
+axios.get(`http://localhost:4000/user/subCat/${idInter}/${idCat}`)
 .then(response => response.data)
 .then(data => {
     console.log('sub', data);

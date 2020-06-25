@@ -13,7 +13,7 @@ const SectionUsers = () => {
 
     useEffect(() => {
         const getUsers = async () => {
-            const url = 'http://localhost:8000/admin/allUsers'
+            const url = 'http://localhost:4000/admin/allUsers'
             const result = await axios.get(url)
             setUsers(result.data)
         }
@@ -28,7 +28,7 @@ const SectionUsers = () => {
     }
 
     const deleteUser = () => {
-        const url = `http://localhost:8000/admin/userDelete/${userID}`
+        const url = `http://localhost:4000/admin/userDelete/${userID}`
         axios.delete(url)
         window.location.reload()
     }

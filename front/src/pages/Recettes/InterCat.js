@@ -19,7 +19,7 @@ componentDidMount() {
     
     const id = this.props.match.params.id
     
-axios.get(`http://localhost:8000/user/interCat/${id}`)
+axios.get(`http://localhost:4000/user/interCat/${id}`)
 .then(response => response.data)
 .then(data => {
     console.log('blabla', data);

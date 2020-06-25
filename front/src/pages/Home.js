@@ -14,7 +14,7 @@ const Home = () => {
         
 
         const getLatestRecipes = async () => {
-            const url = 'http://localhost:8000/admin/lastestRecipes/'
+            const url = 'http://localhost:4000/admin/lastestRecipes/'
             const result = await axios.get(url)
             setLatestRecipes(result.data)
             console.log(lastestRecipes);

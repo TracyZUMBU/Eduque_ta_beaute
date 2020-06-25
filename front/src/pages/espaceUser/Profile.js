@@ -16,14 +16,14 @@ const Profile = (props) => {
 
     useEffect(() => {
         const getUser = async () => {
-            const url = `http://localhost:8000/user/user/${id}`;
+            const url = `http://localhost:4000/user/user/${id}`;
             const result = await axios.get(url)
             setUser(result.data)
         }
         getUser();
 
         const getFavorite = async () => {
-            const url = `http://localhost:8000/user/favorite/${id}`
+            const url = `http://localhost:4000/user/favorite/${id}`
             const result = await axios.get(url)
             setFavorite(result.data)
 

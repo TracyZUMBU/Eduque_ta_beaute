@@ -12,7 +12,7 @@ const CreateProfile = () => {
     const [response, setResponse] = useState();
     
     const handlePost = () => {
-        const url = 'http://localhost:8000/register/sign-up';
+        const url = 'http://localhost:4000/register/sign-up';
         axios.post(url, content)
         .then(res => setResponse(res))
         console.log('tt', response);

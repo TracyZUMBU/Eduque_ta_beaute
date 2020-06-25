@@ -31,7 +31,7 @@ const FilterRecipes = () => {
         
         // Retrieve all the categories of recipes
         const getCatRecipes = async () => {
-            const url = 'http://localhost:8000/admin/catRecipes/'
+            const url = 'http://localhost:4000/admin/catRecipes/'
             const result = await axios.get(url)
             setCatRecipes(result.data)
         }
@@ -39,7 +39,7 @@ const FilterRecipes = () => {
 
         //Retrieve all recipes on DB
         const getAllRecipes = async () => {
-            const url = 'http://localhost:8000/user/allRecipes/'
+            const url = 'http://localhost:4000/user/allRecipes/'
             const result = await axios.get(url)
             setAllRecipes(result.data)
             console.log('allRecipes', result.data);
@@ -63,7 +63,7 @@ const FilterRecipes = () => {
     // Display all the intermediate categories based on category's id
     const getInterCat = async (id) => {
         
-        const url = `http://localhost:8000/admin/interCat/${id}`
+        const url = `http://localhost:4000/admin/interCat/${id}`
         const result = await axios.get(url)
         // initialise InterCatRecipes with bdd result
         setInterCatRecipes(result.data)
@@ -76,7 +76,7 @@ const FilterRecipes = () => {
 
     // Display subcategories 
     const getSubCat = async (idInter) => {
-        const url = `http://localhost:8000/admin/subCat/${idInter}/${idCat}`
+        const url = `http://localhost:4000/admin/subCat/${idInter}/${idCat}`
         const result = await axios.get(url)
         setSubCatRecipes(result.data)
         setShowSubCat(true)
@@ -92,7 +92,7 @@ const FilterRecipes = () => {
     const filterRecipes = allRecipes.filter(allRecipe => allRecipe.sub_cat_id = idSub)
   
     return (
-    <div>
+    <div class="recipePage_blockLeft">
 
         <div className="dropdown">
 
@@ -125,7 +125,8 @@ const FilterRecipes = () => {
 
         </div>
 
-        <div class="recipes-list">
+        <div class="recipe-list-box">
+
                 { showAllRecipes === true ? 
                     allRecipes.map(allRecipe => 
                     <AllRecipes
@@ -149,7 +150,11 @@ const FilterRecipes = () => {
             
                 }
         </div>
-    </div>
+       
+        
+
+</div>
+   
     )
 }
 
