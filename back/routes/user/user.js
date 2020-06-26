@@ -108,7 +108,15 @@ router.get('/favorite/:id', (req,res) => {
     const userID = req.params.id
     console.log(userID);
 
-    connection.query(`SELECT favorites.id, recipes.title, recipes.photo FROM ETB.recipes INNER JOIN favorites ON recipes.id = favorites.recipe_id AND favorites.user_id = ? `, userID, (err, results) => {
+    connection.query(`SELECT favorites.id, recipes.id AS recipeID, recipes.title, recipes.photo, sub_cat_recipes.name AS subcat, cat_recipes.name AS category
+    FROM ETB.recipes 
+    INNER JOIN favorites 
+    ON recipes.id = favorites.recipe_id 
+    INNER JOIN ETB.sub_cat_recipes 
+    ON recipes.sub_cat_id = sub_cat_recipes.id
+    INNER JOIN ETB.cat_recipes
+    ON recipes.cat_id = cat_recipes.id   
+    AND favorites.user_id = ? `, userID, (err, results) => {
         if(err){
             res.status(500).send('Error retrieving comments')
         }else {
