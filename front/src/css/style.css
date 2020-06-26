@@ -160,13 +160,12 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4rem; }
-  .banner-box--recettes {
-    background-image: url(../img/baking.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    width: 100%; }
+  margin-bottom: 4rem;
+  background-image: url(../img/baking.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%; }
 
 .commentSection {
   margin-top: 2rem;
@@ -371,24 +370,80 @@ p[class="login_title"] ~ input {
 .footer {
   grid-area: footer; }
 
-.profileSection {
+.profile {
+  display: flex;
+  flex-direction: column;
+  text-align: center; }
+
+.user_section {
   text-transform: uppercase;
   font-size: 5rem;
   background-position: center;
   background-size: cover;
-  height: calc(100vh - 5rem);
   width: 100%;
+  flex-direction: column;
+  align-items: center; }
+
+.userDetails {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative; }
+  justify-content: center;
+  align-items: center; }
+  .userDetails__name {
+    background-color: #c9975f;
+    padding: 3rem 0;
+    width: 100%;
+    margin-top: 5rem;
+    text-align: center;
+    font-size: 5rem;
+    font-weight: normal; }
+  .userDetails__email {
+    font-size: 3rem; }
 
-.userDetails__name {
-  text-align: center;
-  font-size: 5rem; }
+.profile__title {
+  margin: 5rem 0 5rem 0;
+  padding-bottom: 2rem;
+  font-size: 4rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-bottom: 1px solid #c9975f;
+  width: 90%;
+  color: #c9975f; }
 
-.userDetails__email {
-  font-size: 3rem; }
+.favorite_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.favorite_list {
+  padding: 3rem 15rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 7rem;
+  row-gap: 4rem; }
+
+.favorite_card {
+  border: 1px solid black;
+  height: 100%; }
+  .favorite_card__category {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2.5rem;
+    background-color: #c9975f;
+    font-weight: 600;
+    color: #fff; }
+  .favorite_card__image {
+    width: 100%;
+    height: 27rem; }
+  .favorite_card__subcat {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #c9975f; }
+  .favorite_card__title {
+    font-size: 1.8rem;
+    font-weight: normal; }
 
 .frame {
   display: flex;
