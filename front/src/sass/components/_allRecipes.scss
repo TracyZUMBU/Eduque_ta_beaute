@@ -36,8 +36,13 @@
     line-height: 1;
     align-items: center;
     margin-bottom: 1.5rem;
+    &--oneRecipe {
+        margin-bottom: 3rem;
+    }
     &__category_name{
         padding :0 !important;
+        &--oneRecipe {
+        }
     }
 
     &__date {

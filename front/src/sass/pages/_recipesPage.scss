@@ -6,7 +6,6 @@
 }
 
 .recipePage_blockLeft {
- 
     width: 75%;
 }
 .recipes-container{
@@ -14,6 +13,14 @@
     width: 100%;
     
 }
+
+.heading {
+    &--oneRecipe {
+        margin-bottom: 3rem;
+    }
+}
+
+
 
 .recipePage-blockRight {
     display: flex;

@@ -31,19 +31,21 @@ const OneRecipePage = (props) => {
             <Header/>
             <main class="main">
                 <div class="frame">
-                    <div class="recipePage-blockLeft">
+                    <div class="recipePage_blockLeft">
                     {recipe.map(recipeItem => (
-                        <>
-                    <div class="heading">
-                        <aside class="recipes-info__category_name">{recipeItem.name}
-                        </aside>
-                        <aside class="recipes-info__date">{recipeItem.created_at}
-                        </aside>
+                    <>
+                    <div class="heading heading--oneRecipe">
+                         <div class="recipe-info recipe-info--oneRecipe">   
+                            <aside class="recipe-info__category_name recipes-info__category_name">{recipeItem.name}
+                            </aside>
+                            <aside class="recipe-info__date recipe-info__date--oneRecipe">{recipeItem.created_at}
+                            </aside>
+                        </div>
                         <h2 class="heading-secondary heading-secondary--big">{recipeItem.title}</h2>
-                        <p>by author</p>
+                        <p class="author_recipe"><em>by</em> author</p>
                     </div>
                     <div class="image-box">
-                        <img class="image" src={recipeItem.photo}/>
+                        <img class="image image--oneRecipe" src={recipeItem.photo}/>
                     </div>
                 <div class="recipes-details"></div>
                 </>

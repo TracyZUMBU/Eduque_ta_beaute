@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import Header from '../../components/Header'
 
 
 const Connexion = () => {
@@ -94,23 +95,27 @@ const Connexion = () => {
 
 
     return (
-        <div>
-            <form id="login">
-                <label>
-                    Email :
-                    <input type="email" name="email" onChange={(e)=> setEmail(e.target.value)}/>
-                </label>
-                <label>
-                    Mot de passe :
-                    <input type="password" name="password" onChange={(e)=> setPassword(e.target.value)} />
-                </label>
-                    <input  type="button" value="Envoyer" onClick={() => handlePost()} />
-            </form>
+        <>
+        <Header/>
+        <div class="form-box">
 
             <input id="logout" type="button" value="Se déconnecter" onClick={() => disconnect()}/>
+            <form id="login" class="login_form">
+                 <p class="login_title">Connectez-vous</p>
+                <label for="email">
+                    </label>
+                    <input class="input_login" id="email" type="email" name="email" placeholder="Votre email" onChange={(e)=> setEmail(e.target.value)}/>
+                
+                <label for="password">
+                    </label>
+                    <input class="input_login" id="password" type="password" name="password" onChange={(e)=> setPassword(e.target.value)} placeholder="**********"/>
+                
+                    <input  class="submit_login" type="button" value="SE CONNECTER" onClick={() => handlePost()} />
+            </form>
 
             
         </div>
+        </>
     )
 }
 
