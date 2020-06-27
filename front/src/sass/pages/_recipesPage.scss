@@ -36,7 +36,7 @@
     background-size:cover ;
 
     position: sticky;
-    top:2rem;
+    top: calc(#{$HTotalHeader} + 3rem);
     //position: relative;
     &::before{
         content: "";

@@ -35,7 +35,7 @@ const Home = () => {
                         <div class="aside-box">
                             <aside class="aside-title">Recettes</aside>
                         </div>
-                        <h3 class="heading-tertiary ">Apprenez à faire vos produits du quoditien. <span>en un rien de temps.</span> <span>pour trois fois rien.</span></h3>
+                        <h3 class="heading-tertiary ">Apprenez à faire vos produits du quoditien. <span>en un rien de temps</span> <span> ET pour trois fois rien.</span></h3>
                     </div>
                 </section>
      

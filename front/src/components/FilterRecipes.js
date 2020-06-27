@@ -89,7 +89,7 @@ const FilterRecipes = () => {
         console.log('tt',  idSub, showAllRecipes,'filter', allRecipes.title);
     }
 
-    const filterRecipes = allRecipes.filter(allRecipe => allRecipe.sub_cat_id = idSub)
+    const filterRecipes = allRecipes.filter(allRecipe => allRecipe.sub_cat_id == idSub)
   
     return (
     <div class="recipePage_blockLeft">
