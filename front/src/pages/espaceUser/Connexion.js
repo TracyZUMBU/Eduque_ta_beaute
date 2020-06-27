@@ -11,7 +11,6 @@ const Connexion = () => {
        const [isAdmin, setAdmin] = useState(false)
        //state qui recoit la réponse du back
        const [backRes, setRes] = useState(false)
-       //message sur le login en cas d'erreur
     
        const [email, setEmail] = useState();
        const [password, setPassword] = useState();
@@ -41,69 +40,48 @@ const Connexion = () => {
    
     
     useEffect(() => {   
-        //console.log("response.auth", response.auth)
-
-        const token = response.token
-
-            
-         if (localStorage.getItem('token') === token) {
-        setAdmin(true);
-        console.log('get', isAdmin);
-            
-    }else if (response.auth === true && isAdmin === false) {
-        localStorage.setItem('token', response.token)
-                
-        setAdmin(true)
-        console.log('set', isAdmin);
-        
-        // on stocke le state en local
-          
-    }    }, [response, isAdmin])
+        const token = response.token  
+        if (localStorage.getItem('token') === token) {
+            setAdmin(true);
+            console.log('get', isAdmin);
+        } else if (response.auth === true && isAdmin === false) {
+            localStorage.setItem('token', response.token)      
+            setAdmin(true)
+            console.log('set', isAdmin);    
+        } 
+    }, [response, isAdmin])
 
     useEffect(() => {
-       
         console.log("isAdmin", isAdmin)
-        }, [response, isAdmin])
-
-
+    }, [response, isAdmin])
 
     const handlePost = () => {
-
-            // const url = 'http://localhost:4000/register/login';
-            // axios.post(url, {password, email})
-            // .then(res => setResponse(res))
-            // console.log(response);
-            console.log('hhhh',response);
-
-            const url = 'http://localhost:4000/register/login';
-            axios.post(url, {password, email})
-            .then(res => setResponse(res.data))
-            //! il faut set le const isLoggedIn to true
-            //! renvoyer à la page d'accueil
+        console.log('hhhh',response);
+        const url = 'http://localhost:4000/register/login';
+        axios.post(url, {password, email})
+        .then(res => setResponse(res.data))
+        //! il faut set le const isLoggedIn to true
+        //! renvoyer à la page d'accueil
         }
 
 
     return (
         <>
-        <Header/>
-        <div class="form-box">
-
-            <form id="login" class="login_form">
-                 <p class="login_title">Connectez-vous</p>
-                <label for="email">
-                    </label>
-                    <input class="input_login" id="email" type="email" name="email" placeholder="Votre email" onChange={(e)=> setEmail(e.target.value)}/>
-                
-                <label for="password">
-                    </label>
-                    <input class="input_login" id="password" type="password" name="password" onChange={(e)=> setPassword(e.target.value)} placeholder="**********"/>
-         
-                    <input  class="submit_login" type="button" value="SE CONNECTER" onClick={() => handlePost()} />
+            <Header/>
+            <div class="form-box">
+                <form id="login" class="login_form">
+                        <p class="login_title">Connectez-vous</p>
+                    <label for="email">
+                        </label>
+                        <input class="input_login" id="email" type="email" name="email" placeholder="Votre email" onChange={(e)=> setEmail(e.target.value)}/>
                     
-            </form>
-
-            
-        </div>
+                    <label for="password">
+                        </label>
+                        <input class="input_login" id="password" type="password" name="password" onChange={(e)=> setPassword(e.target.value)} placeholder="**********"/>
+                
+                        <input  class="submit_login" type="button" value="SE CONNECTER" onClick={() => handlePost()} />   
+                </form>
+            </div>
         </>
     )
 }

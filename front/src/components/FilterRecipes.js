@@ -96,15 +96,15 @@ const FilterRecipes = () => {
 
         <div className="dropdown">
 
-        <button onClick={toggleDropDown 
-        } className="dropdown__btn">Catégorie</button>
+        {/* <button onClick={toggleDropDown 
+        } className="dropdown__btn">Catégorie</button> */}
 
         <div className="dropdown__content--cat">
-            {showCat === true ? 
-            catRecipes.map(catRecipe => 
+
+            {catRecipes.map(catRecipe => 
             <p key={catRecipe.id} onClick={() => getInterCat(catRecipe.id)
             }>{catRecipe.name}</p>
-            ) : '' }
+            )} 
         </div>
 
         <div className="dropdown__content--interCat">

@@ -89,7 +89,7 @@ connection.query(`SELECT * FROM users WHERE email = ?`, email, (err, result)=>{
     {id : result[0].id, email: result[0].email}, // on rentre les information de l'utilisateur dont on a besoin en front 
     secret, // correspond a une chaine de caractere permettant de chiffrer la signature du token
     {
-      expiresIn: '24h'// fixe la duree de vie du token
+      expiresIn: '1h'// fixe la duree de vie du token
     },
     { algorithm: 'RS256' }// specifie l'algorithme de chiffrage utilise
   );
