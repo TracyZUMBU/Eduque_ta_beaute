@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
 *,
 *::after,
 *::before {
@@ -167,6 +168,11 @@ span {
   background-size: cover;
   width: 100%; }
 
+.comment_title {
+  font-size: 3rem;
+  text-transform: uppercase;
+  margin-top: 3rem; }
+
 .commentSection {
   margin-top: 2rem;
   border: 2px solid #eaeaea;
@@ -186,6 +192,8 @@ span {
       margin-bottom: 0.65rem; }
   .commentSection__writeComment {
     width: 100%; }
+    .commentSection__writeComment > h4 {
+      font-size: 2.5rem; }
 
 .name_comment {
   font-size: 1.4rem;
@@ -290,7 +298,21 @@ p[class="login_title"] ~ input {
   background: url(../img/bannerHeader2.jpeg) no-repeat;
   background-size: cover;
   background-position: center;
-  width: 100%; }
+  width: 100%;
+  position: relative; }
+
+.logo-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; }
+
+.logo-texte {
+  text-transform: uppercase;
+  color: black;
+  font-size: 3.5rem;
+  font-family: 'Reem Kufi', sans-serif; }
 
 .navigation {
   border: 2px solid #eaeaea;
@@ -316,6 +338,10 @@ p[class="login_title"] ~ input {
     .navigation__item:hover {
       color: #c9975f;
       transition: all .25s linear; }
+    .navigation__item--log {
+      color: #c9975f; }
+    .navigation__item--log:hover {
+      color: black; }
 
 .main--home {
   grid-area: main; }
@@ -326,7 +352,7 @@ p[class="login_title"] ~ input {
   .center__image-box {
     height: 100%;
     margin-top: 6rem; }
-  .center__title {
+  .center__box {
     display: flex;
     flex-direction: column;
     padding: 4rem;
@@ -338,6 +364,10 @@ p[class="login_title"] ~ input {
     background: rgba(255, 255, 255, 0.65);
     width: 30%;
     height: 30%; }
+
+.aside-title {
+  color: #c9975f;
+  font-size: 1.5rem; }
 
 .center__image {
   object-fit: center;
@@ -509,3 +539,48 @@ em {
   font-weight: 600;
   z-index: 1;
   line-height: 2; }
+
+.admin_recipe-list-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 2rem;
+  row-gap: 2rem; }
+
+.admin_recipe-list {
+  border: 1px solid #c9975f;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  text-align: center; }
+
+.admin_recipe-image {
+  width: 100%;
+  height: 20rem; }
+
+.admin_logo-delete {
+  cursor: pointer;
+  width: 2.5rem; }
+
+.admin_recipe-title {
+  font-size: 2rem; }
+
+.user-list-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 3px solid #eaeaea;
+  margin: 0 auto;
+  width: 80%;
+  padding: 3rem 5rem; }
+
+.user-list {
+  display: flex;
+  font-size: 2rem;
+  border: 2px solid #eaeaea;
+  margin-bottom: 2rem; }
+  .user-list > :not(:last-child) {
+    margin-right: 3rem; }
+  .user-list__name {
+    text-transform: uppercase; }
+  .user-list__delete {
+    cursor: pointer; }

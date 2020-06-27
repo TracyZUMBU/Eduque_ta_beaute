@@ -150,9 +150,6 @@ const FilterRecipes = () => {
             
                 }
         </div>
-       
-        
-
 </div>
    
     )

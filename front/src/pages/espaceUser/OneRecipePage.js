@@ -32,26 +32,26 @@ const OneRecipePage = (props) => {
             <main class="main">
                 <div class="frame">
                     <div class="recipePage_blockLeft">
-                    {recipe.map(recipeItem => (
-                    <>
-                    <div class="heading heading--oneRecipe">
-                         <div class="recipe-info recipe-info--oneRecipe">   
-                            <aside class="recipe-info__category_name recipes-info__category_name">{recipeItem.name}
-                            </aside>
-                            <aside class="recipe-info__date recipe-info__date--oneRecipe">{recipeItem.created_at}
-                            </aside>
+                        {recipe.map(recipeItem => (
+                        <>
+                        <div class="heading heading--oneRecipe">
+                            <div class="recipe-info recipe-info--oneRecipe">   
+                                <aside class="recipe-info__category_name recipes-info__category_name">{recipeItem.name}
+                                </aside>
+                                <aside class="recipe-info__date recipe-info__date--oneRecipe">{recipeItem.created_at}
+                                </aside>
+                            </div>
+                            <h2 class="heading-secondary heading-secondary--big">{recipeItem.title}</h2>
+                            <p class="author_recipe"><em>by</em> author</p>
                         </div>
-                        <h2 class="heading-secondary heading-secondary--big">{recipeItem.title}</h2>
-                        <p class="author_recipe"><em>by</em> author</p>
+                        <div class="image-box">
+                            <img class="image image--oneRecipe" src={recipeItem.photo}/>
+                        </div>
+                        <div class="recipes-details"></div>
+                        </>
+                        ))}
+                        <Comment idRecipe={id}/>
                     </div>
-                    <div class="image-box">
-                        <img class="image image--oneRecipe" src={recipeItem.photo}/>
-                    </div>
-                <div class="recipes-details"></div>
-                </>
-                ))}
-                    <Comment idRecipe={id}/>
-                </div>
                     <div class="recipePage-blockRight">
                          <p class="recipePage-blockRight__text"> <span>Des idées ?</span> <span>Des astuces ?</span>  <span>Des recettes ?</span>  Ecolo, Ecocome et Simplissime à faire ? <span>Envoi-les nous.</span> On les publiera sur le site</p>
                          <img src={mail}/>

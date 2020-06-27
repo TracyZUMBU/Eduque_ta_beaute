@@ -7,14 +7,14 @@ const HomeAdmin = () => {
 
     const bannerName = "Espace Adminitrateur"
     return (
-        <div>
+        <>
             <Header/>
             <Banner bannerName={bannerName}/>
             
             <Link to={'/admin/recipes'}><div>RECETTES</div></Link>
             
             <Link to={'/admin/AllUsers'}><div>UTILISATEUR</div></Link>
-        </div>
+        </>
     )
 }
 

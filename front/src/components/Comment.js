@@ -34,6 +34,8 @@ const Comment =(props) => {
     }
 
     return (
+        <>
+        <h2 class="comment_title">Commentaires</h2>
         <section class="commentSection">
             <div class="commentSection__displayComments-box">
                 {displayComment.map(item => (
@@ -50,6 +52,7 @@ const Comment =(props) => {
                 <input  class="submitComment"type="button" value="Envoyer" onClick={() => handlePost()} />
             </div>
         </section>
+        </>
     )
 }
 
