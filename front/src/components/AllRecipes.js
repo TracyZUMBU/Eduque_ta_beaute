@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import heart from '../img/heart.svg'
 import like from '../img/like.svg'
+import ReactHtmlParser from 'react-html-parser';
 
 
 const  AllRecipes = (props) => {
     
-    
+    console.log("props.tiny",props.tiny)
     const handlePost = (recipeID) => {
         const url = 'http://localhost:4000/user/addFavorite';
         axios.post(url, {recipeID: recipeID})  
@@ -34,6 +35,8 @@ const  AllRecipes = (props) => {
                         <img class="repice-icons repice-icons--like" src={like}/>
                         <img class="repice-icons" onClick={()=> handlePost(props.id)} src={heart}/>
                         <span class="like">likes</span>
+                        {ReactHtmlParser(props.tiny)}
+    
                     </div>
                 </div>
             </div>

@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const userMiddleware = require('../middleware/user.js');
 
 const expressJwt = require('express-jwt');
+const { isLoggedIn } = require("../middleware/user.js");
 
 //Authentification
 const secret = process.env.JWT_SECRET
@@ -86,7 +87,7 @@ connection.query(`SELECT * FROM users WHERE email = ?`, email, (err, result)=>{
    */
 
   const token = jwt.sign(// on utilise sign de jwt pour creer le token
-    {id : result[0].id, email: result[0].email}, // on rentre les information de l'utilisateur dont on a besoin en front 
+    {id : result[0].id, email: result[0].email, type: result[0].type}, // on rentre les information de l'utilisateur dont on a besoin en front 
     secret, // correspond a une chaine de caractere permettant de chiffrer la signature du token
     {
       expiresIn: '1h'// fixe la duree de vie du token
@@ -94,6 +95,7 @@ connection.query(`SELECT * FROM users WHERE email = ?`, email, (err, result)=>{
     { algorithm: 'RS256' }// specifie l'algorithme de chiffrage utilise
   );
   console.log('err 4');
+  
   res.header("Access-Control-Expose-Headers", "x-access-token") // On crer le header de la reponse
   res.set("x-access-token", token) // on ajoute le token au header
   res.status(200).send({ auth: true, token: token }) // on envoie la reponse
@@ -103,24 +105,22 @@ connection.query(`SELECT * FROM users WHERE email = ?`, email, (err, result)=>{
  
 
 
-router.get('/secret', (req, res, next) => {
-  jwt.verify(req.token, secret, (err, data) => {
-    if (err) {
-      res.sendStatus(403);
-    }else {
-
+router.get('/home', isLoggedIn, (req, res, next) => {
+  // jwt.verify(req.token, secret, (err, data) => {
+  //   // if (err) {
+  //   //   res.sendStatus(403);
+  //   // }else {
+  console.log('back');
+  
+  
       res.json({
-        posts: {
-         title: "my first post",
-          description: 'blabla',
-          data: data
-        }
-      }); 
-    }
-  } )
+        data: req.user 
+      });    
+  //   }
+  // } )
 
- 
+  
   
 }); 
  
-module.exports = router 
+module.exports = router  

@@ -136,7 +136,8 @@ const FilterRecipes = () => {
                     created_at={allRecipe.created_at}
                     introduction={allRecipe.introduction}
                     photo={allRecipe.photo}
-                    name={allRecipe.name}/>
+                    name={allRecipe.name}
+                    tiny={allRecipe.tiny}/>
                     ) :
                 filterRecipes.map(filterRecipe =>
                     <AllRecipes

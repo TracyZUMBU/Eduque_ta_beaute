@@ -1,29 +1,37 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 
+import ReactHtmlParser from 'react-html-parser';
+
 import { Editor } from '@tinymce/tinymce-react';
 import FilterRecipes from '../../components/FilterRecipes'
 
 
 const CreateRecipe = (props) => {
  
-    const handleEditorChange = (content, editor) => {
-        console.log('Content was updated:', content);
-      }
-    
+   
     const [text, setText] = useState()
     const [title, setTitle] = useState()
-    const [materiel, setMateriel] = useState()
+    const [description, setDescription] = useState()
     const [photo, setPhoto] = useState()
     const [response, setResponse] = useState()
-    const content = { title, photo ,materiel, text}
+    const [tiny, setTiny] = useState('')
+    const content = { title, photo ,description, text, tiny}
+
+    const handleEditorChange = (content, editor) => {
+        setTiny(content)
+        //console.log('Content was updated:', content);
+        console.log(tiny);
+        
+      }
+    
   
     const handlePost = () => {
         const url = `http://localhost:4000/admin/createArticle`
         axios.post(url, content)
         .then(res => setResponse(res))
-        window.location.reload();
-    }
+        //window.location.reload();
+    } 
 
 
     return (
@@ -48,7 +56,7 @@ const CreateRecipe = (props) => {
                 type="text"
                 id="Materiel"
                 placeholder="quel contenant ?"
-                onChange={(e) => setMateriel(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
             ></input>
 
             <input 
@@ -80,7 +88,9 @@ const CreateRecipe = (props) => {
         }}
        
         onEditorChange={handleEditorChange}
-        />
+        /> 
+
+    <div>{ReactHtmlParser(tiny)}</div>
 
         </div>
     
