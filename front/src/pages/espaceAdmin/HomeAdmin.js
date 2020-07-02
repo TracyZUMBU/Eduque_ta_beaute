@@ -7,12 +7,11 @@ import axios from 'axios'
 
 const HomeAdmin = () => {
 
-    const [iduser, setIduser] = useState('')
+    const [idUser, setIduser] = useState('')
     console.log("home")
     useEffect(() => {
         const getHome = async () => {
             const token = localStorage.getItem('token')
-            console.log("token", token)
             const url = 'http://localhost:4000/register/home/'
             const result = await axios({
                 method:'GET',
@@ -23,7 +22,7 @@ const HomeAdmin = () => {
                 }
                 
             })
-            console.log("result.data",result.data.data.id)
+            console.log("result.data",result.data)
             setIduser(result.data.data.id);
         }
         getHome()
@@ -33,7 +32,7 @@ const HomeAdmin = () => {
     const bannerName = "Espace Adminitrateur"
     return (
         <>
-            <Header/>
+            <Header idUser={idUser}/>
             <Banner bannerName={bannerName}/>
             
             <Link to={'/admin/recipes'}><div>RECETTES</div></Link>

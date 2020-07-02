@@ -10,20 +10,33 @@ import Navigation from '../../components/Navigation'
 const Profile = (props) => {
     // Retrieve user's details
     const [users, setUser] = useState([])
+    const [username, setUsername] = useState()
     //Retrieve the user's favorite recipes
     const [favorite, setFavorite] = useState([])
     //Retrieve the user's id
     const id = props.match.params.id
+    console.log(id);
+    
 
     
     
     useEffect(() => {
         const getUser = async () => {
+            const token = localStorage.getItem('token')
             const url = `http://localhost:4000/user/user/${id}`;
-            const result = await axios.get(url)
+            const result = await axios({
+                method: 'GET',
+                url: url,
+                headers: {
+                    'Content-Type':'application/json',
+                    'x-access-token': token
+                }
+
+            })
+           console.log(result.data[0]);
+           
             setUser(result.data)
-            console.log(result.data);
-            
+            setUsername(result.data[0].username)
         }
         getUser();
 
@@ -37,7 +50,9 @@ const Profile = (props) => {
     }, [])
     
     //!
-    const bannerName = `Bienvenue sur votre espace ${users.username}`
+    const bannerName = `Bienvenue sur votre espace ${username}`
+   
+    
 
     return (
         <div>
@@ -47,6 +62,7 @@ const Profile = (props) => {
                 <div class="user_section">
                     {users.map(user =>
                     <div class="userDetails" key={user.id}>
+                        <p>{user.id}</p>
                         <h2 class="profile__title">Changer mes informations</h2>
                         <form id="login" class="login_form login_form--profile">
                             <p class="login_title"></p>

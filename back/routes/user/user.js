@@ -2,6 +2,7 @@
 const express = require("express")
 const connection = require('../../conf')
 const { Router } = require("express")
+const { isLoggedIn } = require("../middleware/user")
 const router = express.Router()
 
 // Retrieve all the categories of recipes
@@ -74,7 +75,7 @@ router.get('/recipe/:id', (req,res) => {
 })
 
 //Retrieve user datas
-router.get('/user/:id', (req,res) => {
+router.get('/user/:id', isLoggedIn, (req,res) => {
     const id = req.params.id
     console.log(id)
     
@@ -125,6 +126,21 @@ router.get('/favorite/:id', (req,res) => {
     })
     
 })
+ 
+// give the number of like for a recipe
+router.get('/countLikes/:recipeId', (req,res) => {
+    const recipeId = req.params.recipeId
+    console.log(recipeId);
+
+    connection.query(`SELECT COUNT(*) AS total FROM likes WHERE recipe_id = ?`, recipeId, (err, results) => {
+        if(err){
+            res.status(500).send('Error retrieving comments')
+        }else {
+            res.status(200).json(results)
+        }
+    })
+    
+})
 
 
 ////////////////////////// POST //////////////////////
@@ -146,16 +162,30 @@ router.post('/postComment', (req, res) => {
 // add a recipe to the favorite list
 router.post('/addFavorite', (req, res) => {
     const recipeID = req.body.recipeID
-    console.log(recipeID);
-    connection.query (`INSERT INTO ETB.favorites (recipe_id) VALUES ('${recipeID}')`,recipeID, (err, results) => {
+    const userId = req.body.userId
+    connection.query (`INSERT INTO ETB.favorites (recipe_id, user_id) VALUES ('${recipeID}', '${userId}')`, (err, results) => {
         if(err) { 
-            return res.status(500).send('The comments has not been post')
+            return res.status(500).send('The recipe has not been saved to favorite list')
         } else {
             res.status(200).send('the recipe has been saved to favorite list')
         }
     })
     
 })
+
+// add a recipe to the favorite list
+router.post('/addLike', (req, res) => {
+    const recipeID = req.body.recipeID
+    const userId = req.body.userId
+    connection.query (`INSERT INTO ETB.likes (recipe_id, user_id) VALUES ('${recipeID}', '${userId}')`, (err, results) => {
+        if(err) { 
+            return res.status(500).send('The recipe has not been saved to favorite list')
+        } else {
+            res.status(200).send('the recipe has been saved to favorite list')
+        }
+    })
+    
+}) 
 
 module.exports = router
 

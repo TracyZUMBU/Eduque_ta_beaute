@@ -21,7 +21,6 @@ app.use(expressJwt({ secret : secret}).unless({path : ['/Connexion']}))
 
 router.post('/sign-up', userMiddleware.validateRegister,(req, res,next) => {
     const content = req.body                
-    console.log(content);
     
     connection.query('SELECT * FROM ETB.users WHERE LOWER(username) = ?', content.username,
     (err, resultat) => {
@@ -69,7 +68,7 @@ connection.query(`SELECT * FROM users WHERE email = ?`, email, (err, result)=>{
     return res.status(500).send(err)
   } else if (!result[0]){ // on verifie la presnec d'un resultat dans la reponse
   console.log('err 2');
-    return res.status(409).send('Unknown user') // si pas de resultat l'email n'est pas enregistre en base donc l'utilisateur est inconnu
+    return res.status(409).send({msg:'Unknown user'})  // si pas de resultat l'email n'est pas enregistre en base donc l'utilisateur est inconnu
   }
 
   /**
@@ -87,10 +86,10 @@ connection.query(`SELECT * FROM users WHERE email = ?`, email, (err, result)=>{
    */
 
   const token = jwt.sign(// on utilise sign de jwt pour creer le token
-    {id : result[0].id, email: result[0].email, type: result[0].type}, // on rentre les information de l'utilisateur dont on a besoin en front 
+    {id : result[0].id, email: result[0].email, type: result[0].type, username: result[0].username}, // on rentre les information de l'utilisateur dont on a besoin en front 
     secret, // correspond a une chaine de caractere permettant de chiffrer la signature du token
     {
-      expiresIn: '1h'// fixe la duree de vie du token
+      expiresIn: '24h'// fixe la duree de vie du token
     },
     { algorithm: 'RS256' }// specifie l'algorithme de chiffrage utilise
   );
@@ -98,7 +97,7 @@ connection.query(`SELECT * FROM users WHERE email = ?`, email, (err, result)=>{
   
   res.header("Access-Control-Expose-Headers", "x-access-token") // On crer le header de la reponse
   res.set("x-access-token", token) // on ajoute le token au header
-  res.status(200).send({ auth: true, token: token }) // on envoie la reponse
+  res.status(200).send({ auth: true, token: token, idUser:result[0].id }) // on envoie la reponse
   connection.query(`UPDATE ETB.users SET last_login = now() WHERE id = '${result[0].id}'` )
 });
 })

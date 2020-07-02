@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import heart from '../img/heart.svg'
@@ -8,10 +8,54 @@ import ReactHtmlParser from 'react-html-parser';
 
 const  AllRecipes = (props) => {
     
-    console.log("props.tiny",props.tiny)
-    const handlePost = (recipeID) => {
+    
+    const [decodedToken, setDecodedToken] = useState({})
+    // store user's id from decoded token
+    const userId = decodedToken.id
+    // amount of likes of recipe
+    const [totalLikes, setTotalLikes] = useState([])
+    
+    useEffect(() => {
+
+        const getUserId = () => {
+            // 1.retrieve the token from localStorage
+            const tokenFromStorage = localStorage.getItem('token');
+            if(tokenFromStorage) {            
+                // 2. retrieve the payload's token
+                const base64Payload = tokenFromStorage.split('.')[1]
+                // 3. decoded payload's token and parse it so that we can get the user id
+                 setDecodedToken(JSON.parse(window.atob(base64Payload)))              
+            } else {
+                return 'not token to parse'
+            }
+        }
+        getUserId()
+
+
+        const getRecipeId = async () => {
+            const recipeId = props.id;
+            const url = `http://localhost:4000/user/countLikes/${recipeId}`;
+            const result = await axios.get(url);
+            setTotalLikes(result.data);
+            console.log(result.data);
+        }
+        getRecipeId();
+
+    }, [])
+    
+   
+    
+    // send the recipe favorited to the DB
+    const handlePostFavorite = (recipeID) => {
         const url = 'http://localhost:4000/user/addFavorite';
-        axios.post(url, {recipeID: recipeID})  
+        axios.post(url, {userId: userId, recipeID: recipeID})
+    }
+
+    const handlePostLike = (recipeID) => {
+        const url = 'http://localhost:4000/user/addLike';
+        axios.post(url, {userId: userId, recipeID: recipeID})
+        console.log('handlepostlike');
+        
     }
 
     return (
@@ -32,10 +76,11 @@ const  AllRecipes = (props) => {
                     <Link to={`/recipe/${props.id}`}><h3 class="heading-tertiary heading-tertiary--small">{props.title}</h3></Link>
                     <p class="recipe-intro">{props.introduction}</p>
                     <div class="repice-icons-box">
-                        <img class="repice-icons repice-icons--like" src={like}/>
-                        <img class="repice-icons" onClick={()=> handlePost(props.id)} src={heart}/>
-                        <span class="like">likes</span>
-                        {ReactHtmlParser(props.tiny)}
+                        <img class="repice-icons repice-icons--like" onClick={()=> handlePostLike(props.id)}src={like}/>
+                        <img class="repice-icons" onClick={()=> handlePostFavorite(props.id)} src={heart}/>
+                        {totalLikes.map(totalLike =>
+                        <span  class="like">{totalLike.total} likes</span>)}
+                        {/*{ReactHtmlParser(props.tiny)}*/}
     
                     </div>
                 </div>
