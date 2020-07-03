@@ -53,7 +53,7 @@ router.get('/recipes/:id', (req,res) => {
  
 // Retrieves all recipes
 router.get('/allRecipes', (req,res) => {
-    connection.query('SELECT recipes.tiny, recipes.id, recipes.title, recipes.photo, recipes.text, recipes.introduction, DATE_FORMAT(recipes.created_at, "%M %d, %Y") AS created_at, recipes.sub_cat_id, cat_recipes.name  FROM recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC', (err, results) => {
+    connection.query('SELECT recipes.tiny, recipes.id, recipes.title, recipes.photo, recipes.text, recipes.introduction, DATE_FORMAT(recipes.created_at, "%M %d, %Y") AS created_at, recipes.sub_cat_id, cat_recipes.name FROM ETB.recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC', (err, results) => {
         if (err) {
             res.status(500).send('Error retrieving recipes')
         } else {
@@ -65,7 +65,7 @@ router.get('/allRecipes', (req,res) => {
 // Retrieve one recipe 
 router.get('/recipe/:id', (req,res) => {
     const id = req.params.id
-    connection.query('SELECT * from ETB.recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id AND recipes.id = ?', id, (err, results) => {
+    connection.query('SELECT *, DATE_FORMAT(recipes.created_at, "%M %d, %Y") AS created_at from ETB.recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id AND recipes.id = ?', id, (err, results) => {
         if (err) {
             res.status(500).send('Error retrieving the recipe')
         }else {

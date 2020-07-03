@@ -4,6 +4,7 @@ import axios from 'axios'
 import Comment from '../../components/Comment'
 
 import mail from '../../img/mail.svg'
+import ReactHtmlParser from 'react-html-parser';
 
 const OneRecipePage = (props) => {
 
@@ -47,14 +48,19 @@ const OneRecipePage = (props) => {
                         <div class="image-box">
                             <img class="image image--oneRecipe" src={recipeItem.photo}/>
                         </div>
-                        <div class="recipes-details"></div>
+                        <div class="recipes-details">
+                            <h3 class="sub-part">Ingrédients:</h3>
+                            {ReactHtmlParser(recipeItem.tiny)}
+                            <h3 class="sub-part">Matériel:</h3>
+                            <h3 class="sub-part">Préparation:</h3>
+                        </div>
                         </>
                         ))}
                         <Comment idRecipe={id}/>
                     </div>
                     <div class="recipePage-blockRight">
                          <p class="recipePage-blockRight__text"> <span>Des idées ?</span> <span>Des astuces ?</span>  <span>Des recettes ?</span>  Ecolo, Ecocome et Simplissime à faire ? <span>Envoi-les nous.</span> On les publiera sur le site</p>
-                         <img src={mail}/>
+                         <img class="logo_mail" src={mail}/>
                     </div>
             </div>
             </main>

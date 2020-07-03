@@ -227,6 +227,26 @@ span {
   font-size: 1.6rem;
   cursor: pointer; }
 
+.dropdown {
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 2rem; }
+  .dropdown__content--cat {
+    width: 95%;
+    padding: 1rem 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    color: #c9975f;
+    font-size: 1.8rem; }
+
+.dropdown__content--interCat {
+  background-color: blue; }
+
+.dropdown__content--subCat {
+  background-color: yellow; }
+
 .form-box {
   display: flex;
   flex-direction: column;
@@ -234,12 +254,11 @@ span {
   align-items: center;
   height: calc(100vh - calc(10rem + 5rem));
   background: url(../img/back_login.jpeg) no-repeat center;
-  background-size: cover;
-  position: relative;
-  position: relative; }
+  background-size: cover; }
 
 .login_form {
   width: 30%;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -254,32 +273,31 @@ span {
     background-color: rgba(0, 0, 0, 0.1); }
 
 .login_title {
-  z-index: 1;
   font-size: 5rem;
   color: #fff;
-  margin-bottom: 5rem; }
+  margin-bottom: 3rem; }
 
 p[class="login_title"] ~ input {
   z-index: 1;
   height: 4.5rem;
   border-radius: 0;
-  width: 80%;
+  width: 100%;
   padding-left: 2rem;
   border: none; }
 
 .input_login {
   z-index: 1;
   background-color: #fff; }
+  .input_login:not(:first-of-type) {
+    margin-top: 2rem; }
   .input_login::placeholder {
     color: black;
     font-size: 1.6rem; }
-  .input_login:first-of-type {
-    margin-bottom: 2rem; }
 
 .submit_login {
   color: #fff;
   background-color: #c9975f;
-  margin: 2rem 0 3rem 0; }
+  margin-top: 2rem; }
   .submit_login:hover {
     background-color: #d6b085; }
 
@@ -296,7 +314,7 @@ header {
   position: sticky;
   top: 0;
   left: 0;
-  z-index: 1; }
+  z-index: 2; }
 
 .bannerHeader {
   height: 10rem;
@@ -509,6 +527,14 @@ em {
 
 .image--oneRecipe {
   width: 100%; }
+
+.sub-part {
+  font-size: 1.6rem;
+  font-style: normal; }
+
+.logo_mail {
+  margin-top: 4rem;
+  height: 8rem; }
 
 .main--recipesPage {
   display: grid;

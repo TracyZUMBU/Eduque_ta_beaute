@@ -31,10 +31,7 @@ const Profile = (props) => {
                     'Content-Type':'application/json',
                     'x-access-token': token
                 }
-
             })
-           console.log(result.data[0]);
-           
             setUser(result.data)
             setUsername(result.data[0].username)
         }
@@ -62,7 +59,6 @@ const Profile = (props) => {
                 <div class="user_section">
                     {users.map(user =>
                     <div class="userDetails" key={user.id}>
-                        <p>{user.id}</p>
                         <h2 class="profile__title">Changer mes informations</h2>
                         <form id="login" class="login_form login_form--profile">
                             <p class="login_title"></p>
@@ -83,7 +79,7 @@ const Profile = (props) => {
                     <h2 class="profile__title">Mes recettes favorites</h2>
                     <div class="favorite_list">
                         {favorite.map(el => 
-                        <Link to={`recipe/${el.recipeID}`}> 
+                        <Link to={`/recipe/${el.recipeID}`}> 
                         <div class="favorite_card" key={el.id}>
                             <p class="favorite_card__category">{el.category}</p>
                             <img class="favorite_card__image" src={el.photo}/>

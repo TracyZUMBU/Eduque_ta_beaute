@@ -3,11 +3,8 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import heart from '../img/heart.svg'
 import like from '../img/like.svg'
-import ReactHtmlParser from 'react-html-parser';
-
 
 const  AllRecipes = (props) => {
-    
     
     const [decodedToken, setDecodedToken] = useState({})
     // store user's id from decoded token
@@ -56,6 +53,7 @@ const  AllRecipes = (props) => {
         axios.post(url, {userId: userId, recipeID: recipeID})
         console.log('handlepostlike');
         
+        
     }
 
     return (
@@ -80,13 +78,9 @@ const  AllRecipes = (props) => {
                         <img class="repice-icons" onClick={()=> handlePostFavorite(props.id)} src={heart}/>
                         {totalLikes.map(totalLike =>
                         <span  class="like">{totalLike.total} likes</span>)}
-                        {/*{ReactHtmlParser(props.tiny)}*/}
-    
                     </div>
                 </div>
             </div>
-         
-            
         </div>
        
 
