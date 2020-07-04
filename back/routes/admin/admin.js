@@ -116,12 +116,10 @@ router.delete('/userDelete/:id', (req,res) => {
  // Add a new recipe
  router.post('/createRecipe', (req, res) => {
      const content = req.body
-     console.log("content", content)
      connection.query(`INSERT INTO ETB.recipes (title, description, photo, preparation, ingredients, materiel) VALUES ('${content.title}', '${content.description}', '${content.photo}', '${content.preparation}', '${content.ingredients}', '${content.materiel}')`, (err, results) => {
          if (err) {
              console.log(err);
-             res.status(500).send("the recipes has not been created")
-             
+             res.status(500).send("the recipes has not been created") 
          } else {
              res.status(200).json(results)
          }

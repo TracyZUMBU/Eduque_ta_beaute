@@ -1,15 +1,14 @@
 import React from 'react'
 
 const DisplayModale = (props) => {
-
     return (
-        <div  className='overlay'>
-        <div className='contenu'>
-            Etes-vous sûr de vouloir supprimer cette recette ?
-            <button onClick={props.closeFunc} className='btnClose' >Oui</button>
+        <div  class='overlay'>
+            <div class='contenu'>
+                Etes-vous sûr de vouloir supprimer {props.text} ?
+                <button onClick={props.deletion} class='btnClose'>Oui</button>
+                <button onClick={props.closeModal}>Annuler</button>
+            </div>
         </div>
-       
-    </div>
     )
 }
 export default DisplayModale

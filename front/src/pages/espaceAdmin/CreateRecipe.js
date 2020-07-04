@@ -20,17 +20,14 @@ const CreateRecipe = (props) => {
 
     const handleSetIngredients = (content, editor) => {
         setIngredients(content)    
-        console.log(ingredients);
       }
 
       const handleSetPreparation = (content, editor) => {
         setPreparation(content)    
-        console.log(preparation);
       }  
 
       const handleSetMateriel = (content, editor) => {
         setMateriel(content)    
-        console.log(materiel);
       } 
     
   

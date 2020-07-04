@@ -9,10 +9,13 @@ import Banner from '../../components/BannerCategory'
 const SectionUsers = () => {
 
     const bannerName = "Espace Adminitrateur"
+
     // retrieve all users
     const [users, setUsers] = useState([])
+    //stock user's id
     const [userID, setUserID] = useState()
-    const [toggleModale, setToggleModale] = useState (false)
+    //handle opening/closing of modal
+    const [toggleModal, setToggleModal] = useState (false)
 
     useEffect(() => {
         const getUsers = async () => {
@@ -23,21 +26,25 @@ const SectionUsers = () => {
         getUsers()
     }, [])
 
+    // asking for confirmation
     const openModale = (userID) => {
         setUserID(userID)
-        setToggleModale(true)
-        console.log(toggleModale);
-       
+        setToggleModal(true) 
     }
 
     const deleteUser = () => {
         const url = `http://localhost:4000/admin/userDelete/${userID}`
         axios.delete(url)
-        window.location.reload()
+        setToggleModal(false)
+    }
+
+    // cancel deletion
+    const closeModal = () => {
+        setToggleModal(false)
     }
 
     return (
-        <div>
+        <div class="container">
             <Header/>
             <Banner bannerName={bannerName}/>
             <div class="user-list-container">
@@ -49,7 +56,7 @@ const SectionUsers = () => {
                 </div>
             ))}
             </div>
-            {toggleModale ? <DisplayModale closeFunc={deleteUser}/> : ""}
+            {toggleModal ? <DisplayModale deletion={deleteUser} text={'cet utilisateur'} closeModal={closeModal}/> : ""}
         </div>
     )
 }

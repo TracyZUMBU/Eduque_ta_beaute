@@ -38,7 +38,7 @@ const Profile = (props) => {
     // retrieve the recipe's deleted id 
     const [recipeID, setRecipeID] = useState()
     // Manage displaying of modale
-    const [toggleModale, setToggleModale] = useState (false) 
+    const [toggleModal, setToggleModal] = useState (false) 
 
     useEffect(() => {
         // retrieve all user's details
@@ -70,37 +70,36 @@ const Profile = (props) => {
     // send new user's details to the DB
     const handleUpdateDetailsUSer = async (e) => {
         const url = 'http://localhost:4000/user/updateDetails/'
-        axios.put(url, newUserDetails)
         console.log(newUserDetails);
+        axios.put(url, newUserDetails)
         form.current.reset();
     }
 
-       // open the modal
+    // open the modal
     const openModale = (recipeID) => {
-        setToggleModale(true)
-        console.log(toggleModale);
-         setRecipeID(recipeID)
-        console.log(recipeID);
+        setToggleModal(true)
+        setRecipeID(recipeID)
+
+    }
+
+    // cancel deletion
+    const closeModal = () => {
+        setToggleModal(false)
     }
 
     // delete recipe from farovite list
-    const deleteRecipe = () => {
+    const deleteRecipe = (e) => {
         const url = `http://localhost:4000/user/delete_recipe/${recipeID}`
         //!le back reçoit pas userID
         axios.delete(url, {userID :id})
-        console.log(id);
-
+        setToggleModal(false)
     }
 
     // Display the user's name on the banner
     const bannerName = `Bienvenue sur votre espace ${username}`
-    
-    
-    
-    
 
     return (
-        <div>
+        <div class='container'>
             <Header/>
             <Banner bannerName={bannerName}/>
             <div class="profile">
@@ -141,7 +140,6 @@ const Profile = (props) => {
                     <h2 class="profile__title">Mes recettes favorites</h2>
                     <div class="favorite_list">
                         {favorite.map(el => 
-                        <>
                         <div class="favorite_card" key={el.id}>
                         <Link to={`/recipe/${el.recipeID}`}> 
                             <p class="favorite_card__category">{el.category}</p>
@@ -151,12 +149,11 @@ const Profile = (props) => {
                         </Link>
                         <div class="delete_recipes" onClick={() => openModale(el.recipeID)}>&#x274C;</div>
                         </div>
-                        </>
                         )}
                     </div>
                 </div>
-                {toggleModale ? <DisplayModale closeFunc={deleteRecipe}/> : ""}
             </div> 
+            {toggleModal ? <DisplayModale deletion={deleteRecipe} closeModal={closeModal} text={'cette recette'}/> : ""}
         </div>
     )
 }

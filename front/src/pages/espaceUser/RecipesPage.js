@@ -19,7 +19,6 @@ const RecipesPage = () => {
         const url = 'http://localhost:4000/user/allrecipes/'
         const result = await axios.get(url)
         setAllRecipes(result.data);
-        console.log('tt', allRecipes, result.data); // tableau vide dans la console ?
     }
     getAllRecipes();
     },[])

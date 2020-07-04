@@ -53,37 +53,21 @@ module.exports = {
           msg: 'Both passwords must match'
         });
       }
-  
       next();
     },
     
     isLoggedIn: (req, res, next) => {
-      console.log("jjj", req.headers["x-access-token"]);
-      
        const token = req.headers["x-access-token"]
        if (!token) return res.status(401).send('Access Denied');
   
        try {
          const verified = jwt.verify(token, process.env.JWT_SECRET);
-         console.log(verified);
-         
          req.user = verified;  
        } catch (err) {
-         console.log("error token", err)  
+        console.log("error token", err)  
         return res.status(400).send('Invalid Token')
        }  
  
     next();  
-   // const bearerHeader = req.headers["Authorization"]
-   // if (typeof bearerHearder !== 'undefined') {
-   //   const bearer = bearerHeader.split(' ');
-   //   const bearerToken = bearer[1];
-   //   req.token = bearerToken;
-   //   next();
-   // }else {
-   //   res.sendStatus(403)
-   // }
-   // }
- 
  }  
 }

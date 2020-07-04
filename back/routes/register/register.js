@@ -18,7 +18,6 @@ const secret = process.env.JWT_SECRET
 app.use(expressJwt({ secret : secret}).unless({path : ['/Connexion']}))
 
 
-
 router.post('/sign-up', userMiddleware.validateRegister,(req, res,next) => {
     const content = req.body                
     
@@ -104,21 +103,9 @@ connection.query(`SELECT * FROM users WHERE email = ?`, email, (err, result)=>{
 
 
 router.get('/home', isLoggedIn, (req, res, next) => {
-  // jwt.verify(req.token, secret, (err, data) => {
-  //   // if (err) {
-  //   //   res.sendStatus(403);
-  //   // }else {
-  console.log('back');
-  
-  
       res.json({
         data: req.user 
       });    
-  //   }
-  // } )
-
-  
-  
 }); 
  
 module.exports = router  

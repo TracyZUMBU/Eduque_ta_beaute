@@ -19,23 +19,13 @@ componentDidMount() {
     
     const id = this.props.match.params.id
     
-axios.get(`http://localhost:4000/user/interCat/${id}`)
-.then(response => response.data)
-.then(data => {
-    console.log('blabla', data);
-    
-    
-    this.setState({interCatRecipes : data});
-    console.log('bonjour', this.state.interCatRecipes);
-    this.setState({idCat : id})
-    console.log('ttt',id);
-   
-    
-    
-    
-    
-})
-}
+    axios.get(`http://localhost:4000/user/interCat/${id}`)
+    .then(response => response.data)
+    .then(data => {
+        this.setState({interCatRecipes : data});
+        this.setState({idCat : id})
+    })
+    }
 
 render() {
     return (

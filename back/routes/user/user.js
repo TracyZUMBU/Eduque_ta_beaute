@@ -82,8 +82,6 @@ router.get('/recipe/:id', (req,res) => {
 //Retrieve user datas
 router.get('/user/:id', isLoggedIn, (req,res) => {
     const id = req.params.id
-    console.log(id)
-    
     connection.query('SELECT * FROM ETB.users WHERE id = ?', id, (err,results) => {
         if(err){ 
             res.status(500).send('Error retrieving recipes')
@@ -97,8 +95,6 @@ router.get('/user/:id', isLoggedIn, (req,res) => {
 // Retrieve all comments based on recipe's id
 router.get('/comment/:id', (req,res) => {
     const id = req.params.id 
-    console.log(id);
-
     connection.query('SELECT comments.id, comments.comments, DATE_FORMAT(comments.created_at, "%M %d, %Y %H:%i AM") AS created_at, users.username FROM ETB.comments INNER JOIN users ON comments.user_id = users.id AND  recipe_id = ?', id, (err,results) => {
         if(err){
             res.status(500).send('Error retrieving comments')
@@ -112,8 +108,6 @@ router.get('/comment/:id', (req,res) => {
 // Retrieve favorite recipes
 router.get('/favorite/:id', (req,res) => {
     const userID = req.params.id
-    console.log(userID);
-
     connection.query(`SELECT favorites.id, recipes.id AS recipeID, recipes.title, recipes.photo, sub_cat_recipes.name AS subcat, cat_recipes.name AS category
     FROM ETB.recipes 
     INNER JOIN favorites 
@@ -128,23 +122,19 @@ router.get('/favorite/:id', (req,res) => {
         }else {
             res.status(200).json(results)
         }
-    })
-    
+    }) 
 })
  
 // give the number of like for a recipe
 router.get('/countLikes/:recipeId', (req,res) => {
     const recipeId = req.params.recipeId
-    console.log(recipeId);
-
     connection.query(`SELECT COUNT(*) AS total FROM likes WHERE recipe_id = ?`, recipeId, (err, results) => {
         if(err){
             res.status(500).send('Error retrieving comments')
         }else {
             res.status(200).json(results)
         }
-    })
-    
+    }) 
 })
 
 
@@ -153,8 +143,6 @@ router.get('/countLikes/:recipeId', (req,res) => {
 // post a comment
 router.post('/postComment', (req, res) => { 
     const valuesComment = req.body
-    console.log(valuesComment.idRecipe);
-    
     connection.query(`INSERT INTO ETB.comments (comments, recipe_id) VALUES ('${valuesComment.comment}', '${valuesComment.idRecipe}')`, (err, results) => { 
         if(err) {
             return res.status(500).send('The comments has not been post')
@@ -202,7 +190,6 @@ router.put('/updateDetails', userMiddleware.validateNewRegister, (req, res) => {
     connection.query(`UPDATE ETB.users SET email='${details.newEmail}', password='${password}' WHERE id= '${details.id}'`, (err, results) => {
         if(err) { 
             console.log(err);
-            
             return res.status(500).send('The new details have not been saved')
         } else {
             res.status(200).send('the new details have been saved')

@@ -8,7 +8,6 @@ import axios from 'axios'
 const HomeAdmin = () => {
 
     const [idUser, setIduser] = useState('')
-    console.log("home")
     useEffect(() => {
         const getHome = async () => {
             const token = localStorage.getItem('token')
@@ -19,24 +18,18 @@ const HomeAdmin = () => {
                 headers: {
                     'Content-Type':'application/json',
                     'x-access-token': token
-                }
-                
+                }               
             })
-            console.log("result.data",result.data)
             setIduser(result.data.data.id);
         }
-        getHome()
-        
+        getHome()    
     }, [])
 
-    const bannerName = "Espace Adminitrateur"
     return (
         <>
             <Header idUser={idUser}/>
-            <Banner bannerName={bannerName}/>
-            
-            <Link to={'/admin/recipes'}><div>RECETTES</div></Link>
-            
+            <Banner bannerName={"Espace Administrateur"}/>
+            <Link to={'/admin/recipes'}><div>RECETTES</div></Link>           
             <Link to={'/admin/AllUsers'}><div>UTILISATEUR</div></Link>
         </>
     )

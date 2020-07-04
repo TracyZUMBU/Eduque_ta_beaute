@@ -21,12 +21,7 @@ componentDidMount() {
 axios.get(`http://localhost:4000/user/subCat/${idInter}/${idCat}`)
 .then(response => response.data)
 .then(data => {
-    console.log('sub', data);
-    
-    
-    this.setState({subRecipes : data});
-    console.log('sub', this.state.subRecipes);
-    
+    this.setState({subRecipes : data});   
 })
 }
 
