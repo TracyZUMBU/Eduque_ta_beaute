@@ -1,7 +1,13 @@
+const bcrypt = require('bcryptjs');
+const userMiddleware = require('../middleware/user.js');
+
+
+
 // Ici sont toutes les routes qui concernent les users
 const express = require("express")
 const connection = require('../../conf')
 const { Router } = require("express")
+const { isLoggedIn } = require("../middleware/user")
 const router = express.Router()
 
 // Retrieve all the categories of recipes
@@ -52,7 +58,7 @@ router.get('/recipes/:id', (req,res) => {
  
 // Retrieves all recipes
 router.get('/allRecipes', (req,res) => {
-    connection.query('SELECT recipes.id, recipes.title, recipes.photo, recipes.text, recipes.introduction, recipes.created_at, recipes.sub_cat_id, cat_recipes.name  FROM recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC', (err, results) => {
+    connection.query('SELECT *, DATE_FORMAT(recipes.created_at, "%M %d, %Y") AS created_at, recipes.id AS id FROM ETB.recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC', (err, results) => {
         if (err) {
             res.status(500).send('Error retrieving recipes')
         } else {
@@ -64,7 +70,7 @@ router.get('/allRecipes', (req,res) => {
 // Retrieve one recipe 
 router.get('/recipe/:id', (req,res) => {
     const id = req.params.id
-    connection.query('SELECT * from ETB.recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id AND recipes.id = ?', id, (err, results) => {
+    connection.query('SELECT *, DATE_FORMAT(recipes.created_at, "%M %d, %Y") AS created_at from ETB.recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id AND recipes.id = ?', id, (err, results) => {
         if (err) {
             res.status(500).send('Error retrieving the recipe')
         }else {
@@ -74,7 +80,7 @@ router.get('/recipe/:id', (req,res) => {
 })
 
 //Retrieve user datas
-router.get('/user/:id', (req,res) => {
+router.get('/user/:id', isLoggedIn, (req,res) => {
     const id = req.params.id
     console.log(id)
     
@@ -93,7 +99,7 @@ router.get('/comment/:id', (req,res) => {
     const id = req.params.id 
     console.log(id);
 
-    connection.query('SELECT comments.id, comments.comments, comments.created_at, users.username FROM ETB.comments INNER JOIN users ON comments.user_id = users.id AND  recipe_id = ?', id, (err,results) => {
+    connection.query('SELECT comments.id, comments.comments, DATE_FORMAT(comments.created_at, "%M %d, %Y %H:%i AM") AS created_at, users.username FROM ETB.comments INNER JOIN users ON comments.user_id = users.id AND  recipe_id = ?', id, (err,results) => {
         if(err){
             res.status(500).send('Error retrieving comments')
         }else {
@@ -108,7 +114,30 @@ router.get('/favorite/:id', (req,res) => {
     const userID = req.params.id
     console.log(userID);
 
-    connection.query(`SELECT favorites.id, recipes.title, recipes.photo FROM ETB.recipes INNER JOIN favorites ON recipes.id = favorites.recipe_id AND favorites.user_id = ? `, userID, (err, results) => {
+    connection.query(`SELECT favorites.id, recipes.id AS recipeID, recipes.title, recipes.photo, sub_cat_recipes.name AS subcat, cat_recipes.name AS category
+    FROM ETB.recipes 
+    INNER JOIN favorites 
+    ON recipes.id = favorites.recipe_id 
+    INNER JOIN ETB.sub_cat_recipes 
+    ON recipes.sub_cat_id = sub_cat_recipes.id
+    INNER JOIN ETB.cat_recipes
+    ON recipes.cat_id = cat_recipes.id   
+    AND favorites.user_id = ? `, userID, (err, results) => {
+        if(err){
+            res.status(500).send('Error retrieving comments')
+        }else {
+            res.status(200).json(results)
+        }
+    })
+    
+})
+ 
+// give the number of like for a recipe
+router.get('/countLikes/:recipeId', (req,res) => {
+    const recipeId = req.params.recipeId
+    console.log(recipeId);
+
+    connection.query(`SELECT COUNT(*) AS total FROM likes WHERE recipe_id = ?`, recipeId, (err, results) => {
         if(err){
             res.status(500).send('Error retrieving comments')
         }else {
@@ -138,10 +167,10 @@ router.post('/postComment', (req, res) => {
 // add a recipe to the favorite list
 router.post('/addFavorite', (req, res) => {
     const recipeID = req.body.recipeID
-    console.log(recipeID);
-    connection.query (`INSERT INTO ETB.favorites (recipe_id) VALUES ('${recipeID}')`,recipeID, (err, results) => {
+    const userId = req.body.userId
+    connection.query (`INSERT INTO ETB.favorites (recipe_id, user_id) VALUES ('${recipeID}', '${userId}')`, (err, results) => {
         if(err) { 
-            return res.status(500).send('The comments has not been post')
+            return res.status(500).send('The recipe has not been saved to favorite list')
         } else {
             res.status(200).send('the recipe has been saved to favorite list')
         }
@@ -149,6 +178,53 @@ router.post('/addFavorite', (req, res) => {
     
 })
 
+// add a recipe to the favorite list
+router.post('/addLike', (req, res) => {
+    const recipeID = req.body.recipeID
+    const userId = req.body.userId
+    connection.query (`INSERT INTO ETB.likes (recipe_id, user_id) VALUES ('${recipeID}', '${userId}')`, (err, results) => {
+        if(err) { 
+            return res.status(500).send('The recipe has not been saved to favorite list')
+        } else {
+            res.status(200).send('the recipe has been saved to favorite list')
+        }
+    })
+    
+}) 
+
+
+////////////////////////// PUT //////////////////////
+
+// Update user's details
+router.put('/updateDetails', userMiddleware.validateNewRegister, (req, res) => {
+    const details = req.body
+    const password = bcrypt.hashSync(details.newPassword)
+    connection.query(`UPDATE ETB.users SET email='${details.newEmail}', password='${password}' WHERE id= '${details.id}'`, (err, results) => {
+        if(err) { 
+            console.log(err);
+            
+            return res.status(500).send('The new details have not been saved')
+        } else {
+            res.status(200).send('the new details have been saved')
+        }
+    })
+})
 module.exports = router
 
 
+////////////////////////// DELETE //////////////////////
+
+// Delete a recipe
+router.delete('/delete_recipe/:id', (req,res) => {
+    const recipeID = req.params.id
+    const userID = req.body.userID 
+    console.log('userID', userID, 'recipeID', recipeID, 'reqBody', req.body);
+    
+    connection.query(`DELETE FROM ETB.favorites WHERE user_id = '${userID}' AND recipe_id = '${recipeID}'`, (err,results) => {
+        if(err) {
+            res.sendStatus(500).send('The recipe has not been deleted')
+        }else {
+            res.status(200).send('The recipes has been deleted')
+        }
+    })
+})

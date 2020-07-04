@@ -2,28 +2,65 @@
     display: grid;
     grid-template-areas: 
     "list aside";
-    grid-template-columns: 2fr 0.7fr;
+    
 }
 
-.recipes-list {
-    grid-area: list;
+.recipePage_blockLeft {
+    width: 75%;
 }
-
-.aside__recipes {
-    grid-area: aside;
+.recipes-container{
+    display: flex;
     width: 100%;
-    position : relative;
-    overflow: hidden;
+    
+}
+
+.heading {
+    &--oneRecipe {
+        margin-bottom: 3rem;
+    }
+}
+
+
+
+.recipePage-blockRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    width: 25%;
+    margin-left: 5rem;
+    height: 55rem;
+    background: url(../img/bathroocleaner.jpg) no-repeat;
+    background-position: center;
+    
+    background-size:cover ;
+
+    position: sticky;
+    top: calc(#{$HTotalHeader} + 3rem);
+    //position: relative;
     &::before{
-        background: url(https://images.unsplash.com/photo-1589125632234-718710bcbb12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
-        //background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        content:"";
-        position: absolute;
-        transform: rotate(180deg);
-        width: 200%;
-        height: 200%;
+        content: "";
+        position:absolute; 
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
         z-index: -1;
     }
+}
+
+
+    
+
+.recipePage-blockRight__text {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: $color-white;
+    font-size: 2.5rem;
+    font-weight: 600;
+    z-index: 1;
+    line-height: 2;
+    
 }

@@ -9,7 +9,7 @@ const router = express.Router()
 
 //Retrieve the lastest recipes
 router.get('/lastestRecipes', (req, res) => {
-    connection.query('SELECT recipes.id, recipes.title, recipes.photo, recipes.text, cat_recipes.name  FROM recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC LIMIT 4' , (err, results) => {
+    connection.query('SELECT recipes.id, recipes.title, recipes.photo, recipes.preparation, cat_recipes.name  FROM recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC LIMIT 4' , (err, results) => {
         if(err) {
             res.status(500).send('Error retrieving recipes')
             
@@ -69,38 +69,16 @@ router.get('/recipes/:idSub', (req,res) => {
 
 // Retrieve all users by ascendant order
 router.get('/allUsers', (req,res) => {
-    connection.query('SELECT * FROM ETB.users ORDER BY created_at DESC', (err,results) => {
+    connection.query('SELECT users.id, users.username, users.email, DATE_FORMAT(registered, "%D %b %Y")AS registered FROM ETB.users ORDER BY registered DESC', (err,results) => {
         if(err) {
-            res.sendStatus(500).send('Error retrieving users')
+            res.status(500).send('Error retrieving users')
         }else {
             res.status(200).json(results)
         }
     })
 
-})
+}) 
 
-// Retrieve all users by ascendant order
-router.get('/allUsersASC', (req,res) => {
-    connection.query('SELECT * FROM ETB.users ORDER BY created_at ASC', (err,results) => {
-        if(err) {
-            res.sendStatus(500).send('Error retrieving users')
-        }else {
-            res.status(200).json(results)
-        }
-    })
-
-})
-
-router.get('/allUsersDESC', (req,res) => {
-    connection.query('SELECT * FROM ETB.users ORDER BY created_at DESC', (err,results) => {
-        if(err) {
-            res.sendStatus(500).send('Error retrieving users')
-        }else {
-            res.status(200).json(results)
-        }
-    })
-
-})
 
 /**
  * DELETE
@@ -136,11 +114,14 @@ router.delete('/userDelete/:id', (req,res) => {
  */
 
  // Add a new recipe
- router.post('/createArticle', (req, res) => {
+ router.post('/createRecipe', (req, res) => {
      const content = req.body
-     connection.query('INSERT INTO ETB.recipes SET ?', content, (err, results) => {
+     console.log("content", content)
+     connection.query(`INSERT INTO ETB.recipes (title, description, photo, preparation, ingredients, materiel) VALUES ('${content.title}', '${content.description}', '${content.photo}', '${content.preparation}', '${content.ingredients}', '${content.materiel}')`, (err, results) => {
          if (err) {
+             console.log(err);
              res.status(500).send("the recipes has not been created")
+             
          } else {
              res.status(200).json(results)
          }

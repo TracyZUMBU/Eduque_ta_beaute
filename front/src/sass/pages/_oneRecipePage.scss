@@ -1,0 +1,30 @@
+.frame{
+    display: flex;
+    padding-top: 4rem;
+}
+
+em {
+    font-style: normal;
+    color: $color-dark-grey;
+    margin-right: 0.2rem;
+}
+
+.author_recipe {
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: $color-orange;
+    text-transform: uppercase;
+}
+.image--oneRecipe {
+    width: 100%;
+}
+
+.sub-part {
+    font-size: 1.6rem;
+    font-style: normal;
+}
+
+.logo_mail {
+    margin-top: 4rem;
+    height: 15rem;
+}

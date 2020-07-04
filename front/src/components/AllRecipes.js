@@ -1,37 +1,89 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import axios from 'axios';
-
+import heart from '../img/heart.svg'
+import like from '../img/like.svg'
 
 const  AllRecipes = (props) => {
     
+    const [decodedToken, setDecodedToken] = useState({})
+    // store user's id from decoded token
+    const userId = decodedToken.id
+    // amount of likes of recipe
+    const [totalLikes, setTotalLikes] = useState([])
     
-    const handlePost = (recipeID) => {
-        const url = 'http://localhost:8000/user/addFavorite';
-        axios.post(url, {recipeID: recipeID})  
+    useEffect(() => {
+
+        const getUserId = () => {
+            // 1.retrieve the token from localStorage
+            const tokenFromStorage = localStorage.getItem('token');
+            if(tokenFromStorage) {            
+                // 2. retrieve the payload's token
+                const base64Payload = tokenFromStorage.split('.')[1]
+                // 3. decoded payload's token and parse it so that we can get the user id
+                 setDecodedToken(JSON.parse(window.atob(base64Payload)))              
+            } else {
+                return 'not token to parse'
+            }
+        }
+        getUserId()
+
+
+        const getRecipeId = async () => {
+            const recipeId = props.id;
+            const url = `http://localhost:4000/user/countLikes/${recipeId}`;
+            const result = await axios.get(url);
+            setTotalLikes(result.data);
+            console.log(result.data);
+        }
+        getRecipeId();
+
+    }, [])
+    
+   
+    
+    // send the recipe favorited to the DB
+    const handlePostFavorite = (recipeID) => {
+        const url = 'http://localhost:4000/user/addFavorite';
+        axios.post(url, {userId: userId, recipeID: recipeID})
+    }
+
+    const handlePostLike = (recipeID) => {
+        const url = 'http://localhost:4000/user/addLike';
+        axios.post(url, {userId: userId, recipeID: recipeID})
+        console.log('handlepostlike');
+        
+        
     }
 
     return (
-        <div class="recipes-list__items">
-            <div class="recipes-list__image-box">
-                <Link to={`/recipe/${props.id}`}>
-                <img class="recipes-list__image" src={props.photo}/></Link>
-            </div>
-            <div class="recipes-list__content-box">
-                <div class="recipes-info">
-                    <aside class="recipes-info__category_name">{props.name}</aside>
-                    <aside class="recipes-info__date">{props.created_at
-                    }</aside>
+
+
+        <div class="recipes-list">
+            <div class="recipes-list__items">
+                <div class="recipes-list__image-box">
+                    <Link to={`/recipe/${props.id}`}>
+                    <img class="recipes-list__image" src={props.photo}/></Link>
                 </div>
-                <Link to={`/recipe/${props.id}`}><h2 class="heading-secondary heading-secondary--big">{props.title}</h2></Link>
-                <p>{props.introduction}</p>
-                <div class="repices-icons">
-                    <img src="https://img.icons8.com/pastel-glyph/64/000000/facebook-like.png"/>
-                    <img onClick={()=> handlePost(props.id)} src="https://img.icons8.com/dotty/80/000000/wish-list.png"/>
+                <div class="recipes-list__content-box">
+                    <div class="recipe-info">
+                        <aside class="recipe-info__category_name">{props.name}</aside>
+                        <aside class="recipe-info__date">{props.created_at
+                        }</aside>
+                    </div>
+                    <Link to={`/recipe/${props.id}`}><h3 class="heading-tertiary heading-tertiary--small">{props.title}</h3></Link>
+                    <p class="recipe-intro">{props.introduction}</p>
+                    <div class="repice-icons-box">
+                        <img class="repice-icons repice-icons--like" onClick={()=> handlePostLike(props.id)}src={like}/>
+                        <img class="repice-icons" onClick={()=> handlePostFavorite(props.id)} src={heart}/>
+                        {totalLikes.map(totalLike =>
+                        <span  class="like">{totalLike.total} likes</span>)}
+                    </div>
                 </div>
             </div>
-            
         </div>
+       
+
     )
 }
 
