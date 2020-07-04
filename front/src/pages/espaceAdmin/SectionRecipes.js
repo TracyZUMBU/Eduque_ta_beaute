@@ -10,7 +10,7 @@ const SectionRecipes = () => {
 
     // lastest added recipes
     const [recipes, setRecipes] = useState ([])
-    const [toggleModale, setToggleModale] = useState (false)
+    const [toggleModal, setToggleModal] = useState (false)
     const [recipeID, setrecipeID] = useState ("")
 
     const bannerName = "Espace Adminitrateur"
@@ -25,21 +25,24 @@ const SectionRecipes = () => {
         getRecipes()
     }, [])
 
-    // open the modal
+    // open the modal - asking for confirmation
     const openModale = (id) => {
-        setToggleModale(true)
-        console.log(toggleModale);
-         setrecipeID(id)
-        console.log(id);
+        setToggleModal(true)
+        setrecipeID(id)
     }
 
-    //close the modal
-    const closeModale = () => {
+    // delete recipe from recipes table
+    const deleteRecipe = () => {
         const url = `http://localhost:4000/admin/recipeDelete/${recipeID}`
         axios.delete(url)
-        window.location.reload()
+        setToggleModal(false)
     }
     
+      // cancel deletion
+    const closeModal = () => {
+        setToggleModal(false)
+    }
+
 
     return (
         <>
@@ -55,7 +58,7 @@ const SectionRecipes = () => {
                     </div>  
             ))}
             </div>              
-            {toggleModale ? <DisplayModale closeFunc={closeModale}/> : ""}
+            {toggleModal ? <DisplayModale deletion={deleteRecipe} closeModal={closeModal} text={'cette recette'}/> : ""}
             <div class="create_recipe">
                 <CreateRecipe/>
             </div>

@@ -11,9 +11,9 @@ const Connexion = (props) => {
 
        // state Admin
        const [isAdmin, setAdmin] = useState(false)
-       //state qui recoit la réponse du back
+       // get response from back
        const [response, setResponse] = useState({});
-       //id of user
+       //user's id
        const [idUser, setIdUser] = useState()
        const [email, setEmail] = useState();
        const [password, setPassword] = useState();
@@ -26,11 +26,9 @@ const Connexion = (props) => {
 
         if (localStorage.getItem('token') === token) {
             setAdmin(true);
-            console.log('get', isAdmin);
-        } else if (response.auth === true && isAdmin === false) {
+            } else if (response.auth === true && isAdmin === false) {
             localStorage.setItem('token', response.token)      
-            setAdmin(true)
-            console.log('set', isAdmin);    
+            setAdmin(true)  
         }
 
         // retrive the id's user from the token
@@ -43,13 +41,7 @@ const Connexion = (props) => {
         
     }, [response, isAdmin])
 
-    //! à supprimer
-    useEffect(() => {
-        console.log("isAdmin", isAdmin, "idUser", idUser, response.idUser, response.auth)
-    }, [response, isAdmin])
-
     const handlePost = () => {
-        console.log('hhhh',response);
         const url = 'http://localhost:4000/register/login';
         axios.post(url, {password, email})
         .then(res => setResponse(res.data))

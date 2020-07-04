@@ -19,7 +19,6 @@ const Comment =(props) => {
             const url = `http://localhost:4000/user/comment/${idRecipe}`
             const result = await axios.get(url)
             setDisplayComment(result.data)
-            console.log('from back', result.data, 'displayComment', displayComment);
         }
         getComments()
 

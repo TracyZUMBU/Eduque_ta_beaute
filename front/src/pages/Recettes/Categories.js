@@ -14,9 +14,7 @@ export default class categories extends Component {
         axios.get('http://localhost:4000/user/catRecipes')
         .then(response => response.data)
         .then(data => {
-            console.log('blabla', data);
             this.setState({catRecipes : data});
-            console.log('bonjour', this.state.catRecipes); 
         })
     }
 

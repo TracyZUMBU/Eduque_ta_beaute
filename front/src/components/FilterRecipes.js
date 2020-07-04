@@ -27,8 +27,6 @@ const FilterRecipes = () => {
     const [showAllRecipes, setShowAllRecipes] = useState(true)
 
     useEffect(() => {
-        console.log(showAllRecipes);
-        
         // Retrieve all the categories of recipes
         const getCatRecipes = async () => {
             const url = 'http://localhost:4000/admin/catRecipes/'
@@ -42,14 +40,12 @@ const FilterRecipes = () => {
             const url = 'http://localhost:4000/user/allRecipes/'
             const result = await axios.get(url)
             setAllRecipes(result.data)
-            console.log('allRecipes', result.data);
         }
         getAllRecipes()
     }, [])
 
     // Display categories
     const toggleDropDown = () => {
-        console.log(showCat);
         setShowCat(!showCat)
         setShowInterCat(false)
         setShowSubCat(false)

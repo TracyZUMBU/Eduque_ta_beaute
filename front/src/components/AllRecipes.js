@@ -34,7 +34,6 @@ const  AllRecipes = (props) => {
             const url = `http://localhost:4000/user/countLikes/${recipeId}`;
             const result = await axios.get(url);
             setTotalLikes(result.data);
-            console.log(result.data);
         }
         getRecipeId();
 
@@ -50,10 +49,7 @@ const  AllRecipes = (props) => {
 
     const handlePostLike = (recipeID) => {
         const url = 'http://localhost:4000/user/addLike';
-        axios.post(url, {userId: userId, recipeID: recipeID})
-        console.log('handlepostlike');
-        
-        
+        axios.post(url, {userId: userId, recipeID: recipeID})   
     }
 
     return (
