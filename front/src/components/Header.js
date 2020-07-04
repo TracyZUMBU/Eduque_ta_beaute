@@ -12,21 +12,17 @@ const Header = (props) => {
     const [userID, setUserID] = useState()
     const token = localStorage.getItem('token')
 
-    //! quand je me connecte il faut rafrachir la page pour que isLoggedIn change
     useEffect (() => {
-        console.log("welcome header")
         if (token) {
             setIsLogged(true);
-            console.log('connected', isLoggedIn);
-            
+            //console.log('connected', isLoggedIn);
             
         }else {
             setIsLogged(false);
-            console.log('disconnected');
+            //console.log('disconnected');
         }
 
         const getUserId = async () => {
-            
             const url = 'http://localhost:4000/register/home/'
             const result = await axios({
                 method:'GET',
@@ -34,20 +30,12 @@ const Header = (props) => {
                 headers: {
                     'Content-Type':'application/json',
                     'x-access-token': token
-                }
-                
+                } 
             })
-            console.log("result.data",result.data.data.id)
             setUserID(result.data.data.id);
         }
         getUserId()
     },[token])
-
-    useEffect(() => {
-        console.log("isLoggedIn",isLoggedIn)
-      
-    }, [isLoggedIn])
-
 
     const disconnect = () => {
         localStorage.removeItem('token')

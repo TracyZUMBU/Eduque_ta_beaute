@@ -1,0 +1,25 @@
+
+.create_recipe {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+    padding: 4rem 0;
+}
+
+.form_createRecipe {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.input_form_createRecipe {
+    width: 70%;
+    height: 5rem;
+    &:not(:last-of-type) {
+        
+    }
+}

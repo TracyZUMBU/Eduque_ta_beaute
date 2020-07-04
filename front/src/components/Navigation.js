@@ -1,30 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { useEffect, useState } from 'react'
 
 export default function Navigation({isLoggedIn,disconnect}) {
-
-    // const [isLoggedIn, setIsLogged] = useState(false)
-    //! quand je me connecte il faut rafrachir la page pour que isLoggedIn change
     const token = localStorage.getItem('token')
-    // useEffect (() => {
-    //     if (token) {
-    //         setIsLogged(true);
-    //         console.log('connected');
-            
-            
-    //     }else {
-    //         setIsLogged(false);
-    //         console.log('disconnected');
-    //     }
-    // },[token])
-    
-    console.log(isLoggedIn);
-    // const disconnect = () => {
-    //     localStorage.removeItem('token')
-    //     setIsLogged(false)
-    //     alert("vous êtes déconnecté")
-    // }
 
     return (
              <nav class="navigation">

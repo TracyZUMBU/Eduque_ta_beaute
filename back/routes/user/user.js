@@ -1,3 +1,8 @@
+const bcrypt = require('bcryptjs');
+const userMiddleware = require('../middleware/user.js');
+
+
+
 // Ici sont toutes les routes qui concernent les users
 const express = require("express")
 const connection = require('../../conf')
@@ -53,7 +58,7 @@ router.get('/recipes/:id', (req,res) => {
  
 // Retrieves all recipes
 router.get('/allRecipes', (req,res) => {
-    connection.query('SELECT recipes.tiny, recipes.id, recipes.title, recipes.photo, recipes.text, recipes.introduction, DATE_FORMAT(recipes.created_at, "%M %d, %Y") AS created_at, recipes.sub_cat_id, cat_recipes.name FROM ETB.recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC', (err, results) => {
+    connection.query('SELECT *, DATE_FORMAT(recipes.created_at, "%M %d, %Y") AS created_at, recipes.id AS id FROM ETB.recipes INNER JOIN cat_recipes ON recipes.cat_id = cat_recipes.id ORDER BY created_at DESC', (err, results) => {
         if (err) {
             res.status(500).send('Error retrieving recipes')
         } else {
@@ -187,6 +192,39 @@ router.post('/addLike', (req, res) => {
     
 }) 
 
+
+////////////////////////// PUT //////////////////////
+
+// Update user's details
+router.put('/updateDetails', userMiddleware.validateNewRegister, (req, res) => {
+    const details = req.body
+    const password = bcrypt.hashSync(details.newPassword)
+    connection.query(`UPDATE ETB.users SET email='${details.newEmail}', password='${password}' WHERE id= '${details.id}'`, (err, results) => {
+        if(err) { 
+            console.log(err);
+            
+            return res.status(500).send('The new details have not been saved')
+        } else {
+            res.status(200).send('the new details have been saved')
+        }
+    })
+})
 module.exports = router
 
 
+////////////////////////// DELETE //////////////////////
+
+// Delete a recipe
+router.delete('/delete_recipe/:id', (req,res) => {
+    const recipeID = req.params.id
+    const userID = req.body.userID 
+    console.log('userID', userID, 'recipeID', recipeID, 'reqBody', req.body);
+    
+    connection.query(`DELETE FROM ETB.favorites WHERE user_id = '${userID}' AND recipe_id = '${recipeID}'`, (err,results) => {
+        if(err) {
+            res.sendStatus(500).send('The recipe has not been deleted')
+        }else {
+            res.status(200).send('The recipes has been deleted')
+        }
+    })
+})

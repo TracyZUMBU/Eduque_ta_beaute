@@ -39,7 +39,6 @@ router.post('/sign-up', userMiddleware.validateRegister,(req, res,next) => {
         
     console.log(password);
     connection.query(  
-      
     `INSERT INTO ETB.users (username, email, password) VALUES ('${content.username}', '${content.email}', '${password}')`, 
     (err, result) => { 
         if (err) {

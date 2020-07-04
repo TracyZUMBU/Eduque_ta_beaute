@@ -50,7 +50,7 @@ const Home = () => {
                                     title={latestRecipe.title}
                                     photo={latestRecipe.photo}
                                     name={latestRecipe.name}
-                                    text={latestRecipe.text}/>            
+                                    preparation={latestRecipe.preparation}/>            
                             ))}                      
                         </article>
                     </div>

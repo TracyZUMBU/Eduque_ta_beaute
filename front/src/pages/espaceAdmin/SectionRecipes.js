@@ -56,7 +56,7 @@ const SectionRecipes = () => {
             ))}
             </div>              
             {toggleModale ? <DisplayModale closeFunc={closeModale}/> : ""}
-            <div class="create-recipe">
+            <div class="create_recipe">
                 <CreateRecipe/>
             </div>
         </>

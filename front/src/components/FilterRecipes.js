@@ -43,7 +43,6 @@ const FilterRecipes = () => {
             const result = await axios.get(url)
             setAllRecipes(result.data)
             console.log('allRecipes', result.data);
-            
         }
         getAllRecipes()
     }, [])
@@ -51,13 +50,10 @@ const FilterRecipes = () => {
     // Display categories
     const toggleDropDown = () => {
         console.log(showCat);
-        
         setShowCat(!showCat)
         setShowInterCat(false)
         setShowSubCat(false)
-        
         console.log(showCat, showInterCat, showSubCat);
-        
     }
 
     // Display all the intermediate categories based on category's id
@@ -92,29 +88,34 @@ const FilterRecipes = () => {
   
     return (
     <div class="recipePage_blockLeft">
-
         <div className="dropdown">
             <div className="dropdown__content--cat">
-
                 {catRecipes.map(catRecipe => 
-                <p key={catRecipe.id} onClick={() => getInterCat(catRecipe.id)
-                }>{catRecipe.name}</p>
+                <p 
+                key={catRecipe.id} 
+                onClick={() => getInterCat(catRecipe.id)}>
+                {catRecipe.name}
+                </p>
                 )} 
             </div>
-
             <div className="dropdown__content--interCat">
                 {showInterCat === true ? 
                 interCatRecipes.map(interCatRecipe => 
-                <p key={interCatRecipe.cat_inter_id} onClick={() => getSubCat(interCatRecipe.cat_inter_id)} >{interCatRecipe.name_cat_inter}</p>
+                <p 
+                key={interCatRecipe.cat_inter_id} 
+                onClick={() => getSubCat(interCatRecipe.cat_inter_id)}>
+                {interCatRecipe.name_cat_inter}
+                </p>
                 ) : '' }
             </div>
-
-
             <div className="dropdown__content--subCat">
                 { showSubCat === true && showInterCat === true  ? 
                 subCatRecipes.map(subCatRecipe => 
-                <p key={subCatRecipe.id} 
-                onClick={()=> getRecipes(subCatRecipe.id)}>{subCatRecipe.name}</p>
+                <p 
+                key={subCatRecipe.id} 
+                onClick={()=> getRecipes(subCatRecipe.id)}>
+                {subCatRecipe.name}
+                </p>
                 ) : ''}
             </div>
         </div>
@@ -130,9 +131,9 @@ const FilterRecipes = () => {
                     introduction={allRecipe.introduction}
                     photo={allRecipe.photo}
                     name={allRecipe.name}
-                    tiny={allRecipe.tiny}/>
+                    ingredients={allRecipe.ingredients}/>
                     ) :
-                filterRecipes.map(filterRecipe =>
+                    filterRecipes.map(filterRecipe =>
                     <AllRecipes
                     key={filterRecipe.id}
                     title={filterRecipe.title}

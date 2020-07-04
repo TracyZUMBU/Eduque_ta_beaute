@@ -50,9 +50,11 @@ const OneRecipePage = (props) => {
                         </div>
                         <div class="recipes-details">
                             <h3 class="sub-part">Ingrédients:</h3>
-                            {ReactHtmlParser(recipeItem.tiny)}
+                            {ReactHtmlParser(recipeItem.ingredients)}
                             <h3 class="sub-part">Matériel:</h3>
+                            {ReactHtmlParser(recipeItem.materiel)}
                             <h3 class="sub-part">Préparation:</h3>
+                            {ReactHtmlParser(recipeItem.preparation)}
                         </div>
                         </>
                         ))}

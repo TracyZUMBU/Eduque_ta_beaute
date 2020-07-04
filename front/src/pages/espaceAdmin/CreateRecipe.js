@@ -4,30 +4,38 @@ import axios from 'axios'
 import ReactHtmlParser from 'react-html-parser';
 
 import { Editor } from '@tinymce/tinymce-react';
-import FilterRecipes from '../../components/FilterRecipes'
 
 
 const CreateRecipe = (props) => {
  
    
-    const [text, setText] = useState()
+    const [preparation, setPreparation] = useState()
     const [title, setTitle] = useState()
     const [description, setDescription] = useState()
     const [photo, setPhoto] = useState()
     const [response, setResponse] = useState()
-    const [tiny, setTiny] = useState('')
-    const content = { title, photo ,description, text, tiny}
+    const [ingredients, setIngredients] = useState('')
+    const [materiel, setMateriel] = useState()
+    const content = { title, photo ,description, preparation, ingredients, materiel}
 
-    const handleEditorChange = (content, editor) => {
-        setTiny(content)
-        //console.log('Content was updated:', content);
-        console.log(tiny);
-        
+    const handleSetIngredients = (content, editor) => {
+        setIngredients(content)    
+        console.log(ingredients);
       }
+
+      const handleSetPreparation = (content, editor) => {
+        setPreparation(content)    
+        console.log(preparation);
+      }  
+
+      const handleSetMateriel = (content, editor) => {
+        setMateriel(content)    
+        console.log(materiel);
+      } 
     
   
     const handlePost = () => {
-        const url = `http://localhost:4000/admin/createArticle`
+        const url = `http://localhost:4000/admin/createRecipe`
         axios.post(url, content)
         .then(res => setResponse(res))
         //window.location.reload();
@@ -35,64 +43,125 @@ const CreateRecipe = (props) => {
 
 
     return (
-        <div>
-            <h1>Taper l'article</h1>
-            {props.children}
-            <input
-                type="text"
-                id="title"
-                placeholder="un titre..."
-                onChange={(e) => setTitle(e.target.value)}
-            ></input>
+        <>
+            <h1>Créer une nouvelle recette</h1>
+            <div class="form_createRecipe">
+                <input
+                    class="input_form_createRecipe"
+                    type="text"
+                    id="title"
+                    placeholder="un titre..."
+                    onChange={(e) => setTitle(e.target.value)}
+                ></input>
 
-            <input
-                type="text"
-                id="image"
-                placeholder="Saisir l'URL de l'image"
-                onChange={(e) => setPhoto(e.target.value)}
-            ></input>
+                <input
+                    class="input_form_createRecipe"
+                    type="text"
+                    id="image"
+                    placeholder="Saisir l'URL de l'image"
+                    onChange={(e) => setPhoto(e.target.value)}
+                ></input>
 
-            <input
-                type="text"
-                id="Materiel"
-                placeholder="quel contenant ?"
-                onChange={(e) => setDescription(e.target.value)}
-            ></input>
+                <input
+                    class="input_form_createRecipe"
+                    type="text"
+                    id="Materiel"
+                    placeholder="quel contenant ?"
+                    onChange={(e) => setDescription(e.target.value)}
+                ></input>
 
-            <input 
-                type="text" 
-                id="button-blue" 
-                className="feedback-input" 
-                onChange={(e) => setText(e.target.value)}>
-            </input>
+                {/* <input
+                    class="input_form_createRecipe" 
+                    type="text" 
+                    id="button-blue"
+                    placeholder="Détailler les étapes de la recette" 
+                    onChange={(e) => setPreparation(e.target.value)}/> */}
 
-            <input 
-                type="button" 
-                id="text" 
-                className="feedback-input" 
-                value="Créer l'article" onClick={() => handlePost()} />
-        <Editor
-        initialValue="<p>This is the initial content of the editor</p>"
-        init={{
-            height: 500,
-            menubar: false,
-            plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount'
-            ],
-            toolbar:
-            'undo redo | formatselect | bold italic backcolor | \
-            alignleft aligncenter alignright alignjustify | \
-            bullist numlist outdent indent | removeformat | help'
-        }}
-       
-        onEditorChange={handleEditorChange}
-        /> 
+               
 
-    <div>{ReactHtmlParser(tiny)}</div>
+                <p>Saisir les ingrédients de la recette</p>
+                <Editor
+                initialValue="<p>Saisir les ingrédients de la recette</p>"
+                init={{
+                    content_css : "./css/style.css",
+                    theme_advanced_font_sizes: "10px,12px,13px,14px,16px,18px,20px",
+                    font_size_style_values : "10px,12px,13px,14px,16px,18px,20px",
+                    height: 400,
+                    width: 1000,
+                    menubar: false,
+                    plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                    ],
+                    toolbar:
+                    'undo redo | formatselect | bold italic backcolor | \
+                    alignleft aligncenter alignright alignjustify | \
+                    bullist numlist outdent indent | removeformat | help'
+                }}
+            
+                onEditorChange={handleSetIngredients}
+                /> 
 
-        </div>
+                <Editor
+                initialValue="<p>détailler les étapes de la recette</p>"
+                init={{
+                    content_css : "./css/style.css",
+                    theme_advanced_font_sizes: "10px,12px,13px,14px,16px,18px,20px",
+                    font_size_style_values : "10px,12px,13px,14px,16px,18px,20px",
+                    height: 400,
+                    width: 1000,
+                    menubar: false,
+                    plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                    ],
+                    toolbar:
+                    'undo redo | formatselect | bold italic backcolor | \
+                    alignleft aligncenter alignright alignjustify | \
+                    bullist numlist outdent indent | removeformat | help'
+                }}
+            
+                onEditorChange={handleSetPreparation}
+                /> 
+
+<Editor
+                initialValue="<p>lister le matériel nécessaire pour la recette</p>"
+                init={{
+                    content_css : "./css/style.css",
+                    theme_advanced_font_sizes: "10px,12px,13px,14px,16px,18px,20px",
+                    font_size_style_values : "10px,12px,13px,14px,16px,18px,20px",
+                    height: 400,
+                    width: 1000,
+                    menubar: false,
+                    plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                    ],
+                    toolbar:
+                    'undo redo | formatselect | bold italic backcolor | \
+                    alignleft aligncenter alignright alignjustify | \
+                    bullist numlist outdent indent | removeformat | help'
+                }}
+            
+                onEditorChange={handleSetMateriel}
+                /> 
+                
+
+                <input
+                    class="input_form_createRecipe"  
+                    type="button" 
+                    id="text" 
+                    value="Créer la nouvelle recette" 
+                    onClick={() => handlePost()} />
+            </div>
+            
+
+    <div>{ReactHtmlParser(ingredients)}</div>
+
+        </>
     
     )
 }
