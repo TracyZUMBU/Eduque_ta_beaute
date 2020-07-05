@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import {Link} from 'react-router-dom'
-import Navigation from './Navigation'
+import {Link, useHistory} from 'react-router-dom'
 import axios from 'axios'
+
+import Navigation from './Navigation'
 
 import user_icon from '../img/user_icon.png'
 
 
-const Header = (props) => {
-
+const Header = () => {
+    
     const [isLoggedIn, setIsLogged] = useState(false)
     const [userID, setUserID] = useState()
     const token = localStorage.getItem('token')
-
+    let history = useHistory()
+    
     useEffect (() => {
         if (token) {
             setIsLogged(true);
@@ -37,10 +39,11 @@ const Header = (props) => {
         getUserId()
     },[token])
 
-    const disconnect = () => {
+    const disconnect = (props) => {
         localStorage.removeItem('token')
         setIsLogged(false)
         alert("vous êtes déconnecté")
+        history.push('/')
     }
 
     return (
