@@ -623,6 +623,9 @@ em {
   z-index: 1;
   line-height: 2; }
 
+.logo_mail {
+  cursor: pointer; }
+
 .admin_recipe-list-box {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

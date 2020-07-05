@@ -32,7 +32,7 @@ const RecipesPage = () => {
                     <FilterRecipes/> 
                     <div class="recipePage-blockRight">
                          <p class="recipePage-blockRight__text"> <span>Des idées ?</span> <span>Des astuces ?</span>  <span>Des recettes ?</span>  Ecolo, Ecocome et Simplissime à faire ? <span>Envoi-les nous.</span> On les publiera sur le site</p>
-                         <img  class="logo_mail" src={mail}/>
+                         <img  onClick={()=> alert("Patience. Tu pourras bientôt nous partager des pépites :)")} class="logo_mail" src={mail}/>
                     </div>
                 </div>
             </main>
