@@ -22,8 +22,9 @@ import decode from 'jwt-decode'
 
 function App() {
 
- 
+  // Check if the user if authentificated
   const checkAuth = () => {
+    
     // 1. stock token from localstorage
     const token = localStorage.getItem('token');
     // 2. verify if there is a token
@@ -52,14 +53,6 @@ function App() {
       )
     )}/>
   )
-
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      console.log('user connected');
-    } else {
-      console.log('noone is connected')
-    }
-  },[])
 
   return (
     <Router>
