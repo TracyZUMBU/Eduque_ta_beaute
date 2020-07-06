@@ -6,7 +6,6 @@ const userMiddleware = require('../middleware/user.js');
 // Ici sont toutes les routes qui concernent les users
 const express = require("express")
 const connection = require('../../conf')
-const { Router } = require("express")
 const { isLoggedIn } = require("../middleware/user")
 const router = express.Router()
 
@@ -162,8 +161,7 @@ router.post('/addFavorite', (req, res) => {
         } else {
             res.status(200).send('the recipe has been saved to favorite list')
         }
-    })
-    
+    })  
 })
 
 // add a recipe to the favorite list

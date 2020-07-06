@@ -28,7 +28,7 @@ const  AllRecipes = (props) => {
         }
         getUserId()
 
-
+        
         const getRecipeId = async () => {
             const recipeId = props.id;
             const url = `http://localhost:4000/user/countLikes/${recipeId}`;
@@ -45,18 +45,21 @@ const  AllRecipes = (props) => {
     const handlePostFavorite = (recipeID) => {
         const url = 'http://localhost:4000/user/addFavorite';
         axios.post(url, {userId: userId, recipeID: recipeID})
+        //.then(res => console.log(res));
+        
     }
 
     const handlePostLike = (recipeID) => {
         const url = 'http://localhost:4000/user/addLike';
-        axios.post(url, {userId: userId, recipeID: recipeID})   
+        axios.post(url, {userId: userId, recipeID: recipeID})
+
     }
 
     return (
 
 
         <div class="recipes-list">
-            <div class="recipes-list__items">
+            <div key={props.id}class="recipes-list__items">
                 <div class="recipes-list__image-box">
                     <Link to={`/recipe/${props.id}`}>
                     <img class="recipes-list__image" src={props.photo}/></Link>

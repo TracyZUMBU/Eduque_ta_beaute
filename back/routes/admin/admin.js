@@ -90,7 +90,7 @@ router.delete('/recipeDelete/:id', (req,res) => {
     connection.query('DELETE FROM ETB.recipes WHERE id = ?', id, (err,results) => {
         if(err) {
             res.sendStatus(500).send('The recipe has not been deleted')
-        }else {
+        } else {
             res.status(200).send('The recipes has been deleted')
         }
     })

@@ -18,25 +18,25 @@ const Header = () => {
         if (token) {
             setIsLogged(true);
             //console.log('connected', isLoggedIn);
-            
+            const getUserId = async () => {
+                const url = 'http://localhost:4000/register/home/'
+                const result = await axios({
+                    method:'GET',
+                    url:url,
+                    headers: {
+                        'Content-Type':'application/json',
+                        'x-access-token': token
+                    } 
+                })
+                setUserID(result.data.data.id);
+                }
+                getUserId()
         }else {
             setIsLogged(false);
             //console.log('disconnected');
         }
 
-        const getUserId = async () => {
-            const url = 'http://localhost:4000/register/home/'
-            const result = await axios({
-                method:'GET',
-                url:url,
-                headers: {
-                    'Content-Type':'application/json',
-                    'x-access-token': token
-                } 
-            })
-            setUserID(result.data.data.id);
-        }
-        getUserId()
+    
     },[token])
 
     const disconnect = (props) => {

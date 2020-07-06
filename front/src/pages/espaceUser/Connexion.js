@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom';
-import {Link} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import Header from '../../components/Header'
 
 
@@ -17,6 +17,9 @@ const Connexion = (props) => {
        const [idUser, setIdUser] = useState()
        const [email, setEmail] = useState();
        const [password, setPassword] = useState();
+
+       //
+       let history = useHistory()
       
    
     
@@ -41,10 +44,11 @@ const Connexion = (props) => {
         
     }, [response, isAdmin])
 
-    const handlePost = () => {
+    const handlePost = async () => {
         const url = 'http://localhost:4000/register/login';
-        axios.post(url, {password, email})
+        await axios.post(url, {password, email})
         .then(res => setResponse(res.data))
+        history.push('/')
         }
 
 

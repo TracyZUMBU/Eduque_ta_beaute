@@ -11,8 +11,6 @@ const Home = () => {
     const [lastestRecipes, setLatestRecipes] = useState ([])
     
     useEffect(() => {
-        
-
         const getLatestRecipes = async () => {
             const url = 'http://localhost:4000/admin/lastestRecipes/'
             const result = await axios.get(url)
