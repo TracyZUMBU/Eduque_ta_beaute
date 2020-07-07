@@ -29,6 +29,24 @@ router.get('/catRecipes', (req, res) => {
     })
 })
 
+// Retrieve all intermediare categories of recipes
+router.get('/interCatRecipes', (req, res) => {
+    connection.query(`SELECT * FROM cat_inter_recipes`, (err,results) => {
+        if (err) {
+            res.status(500).send('Error retrieving intermediare categories recipes')
+        }else res.status(200).json(results)
+    })
+})
+
+// retrieve all sub categories of recipes
+router.get('/subCatRecipes', (req, res) => {
+    connection.query(`SELECT * FROM sub_cat_recipes`, (err,results) => {
+        if (err) {
+            res.status(500).send('Error retrieving sub categories recipes')
+        }else res.status(200).json(results)
+    })
+})
+
 // Retrieve all the intermediate categories depending on id's category
 router.get('/interCat/:id', (req, res) => {
     const id = req.params.id
@@ -41,6 +59,16 @@ router.get('/interCat/:id', (req, res) => {
         })
 })
 
+router.get('/interCat/:id', (req, res) => {
+    const id = req.params.id
+    connection.query('SELECT cat_inter_id, name_cat_inter FROM cat_has_cat_inter INNER JOIN cat_inter_recipes on cat_has_cat_inter.cat_inter_id = cat_inter_recipes.id WHERE cat_id = ? ', id, (err,results) => {
+        if (err) {
+            res.status(500).send('Error retrieving cat_repices')
+        } else {
+            res.status(200).json(results)
+        }
+        })
+})
 
 // Retrieve all the subcategories of recipes depending on id's category and id's intermediate category
 router.get('/subCat/:idInter/:idCat', (req,res) => {
@@ -116,7 +144,7 @@ router.delete('/userDelete/:id', (req,res) => {
  // Add a new recipe
  router.post('/createRecipe', (req, res) => {
      const content = req.body
-     connection.query(`INSERT INTO ETB.recipes (title, description, photo, preparation, ingredients, materiel) VALUES ('${content.title}', '${content.description}', '${content.photo}', '${content.preparation}', '${content.ingredients}', '${content.materiel}')`, (err, results) => {
+     connection.query(`INSERT INTO ETB.recipes (title, description, photo, preparation, ingredients, materiel, author, cat_id, cat_inter_id, sub_cat_id ) VALUES ('${content.title}', '${content.description}', '${content.photo}', '${content.preparation}', '${content.ingredients}', '${content.materiel}', '${content.author}', '${content.idCat}', '${content.idInterCat}', '${content.idSubCat}')`, (err, results) => {
          if (err) {
              console.log(err);
              res.status(500).send("the recipes has not been created") 

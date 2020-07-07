@@ -47,7 +47,7 @@ function App() {
   const AuthRoute = ({ component: Component, ...rest}) => (
     <Route {...rest} render={props => (
       checkAuth() ? (
-        <Component {...props} />
+        <Component {...props}/>
       ) : (
         <Redirect to={{pathname: '/connexion'}}/>
       )
@@ -70,7 +70,7 @@ function App() {
    
     <Route exact path="/recipe/:id" component={OneRecipePage}/>
     <AuthRoute exact path="/user/:id" component={Profile}/>
-    <Route exact path="/comment" component={Comment}/>
+    <Route exact path="/comment" component={Comment} />
     <Route exact path="/sign-up" component={CreateProfile}/>
     <Route exact path="/recipes-page" component={RecipesPage}/>
     <Route exact path="/createrecipe" component={CreateRecipe}/>

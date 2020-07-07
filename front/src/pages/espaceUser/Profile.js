@@ -10,6 +10,8 @@ import DisplayModale from '../DisplayModale'
 
 
 const Profile = (props) => {
+    console.log(props.userId);
+    
     //Retrieve the user's id
     const id = props.match.params.id;
     // Retrieve user's details
@@ -68,7 +70,7 @@ const Profile = (props) => {
     }, [])
 
     // send new user's details to the DB
-    const handleUpdateDetailsUSer = async (e) => {
+    const handleUpdateDetailsUSer = async () => {
         const url = 'http://localhost:4000/user/updateDetails/'
         console.log(newUserDetails);
         axios.put(url, newUserDetails)

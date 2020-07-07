@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import axios from 'axios'
 
+import logo_comment from '../img/chat.svg'
+
 const Comment =(props) => {
-    
     // stock the comment
     const [comment, setComment] = useState()
     //send the comment to the back
@@ -11,9 +12,30 @@ const Comment =(props) => {
     const [displayComment, setDisplayComment] = useState([])
     // Retrieve the id of the recipe from the OnePAgeRecipe.js
     const idRecipe = props.idRecipe;
-    const valuesComment = {comment, idRecipe}
+    // details' comments
+    let valuesComment = {}
+     // Stock details of the token after decodeding
+     const [decodedToken, setDecodedToken] = useState({})
+     //
+     let form = useRef();
     
     useEffect(()=> {
+
+        const getUserId = async () => {
+            // 1.retrieve the token from localStorage
+            const tokenFromStorage = localStorage.getItem('token');
+             if(tokenFromStorage) {            
+                // 2. retrieve the payload's token
+                const base64Payload = tokenFromStorage.split('.')[1]
+                // 3. decoded payload's token and parse it so that we can get the user id
+                 setDecodedToken(JSON.parse(window.atob(base64Payload)))
+                 //console.log(userId, decodedToken, decodedToken.id);                 
+            } else {
+                return 'not token to parse'
+            }
+        }
+        getUserId()
+
         //Retrieve all recipes' comments
         const getComments = async () => {
             const url = `http://localhost:4000/user/comment/${idRecipe}`
@@ -22,19 +44,24 @@ const Comment =(props) => {
         }
         getComments()
 
-    },[]) 
+
+    },[response]) 
+
 
     // Send user's comment to the back
     const handlePost = () => {
+        const userId = decodedToken.id
+        valuesComment = {comment, idRecipe, userId}
         const url = 'http://localhost:4000/user/postComment'
         axios.post(url, valuesComment)
         .then(res => setResponse(res))
-        //! Relance la fonction getComments
+        //! TypeError: form.current.reset is not a function
+            //form.current.reset();
     }
 
     return (
         <>
-        <h2 class="comment_title">Commentaires</h2>
+        <h2 class="commentSection__title"><img src={logo_comment}/>Commentaires</h2>
         <section class="commentSection">
             <div class="commentSection__displayComments-box">
                 {displayComment.map(item => (
@@ -47,7 +74,7 @@ const Comment =(props) => {
             </div>
             <div class="commentSection__writeComment">
                 <h4 class="">Laissez un commentaire</h4>
-                <textarea class="type_comment" name="comment" onChange={(e)=> setComment(e.target.value)} placeholder="Vous avez testé la recette ? Qu'en avez-vous pensé ? " rows="5" cols="33"/>
+                <textarea ref={form} class="type_comment" name="comment" onChange={(e)=> setComment(e.target.value)} placeholder="Vous avez testé la recette ? Qu'en avez-vous pensé ? " rows="5" cols="33"/>
                 <input  class="submitComment"type="button" value="Envoyer" onClick={() => handlePost()} />
             </div>
         </section>
