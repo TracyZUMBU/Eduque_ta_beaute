@@ -18,13 +18,15 @@ import RecipesPage from './pages/espaceUser/RecipesPage';
 import OneRecipePage from './pages/espaceUser/OneRecipePage';
 import CreateRecipe from './pages/espaceAdmin/CreateRecipe';
 import Header from './components/Header';
+import Upcoming from './pages/espaceUser/Upcoming'
+
 import decode from 'jwt-decode'
+import ErrorPage from './pages/espaceUser/ErrorPage';
 
 function App() {
 
   // Check if the user if authentificated
   const checkAuth = () => {
-    
     // 1. stock token from localstorage
     const token = localStorage.getItem('token');
     // 2. verify if there is a token
@@ -54,27 +56,32 @@ function App() {
     )}/>
   )
 
+
+
   return (
     <Router>
-    <Route exact path="/" component={Home}/>
-    <Route exact path="/categories" component={Categories}/>
-    <Route exact path="/interCat/:id" component={InterCat}/>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/categories" component={Categories}/>
+        <Route exact path="/interCat/:id" component={InterCat}/>
 
-    <Route exact path="/subCat/:idInter/:idCat" component={Subcat}/>
-    
-    <Route exact path="/admin" component={HomeAdmin}/>
-    <Route exact path="/admin/recipes" component={SectionRecipes}/>
-    <Route exact path="/admin/allUsers" component={SectionUsers}/>
+        <Route exact path="/subCat/:idInter/:idCat" component={Subcat}/>
+        
+        <Route exact path="/admin" component={HomeAdmin}/>
+        <Route exact path="/admin/recipes" component={SectionRecipes}/>
+        <Route exact path="/admin/allUsers" component={SectionUsers}/>
 
-    <Route exact path="/connexion" component={Connexion}/>
-   
-    <Route exact path="/recipe/:id" component={OneRecipePage}/>
-    <AuthRoute exact path="/user/:id" component={Profile}/>
-    <Route exact path="/comment" component={Comment} />
-    <Route exact path="/sign-up" component={CreateProfile}/>
-    <Route exact path="/recipes-page" component={RecipesPage}/>
-    <Route exact path="/createrecipe" component={CreateRecipe}/>
-
+        <Route exact path="/connexion" component={Connexion}/>
+      
+        <Route exact path="/recipe/:id" component={OneRecipePage}/>
+        <AuthRoute exact path="/user/:id" component={Profile}/>
+        <Route exact path="/comment" component={Comment} />
+        <Route exact path="/sign-up" component={CreateProfile}/>
+        <Route exact path="/recipes-page" component={RecipesPage}/>
+        <Route exact path="/createrecipe" component={CreateRecipe}/>
+        <Route exact path="/upcoming/:pages" component={Upcoming}/>
+        <Route component={ErrorPage}/>
+      </Switch>
     </Router>
   );
 }

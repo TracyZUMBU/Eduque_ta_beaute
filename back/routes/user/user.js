@@ -206,7 +206,7 @@ module.exports = router
 // Delete a recipe
 router.delete('/delete_recipe/:id', (req,res) => {
     const recipeID = req.params.id
-    const userID = req.body.userID 
+    const userID = req.body.userID
     console.log('userID', userID, 'recipeID', recipeID, 'reqBody', req.body);
     
     connection.query(`DELETE FROM ETB.favorites WHERE user_id = '${userID}' AND recipe_id = '${recipeID}'`, (err,results) => {

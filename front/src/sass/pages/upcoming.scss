@@ -1,0 +1,5 @@
+.background_upcomingPage {
+    background: url(../img/upcomingPage.jpg) center no-repeat ;
+    background-size: cover;
+    height: calc(100vh - #{$HTotalHeader});
+}

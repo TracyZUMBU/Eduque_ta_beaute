@@ -6,7 +6,7 @@ import logo_comment from '../img/chat.svg'
 const Comment =(props) => {
     // stock the comment
     const [comment, setComment] = useState()
-    //send the comment to the back
+    //stock response from back
     const [response, setResponse] = useState();
     // Retrieve all recipes's comments
     const [displayComment, setDisplayComment] = useState([])

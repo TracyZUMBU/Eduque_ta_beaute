@@ -45,3 +45,9 @@ figure {
 a {
   cursor: pointer;
 }
+
+.errorPage {
+  height: 100vh;
+  background: url(../img/404page.jpg) no-repeat center;
+  background-size: cover;
+}

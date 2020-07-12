@@ -74,7 +74,6 @@ const CreateRecipe = (props) => {
         axios.post(url, content)
         .then(res => setResponse(res))
         console.log(content);
-        
         //! reset form
     } 
     console.log(category);

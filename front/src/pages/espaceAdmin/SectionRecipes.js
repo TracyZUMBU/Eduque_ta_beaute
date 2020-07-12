@@ -12,6 +12,8 @@ const SectionRecipes = () => {
     const [recipes, setRecipes] = useState ([])
     const [toggleModal, setToggleModal] = useState (false)
     const [recipeID, setrecipeID] = useState ("")
+    //Stock response from back
+    const [response, setResponse] = useState();
 
     const bannerName = "Espace Adminitrateur"
     // Retrieve the lastest recipes
@@ -23,7 +25,7 @@ const SectionRecipes = () => {
             setRecipes(result.data)
         }
         getRecipes()
-    }, [])
+    }, [response])
 
     // open the modal - asking for confirmation
     const openModale = (id) => {
@@ -35,6 +37,7 @@ const SectionRecipes = () => {
     const deleteRecipe = () => {
         const url = `http://localhost:4000/admin/recipeDelete/${recipeID}`
         axios.delete(url)
+        .then(res => setResponse(res))
         setToggleModal(false)
     }
     
