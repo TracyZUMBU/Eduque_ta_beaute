@@ -142,8 +142,12 @@ router.get('/countLikes/:recipeId', (req,res) => {
 // post a comment
 router.post('/postComment', (req, res) => { 
     const valuesComment = req.body
-    connection.query(`INSERT INTO ETB.comments (comments, recipe_id) VALUES ('${valuesComment.comment}', '${valuesComment.idRecipe}')`, (err, results) => { 
+    console.log(valuesComment);
+    
+    connection.query(`INSERT INTO ETB.comments (comments, user_id, recipe_id) VALUES ('${valuesComment.comment}','${valuesComment.userId}', '${valuesComment.idRecipe}')`, (err, results) => { 
         if(err) {
+            console.log(err);
+            
             return res.status(500).send('The comments has not been post')
         } else {
             res.status(200).send('the comments has been post')
@@ -202,7 +206,7 @@ module.exports = router
 // Delete a recipe
 router.delete('/delete_recipe/:id', (req,res) => {
     const recipeID = req.params.id
-    const userID = req.body.userID 
+    const userID = req.body.userID
     console.log('userID', userID, 'recipeID', recipeID, 'reqBody', req.body);
     
     connection.query(`DELETE FROM ETB.favorites WHERE user_id = '${userID}' AND recipe_id = '${recipeID}'`, (err,results) => {

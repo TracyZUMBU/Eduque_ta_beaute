@@ -10,6 +10,7 @@ import DisplayModale from '../DisplayModale'
 
 
 const Profile = (props) => {
+    
     //Retrieve the user's id
     const id = props.match.params.id;
     // Retrieve user's details
@@ -18,6 +19,8 @@ const Profile = (props) => {
     const [username, setUsername] = useState([])
     //Retrieve the user's favorite recipes
     const [favorite, setFavorite] = useState([])
+    //Stock response from back
+    const [response, setResponse] = useState();
 
     /**
      * Variable for update function
@@ -37,6 +40,7 @@ const Profile = (props) => {
      */
     // retrieve the recipe's deleted id 
     const [recipeID, setRecipeID] = useState()
+    const userID = {id}
     // Manage displaying of modale
     const [toggleModal, setToggleModal] = useState (false) 
 
@@ -65,10 +69,10 @@ const Profile = (props) => {
             setFavorite(result.data)
         }
         getFavorite();
-    }, [])
+    }, [response])
 
     // send new user's details to the DB
-    const handleUpdateDetailsUSer = async (e) => {
+    const handleUpdateDetailsUSer = () => {
         const url = 'http://localhost:4000/user/updateDetails/'
         console.log(newUserDetails);
         axios.put(url, newUserDetails)
@@ -88,10 +92,10 @@ const Profile = (props) => {
     }
 
     // delete recipe from farovite list
-    const deleteRecipe = (e) => {
+    const deleteRecipe = () => {
         const url = `http://localhost:4000/user/delete_recipe/${recipeID}`
-        //!le back reçoit pas userID
-        axios.delete(url, {userID :id})
+        axios.delete(url, {data :{userID: id} })
+        .then(res => setResponse(res))
         setToggleModal(false)
     }
 
@@ -131,7 +135,7 @@ const Profile = (props) => {
                                     onChange={(e) => setRepeatPassword(e.target.value)}/>
 
                             
-                                <input  class="submit_login" type="button" value="SE CONNECTER" onClick={handleUpdateDetailsUSer} />
+                                <input  class="submit_login" type="button" value="Changer mes informations" onClick={handleUpdateDetailsUSer} />
                         </form>
                     </div>
                     )}

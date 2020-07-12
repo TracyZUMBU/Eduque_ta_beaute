@@ -38,12 +38,13 @@ const OneRecipePage = (props) => {
                                 </aside>
                             </div>
                             <h2 class="heading-secondary heading-secondary--big">{recipeItem.title}</h2>
-                            <p class="author_recipe"><em>by</em> author</p>
+                            <p class="author_recipe"><em>by</em> {recipeItem.author}</p>
                         </div>
                         <div class="image-box">
                             <img class="image image--oneRecipe" src={recipeItem.photo}/>
                         </div>
                         <div class="recipes-details">
+                        <p>{}</p>
                             <h3 class="sub-part">Ingrédients:</h3>
                             {ReactHtmlParser(recipeItem.ingredients)}
                             <h3 class="sub-part">Matériel:</h3>
@@ -57,7 +58,7 @@ const OneRecipePage = (props) => {
                     </div>
                     <div class="recipePage-blockRight">
                          <p class="recipePage-blockRight__text"> <span>Des idées ?</span> <span>Des astuces ?</span>  <span>Des recettes ?</span>  Ecolo, Ecocome et Simplissime à faire ? <span>Envoi-les nous.</span> On les publiera sur le site</p>
-                         <img class="logo_mail" src={mail}/>
+                         <img onClick={()=> alert("Patience. Tu pourras bientôt nous partager des pépites :)")} class="logo_mail" src={mail}/>
                     </div>
             </div>
             </main>

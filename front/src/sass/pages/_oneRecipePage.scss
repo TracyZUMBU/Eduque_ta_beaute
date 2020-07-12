@@ -28,3 +28,22 @@ em {
     margin-top: 4rem;
     height: 15rem;
 }
+
+.recipes-details > h3 {
+   
+    font-weight: 700;
+    //color: $color-orange;
+    margin: 1.5rem 0;
+    font-size: 1.7rem;
+}
+
+.recipes-details > ul, ol {
+    margin-left: 1rem;
+}
+
+.recipes-details > ul, ol > li {
+    line-height: 1.6;
+    font-size: 1.6rem;
+    font-weight: 400;
+    font-style: normal;
+}

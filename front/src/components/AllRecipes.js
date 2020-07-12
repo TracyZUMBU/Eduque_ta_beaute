@@ -11,6 +11,8 @@ const  AllRecipes = (props) => {
     const userId = decodedToken.id
     // amount of likes of recipe
     const [totalLikes, setTotalLikes] = useState([])
+    //Stock response from back
+    const [response, setResponse] = useState();
     
     useEffect(() => {
 
@@ -29,15 +31,15 @@ const  AllRecipes = (props) => {
         getUserId()
 
         
-        const getRecipeId = async () => {
+        const getAmountOfLikes = async () => {
             const recipeId = props.id;
             const url = `http://localhost:4000/user/countLikes/${recipeId}`;
             const result = await axios.get(url);
             setTotalLikes(result.data);
         }
-        getRecipeId();
+        getAmountOfLikes();
 
-    }, [])
+    }, [response])
     
    
     
@@ -45,14 +47,14 @@ const  AllRecipes = (props) => {
     const handlePostFavorite = (recipeID) => {
         const url = 'http://localhost:4000/user/addFavorite';
         axios.post(url, {userId: userId, recipeID: recipeID})
-        //.then(res => console.log(res));
+        .then(res => setResponse(res));
         
     }
 
     const handlePostLike = (recipeID) => {
         const url = 'http://localhost:4000/user/addLike';
         axios.post(url, {userId: userId, recipeID: recipeID})
-
+        .then(res => setResponse(res));
     }
 
     return (

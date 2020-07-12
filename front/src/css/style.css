@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
 *,
@@ -39,6 +40,11 @@ figure {
 
 a {
   cursor: pointer; }
+
+.errorPage {
+  height: 100vh;
+  background: url(../img/404page.jpg) no-repeat center;
+  background-size: cover; }
 
 aside {
   text-transform: uppercase;
@@ -169,18 +175,21 @@ span {
   background-size: cover;
   width: 100%; }
 
-.comment_title {
-  font-size: 3rem;
-  text-transform: uppercase;
-  margin-top: 3rem; }
-
 .commentSection {
-  margin-top: 2rem;
   border: 2px solid #eaeaea;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 2.5rem; }
+  padding: 1rem 2.5rem 0 2.5rem; }
+  .commentSection__title {
+    font-size: 2.3rem;
+    text-transform: uppercase;
+    margin: 2rem 0 0 0;
+    padding: 2rem 0 2rem 2.5rem;
+    border: 2px solid #eaeaea;
+    border-bottom: none; }
+    .commentSection__title > img {
+      margin-right: 1.2rem; }
   .commentSection__displayComments-box {
     display: flex;
     flex-direction: column;
@@ -241,11 +250,37 @@ span {
     color: #c9975f;
     font-size: 1.8rem; }
 
+ul.dropdown__content--cat {
+  border: 2px solid red; }
+
+ul.dropdown__content--cat > li:hover .dropdown__content--interCat {
+  color: green; }
+
 .dropdown__content--interCat {
   background-color: blue; }
 
 .dropdown__content--subCat {
   background-color: yellow; }
+
+.filtered_navigation {
+  display: flex; }
+
+.test   {
+  display: flex; }
+
+.dropdown-menu {
+  border: 2px solid red;
+  width: 100%; }
+  .dropdown-menu__category {
+    border: 1px dotted green;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center; }
+    .dropdown-menu__category-items {
+      border: 1px dotted yellow; }
+  .dropdown-menu__interCat {
+    border: 2px solid turquoise;
+    width: 25%; }
 
 .form-box {
   display: flex;
@@ -576,6 +611,20 @@ em {
   margin-top: 4rem;
   height: 15rem; }
 
+.recipes-details > h3 {
+  font-weight: 700;
+  margin: 1.5rem 0;
+  font-size: 1.7rem; }
+
+.recipes-details > ul, ol {
+  margin-left: 1rem; }
+
+.recipes-details > ul, ol > li {
+  line-height: 1.6;
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-style: normal; }
+
 .main--recipesPage {
   display: grid;
   grid-template-areas: "list aside"; }
@@ -670,3 +719,8 @@ em {
     text-transform: uppercase; }
   .user-list__delete {
     cursor: pointer; }
+
+.background_upcomingPage {
+  background: url(../img/upcomingPage.jpg) center no-repeat;
+  background-size: cover;
+  height: calc(100vh - calc(10rem + 5rem)); }

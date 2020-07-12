@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import AllRecipes from './AllRecipes'
 
+import logo_filter from '../img/filter.svg'
+
 
 const FilterRecipes = () => {
   
@@ -19,6 +21,8 @@ const FilterRecipes = () => {
     const [showSubCat, setShowSubCat] = useState(false)
     // Retrieve the id of category
     const [idCat, setIdCat] = useState('')
+    // Retrieve the id of intercategory
+    const [idInterCat, setIdInterCat] = useState([])
     // Retrieve the id of subcategory
     const [idSub, setIdSub] = useState('')
     // Retrieve all recipes on DB
@@ -47,23 +51,24 @@ const FilterRecipes = () => {
     // Display categories
     const toggleDropDown = () => {
         setShowCat(!showCat)
-        setShowInterCat(false)
-        setShowSubCat(false)
+        // setShowInterCat(false)
+        // setShowSubCat(false)
         console.log(showCat, showInterCat, showSubCat);
     }
 
     // Display all the intermediate categories based on category's id
-    const getInterCat = async (id) => {
+    const displayInterCat = async (catID) => {
         
-        const url = `http://localhost:4000/admin/interCat/${id}`
+        const url = `http://localhost:4000/admin/interCat/${catID}`
         const result = await axios.get(url)
         // initialise InterCatRecipes with bdd result
         setInterCatRecipes(result.data)
-        setIdCat(id)
+        setIdCat(catID)
+        setIdInterCat(result.data.cat_inter_id)
         setShowInterCat(true)
         setShowSubCat(false)
         //setShowRecipes(false)
-        console.log(showInterCat, showCat);
+        console.log(result.data, 'setInterCat', idInterCat,'ShowInterCat', showInterCat, showCat);
     }
 
     // Display subcategories 
@@ -84,37 +89,81 @@ const FilterRecipes = () => {
   
     return (
     <div class="recipePage_blockLeft">
-        <div className="dropdown">
-            <div className="dropdown__content--cat">
-                {catRecipes.map(catRecipe => 
-                <p 
-                key={catRecipe.id} 
-                onClick={() => getInterCat(catRecipe.id)}>
-                {catRecipe.name}
-                </p>
-                )} 
+        <div className="filtered_navigation">
+
+            <div 
+            onClick={()=> toggleDropDown()}
+            class="logo_filter_box">
+                <img className="logo-filter_image" src={logo_filter}/>
             </div>
-            <div className="dropdown__content--interCat">
-                {showInterCat === true ? 
-                interCatRecipes.map(interCatRecipe => 
-                <p 
-                key={interCatRecipe.cat_inter_id} 
-                onClick={() => getSubCat(interCatRecipe.cat_inter_id)}>
-                {interCatRecipe.name_cat_inter}
-                </p>
-                ) : '' }
-            </div>
-            <div className="dropdown__content--subCat">
-                { showSubCat === true && showInterCat === true  ? 
-                subCatRecipes.map(subCatRecipe => 
-                <p 
-                key={subCatRecipe.id} 
-                onClick={()=> getRecipes(subCatRecipe.id)}>
-                {subCatRecipe.name}
-                </p>
-                ) : ''}
-            </div>
+
+            {showCat === true ?
+             <nav className="dropdown-menu">
+                 <>
+                 <ul className="dropdown-menu__category">
+                 {catRecipes.map(catRecipe => 
+                    <li
+                    key={catRecipe.id}                    
+                    onMouseEnter={()=> displayInterCat(catRecipe.id)} 
+                    className="dropdown-menu__category-items">
+                    {catRecipe.name}
+                    </li>
+                    )}
+                </ul>                    
+                </>
+                {showInterCat === true ?
+                <div className='test'>
+                {interCatRecipes.map(interCatRecipe =>
+                 <ul 
+                 className="dropdown-menu__interCat"
+                 key={interCatRecipe.id}>
+                    {interCatRecipe.name_cat_inter}
+                    {subCatRecipes.map(subCatRecipe =>
+                    <li>{subCatRecipe.name}</li>
+
+                    )}
+                </ul>
+                    )}
+                </div>
+                : '' }
+            </nav> :
+            '' }
+
         </div>
+        
+        {/* <nav className="dropdown">
+            {catRecipes.map(catRecipe => 
+            <ul 
+            className="dropdown__content--cat"
+            onMouseEnter={() => getInterCat(catRecipe.id)}>
+                <li className="cat_items"
+                key={catRecipe.id}>
+                {catRecipe.name}
+                </li>
+            </ul>
+                )} 
+           
+
+                    {showInterCat === true ? interCatRecipes.map(interCatRecipe => 
+                <ul  className="dropdown__content--interCat">                        
+                    <li className="interCat_items"
+                    key={interCatRecipe.cat_inter_id} 
+                    onClick={() => getSubCat(interCatRecipe.cat_inter_id)}>
+                    {interCatRecipe.name_cat_inter}
+                    </li>
+                </ul>
+                    ) : ''}
+               
+            <ul className="dropdown__content--subCat">
+                {subCatRecipes.map(subCatRecipe => 
+                <li
+                key={subCatRecipe.id} 
+                onMouseEnter={()=> getRecipes(subCatRecipe.id)}>
+                {subCatRecipe.name}
+                </li>
+                )}
+            </ul>
+        </nav> */}
 
         <div class="recipe-list-box">
                 { showAllRecipes === true ? 
