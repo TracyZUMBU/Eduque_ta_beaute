@@ -181,11 +181,13 @@ const FilterRecipes = () => {
                     filterRecipes.map(filterRecipe =>
                     <AllRecipes
                     key={filterRecipe.id}
+                    id={filterRecipe.id}
                     title={filterRecipe.title}
                     created_at={filterRecipe.created_at}
                     introduction={filterRecipe.introduction}
                     photo={filterRecipe.photo}
-                    name={filterRecipe.name}/>
+                    name={filterRecipe.name}
+                    ingredients={filterRecipe.ingredients}/>
                     )
                 }
         </div>

@@ -6,7 +6,8 @@ const userMiddleware = require('../middleware/user.js');
 // Ici sont toutes les routes qui concernent les users
 const express = require("express")
 const connection = require('../../conf')
-const { isLoggedIn } = require("../middleware/user")
+const { isLoggedIn } = require("../middleware/user");
+const { Router } = require('express');
 const router = express.Router()
 
 // Retrieve all the categories of recipes
@@ -124,7 +125,7 @@ router.get('/favorite/:id', (req,res) => {
     }) 
 })
  
-// give the number of like for a recipe
+// return the amount of like for a recipe
 router.get('/countLikes/:recipeId', (req,res) => {
     const recipeId = req.params.recipeId
     connection.query(`SELECT COUNT(*) AS total FROM likes WHERE recipe_id = ?`, recipeId, (err, results) => {
@@ -136,6 +137,17 @@ router.get('/countLikes/:recipeId', (req,res) => {
     }) 
 })
 
+// return recipes which were liked by user
+router.get('/recipeLiked/:userID', (req,res) => {
+    const userID = req.params.userID
+    connection.query(`SELECT recipe_id from likes where user_id = ?`, userID, (err, results) => {
+        if(err){
+            res.status(500).send('Error retrieving comments')
+        }else {
+            res.status(200).json(results)
+        }
+    })
+})
 
 ////////////////////////// POST //////////////////////
 
@@ -174,6 +186,7 @@ router.post('/addLike', (req, res) => {
     const userId = req.body.userId
     connection.query (`INSERT INTO ETB.likes (recipe_id, user_id) VALUES ('${recipeID}', '${userId}')`, (err, results) => {
         if(err) { 
+            console.log(err);
             return res.status(500).send('The recipe has not been saved to favorite list')
         } else {
             res.status(200).send('the recipe has been saved to favorite list')
@@ -214,6 +227,19 @@ router.delete('/delete_recipe/:id', (req,res) => {
             res.sendStatus(500).send('The recipe has not been deleted')
         }else {
             res.status(200).send('The recipes has been deleted')
+        }
+    })
+})
+
+router.delete('/deleteLike/:userID/:recipeID', (req,res) => {
+    const recipeID = req.params.recipeID
+    const userID = req.params.userID
+    const details = req.params
+    connection.query(`DELETE FROM ETB.likes WHERE user_id = '${userID}' AND recipe_id = '${recipeID}'`, (err, results) => {
+        if(err) {
+            res.sendStatus(500).send('The like has not been deleted')
+        }else {
+            res.status(200).send('The like has been deleted')
         }
     })
 })

@@ -23,6 +23,7 @@ import Upcoming from './pages/espaceUser/Upcoming'
 import decode from 'jwt-decode'
 import ErrorPage from './pages/espaceUser/ErrorPage';
 
+
 function App() {
 
   // Check if the user if authentificated

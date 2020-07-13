@@ -282,6 +282,9 @@ ul.dropdown__content--cat > li:hover .dropdown__content--interCat {
     border: 2px solid turquoise;
     width: 25%; }
 
+.material-icons.md-light {
+  color: #00f400; }
+
 .form-box {
   display: flex;
   flex-direction: column;
