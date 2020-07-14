@@ -51,7 +51,6 @@ const  AllRecipes = (props) => {
             const url = `http://localhost:4000/user/recipeLiked/${userId}`
             const result = await axios.get(url)
             setrecipeLiked(result.data)
-            console.log(result.data);
         }
         if(userId) getRecipeLiked()
 
@@ -59,7 +58,6 @@ const  AllRecipes = (props) => {
             const url = `http://localhost:4000/user/recipeFavorited/${userId}`
             const result = await axios.get(url)
             setRecipeFavorited(result.data)
-            console.log('favorited recipes',result.data);
         }
         if(userId) getRecipeFavorited()
 
@@ -90,7 +88,6 @@ const  AllRecipes = (props) => {
 
     // send the recipe liked to the DB
     const handlePostLike = (recipeID) => {
-        console.log(recipeID);
         //Check if recipe is already liked
         const alreadyLiked = recipeLiked.find( ({recipe_id}) => recipe_id == recipeID)
         if (alreadyLiked){
