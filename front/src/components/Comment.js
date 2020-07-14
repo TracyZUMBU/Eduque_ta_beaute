@@ -3,19 +3,20 @@ import axios from 'axios'
 
 import logo_comment from '../img/chat.svg'
 
-const Comment =(props) => {
-    // stock the comment
+const Comment = (props) => {
+    // stock the comment's user
     const [comment, setComment] = useState()
+    // details' comments
+    let valuesComment = {}
+    // Retrieve the id of the recipe from the OnePAgeRecipe.js
+    const idRecipe = props.idRecipe;
     //stock response from back
     const [response, setResponse] = useState();
     // Retrieve all recipes's comments
     const [displayComment, setDisplayComment] = useState([])
-    // Retrieve the id of the recipe from the OnePAgeRecipe.js
-    const idRecipe = props.idRecipe;
-    // details' comments
-    let valuesComment = {}
      // Stock details of the token after decodeding
      const [decodedToken, setDecodedToken] = useState({})
+     const [isLoggedIn, setIsLoggedIn] = useState(false)
      //
      let form = useRef();
     
@@ -29,7 +30,8 @@ const Comment =(props) => {
                 const base64Payload = tokenFromStorage.split('.')[1]
                 // 3. decoded payload's token and parse it so that we can get the user id
                  setDecodedToken(JSON.parse(window.atob(base64Payload)))
-                 //console.log(userId, decodedToken, decodedToken.id);                 
+                 //console.log(userId, decodedToken, decodedToken.id);
+                 setIsLoggedIn(true)                 
             } else {
                 return 'not token to parse'
             }
@@ -45,7 +47,7 @@ const Comment =(props) => {
         getComments()
 
 
-    },[response]) 
+    },[response, isLoggedIn]) 
 
 
     // Send user's comment to the back
@@ -74,8 +76,19 @@ const Comment =(props) => {
             </div>
             <div class="commentSection__writeComment">
                 <h4 class="">Laissez un commentaire</h4>
-                <textarea ref={form} class="type_comment" name="comment" onChange={(e)=> setComment(e.target.value)} placeholder="Vous avez testé la recette ? Qu'en avez-vous pensé ? " rows="5" cols="33"/>
-                <input  class="submitComment"type="button" value="Envoyer" onClick={() => handlePost()} />
+                <textarea 
+                    ref={form} 
+                    class="type_comment" 
+                    name="comment" 
+                    onChange={(e)=> setComment(e.target.value)} 
+                    placeholder={isLoggedIn ? "Vous avez testé la recette ? Qu'en avez-vous pensé ? " : "Connectez-vous, pour laisser un commentaire"} 
+                    rows="5" 
+                    cols="33"/>
+                <input  
+                    class="submitComment"
+                    type="button" 
+                    value="Envoyer" 
+                    onClick={() => handlePost()} />
             </div>
         </section>
         </>

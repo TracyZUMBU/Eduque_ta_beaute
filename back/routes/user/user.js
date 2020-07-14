@@ -149,6 +149,17 @@ router.get('/recipeLiked/:userID', (req,res) => {
     })
 })
 
+// return recipes which were liked by user
+router.get('/recipeFavorited/:userID', (req,res) => {
+    const userID = req.params.userID
+    connection.query(`SELECT recipe_id from favorites where user_id = ?`, userID, (err, results) => {
+        if(err){
+            res.status(500).send('Error retrieving comments')
+        }else {
+            res.status(200).json(results)
+        }
+    })
+})
 ////////////////////////// POST //////////////////////
 
 // post a comment
@@ -173,12 +184,13 @@ router.post('/addFavorite', (req, res) => {
     const userId = req.body.userId
     connection.query (`INSERT INTO ETB.favorites (recipe_id, user_id) VALUES ('${recipeID}', '${userId}')`, (err, results) => {
         if(err) { 
+            console.log(err);
             return res.status(500).send('The recipe has not been saved to favorite list')
         } else {
             res.status(200).send('the recipe has been saved to favorite list')
         }
     })  
-})
+}) 
 
 // add a recipe to the favorite list
 router.post('/addLike', (req, res) => {
@@ -224,7 +236,7 @@ router.delete('/delete_recipe/:id', (req,res) => {
     
     connection.query(`DELETE FROM ETB.favorites WHERE user_id = '${userID}' AND recipe_id = '${recipeID}'`, (err,results) => {
         if(err) {
-            res.sendStatus(500).send('The recipe has not been deleted')
+            res.status(500).send('The recipe has not been deleted')
         }else {
             res.status(200).send('The recipes has been deleted')
         }
@@ -234,12 +246,23 @@ router.delete('/delete_recipe/:id', (req,res) => {
 router.delete('/deleteLike/:userID/:recipeID', (req,res) => {
     const recipeID = req.params.recipeID
     const userID = req.params.userID
-    const details = req.params
     connection.query(`DELETE FROM ETB.likes WHERE user_id = '${userID}' AND recipe_id = '${recipeID}'`, (err, results) => {
         if(err) {
-            res.sendStatus(500).send('The like has not been deleted')
+            res.status(500).send('The like has not been deleted')
         }else {
             res.status(200).send('The like has been deleted')
         }
     })
 })
+
+router.delete('/deleteFavorite/:userID/:recipeID', (req,res) => {
+    const recipeID = req.params.recipeID
+    const userID = req.params.userID
+    connection.query(`DELETE FROM ETB.favorites WHERE user_id = '${userID}' AND recipe_id = '${recipeID}'`, (err, results) => {
+        if(err) {
+            res.status(500).send('The like has not been deleted')
+        }else {
+            res.status(200).send('The like has been deleted')
+        }
+    })
+}) 
