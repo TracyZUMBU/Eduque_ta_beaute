@@ -167,7 +167,7 @@ router.post('/postComment', (req, res) => {
     const valuesComment = req.body
     console.log(valuesComment);
     
-    connection.query(`INSERT INTO ETB.comments (comments, user_id, recipe_id) VALUES ('${valuesComment.comment}','${valuesComment.userId}', '${valuesComment.idRecipe}')`, (err, results) => { 
+    connection.query(`INSERT INTO ETB.comments (comments, user_id, recipe_id) VALUES ("${valuesComment.comment}","${valuesComment.userId}", '${valuesComment.idRecipe}')`, (err, results) => { 
         if(err) {
             console.log(err);
             
