@@ -22,6 +22,7 @@ import Upcoming from './pages/espaceUser/Upcoming'
 
 import decode from 'jwt-decode'
 import ErrorPage from './pages/espaceUser/ErrorPage';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
 
 
   return (
+    
     <Router>
       <Switch>
         <Route exact path="/" component={Home}/>
@@ -83,7 +85,9 @@ function App() {
         <Route exact path="/upcoming/:pages" component={Upcoming}/>
         <Route component={ErrorPage}/>
       </Switch>
+     
     </Router>
+      
   );
 }
 

@@ -5,6 +5,7 @@ import '../css/style.css';
 import Header from '../components/Header'
 import Slider from '../components/Slider'
 import mainSlide from '../img/main_slide.jpeg'
+import Footer from '../components/Footer'
 
 const Home = () => {
 
@@ -20,6 +21,7 @@ const Home = () => {
     }, [])
 
     return ( 
+        <>
         <div class="grid-container">
             <Header/>
 
@@ -54,11 +56,11 @@ const Home = () => {
                 </section>
             </main>
       
-            <footer class="footer">
-
-            </footer>
+            
 
         </div>
+         <Footer/>
+         </>
     )
 }
  export default Home

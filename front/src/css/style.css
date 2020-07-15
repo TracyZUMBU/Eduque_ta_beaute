@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sirin+Stencil&display=swap");
 *,
 *::after,
 *::before {
@@ -52,7 +53,7 @@ aside {
   font-weight: 600;
   white-space: nowrap; }
   aside:hover {
-    color: black;
+    color: #222;
     transition: all .25s linear; }
 
 aside[class*="category_name"] {
@@ -99,8 +100,9 @@ span {
     display: flex;
     height: 31rem;
     padding-bottom: 2rem;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #eaeaea; }
+    margin-bottom: 2rem; }
+    .recipes-list__items:not(:last-child) {
+      border-bottom: 1px solid #eaeaea; }
   .recipes-list__image-box {
     width: 50%;
     height: 100%;
@@ -281,6 +283,83 @@ ul.dropdown__content--cat > li:hover .dropdown__content--interCat {
   .dropdown-menu__interCat {
     border: 2px solid turquoise;
     width: 25%; }
+
+.footer {
+  margin: 3.5rem 0 4rem 0;
+  background-color: #f9f9f9;
+  color: #767676;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  height: auto;
+  font-weight: 400;
+  font-size: normal; }
+  .footer__container {
+    background-color: inherit;
+    margin: 0 16rem;
+    display: flex; }
+    .footer__container > div {
+      flex: 1;
+      padding-top: 2rem; }
+      .footer__container > div:nth-child(2) {
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+        border-right: 1px solid rgba(0, 0, 0, 0.1); }
+  .footer__compartment {
+    padding: 4rem;
+    margin-bottom: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1; }
+    .footer__compartment--middle > * {
+      margin-bottom: 2rem; }
+    .footer__compartment--right {
+      position: relative; }
+      .footer__compartment--right > p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center; }
+      .footer__compartment--right > img {
+        width: 100%; }
+    .footer__compartment > * {
+      margin-bottom: 1rem; }
+
+.sitemap {
+  font-weight: 400; }
+  .sitemap__item {
+    font-size: 1.3rem;
+    text-align: center;
+    text-transform: uppercase;
+    list-style: none;
+    padding: .8rem 0;
+    line-height: 1.8rem;
+    font-weight: 400; }
+
+.logo-name {
+  color: #222;
+  font-size: 2.3rem;
+  font-family: 'Sirin Stencil', cursive; }
+
+.social-media_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  .social-media_container p {
+    color: #222;
+    text-transform: uppercase; }
+
+.caption {
+  text-align: center;
+  line-height: 1.8;
+  font-size: 1.3rem; }
+
+.social-media_logos img {
+  height: 3.5rem; }
+  .social-media_logos img:not(:last-child) {
+    margin-right: 1rem; }
 
 .form-box {
   display: flex;

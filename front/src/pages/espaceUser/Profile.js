@@ -6,6 +6,7 @@ import Header from '../../components/Header'
 import Banner from '../../components/BannerCategory'
 import Navigation from '../../components/Navigation'
 import DisplayModale from '../DisplayModale'
+import Footer from '../../components/Footer'
 
 
 
@@ -158,6 +159,7 @@ const Profile = (props) => {
                 </div>
             </div> 
             {toggleModal ? <DisplayModale deletion={deleteRecipe} closeModal={closeModal} text={'cette recette'}/> : ""}
+            <Footer/>
         </div>
     )
 }

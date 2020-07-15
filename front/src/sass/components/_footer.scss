@@ -1,0 +1,113 @@
+.footer {
+    margin: 3.5rem 0 4rem 0;
+    background-color: $color-footer;
+    color: $color-dark-grey;
+    border-top:1px solid rgba(0,0,0,0.1) ;
+    border-bottom:1px solid rgba(0,0,0,0.1) ;
+    height: auto;
+    font-weight: 400;
+    font-size: normal;
+
+    &__container{
+        background-color: inherit;
+        //border: 1px solid black;
+        margin: 0 16rem;
+        //padding-top: 3rem;
+
+        display: flex;
+        & > div {
+            flex: 1;
+            padding-top: 2rem;
+            &:nth-child(2) {
+                border-left:1px solid rgba(0,0,0,0.1) ;
+                border-right:1px solid rgba(0,0,0,0.1) ;
+            }
+
+    }
+}
+    
+    &__compartment {
+        padding: 4rem;
+        margin-bottom: 4.5rem;
+        //border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+
+        &--middle {
+            & > * {
+                margin-bottom: 2rem;
+            }
+        }
+
+        &--right {
+          position: relative;
+          
+           & > p {
+            @include centringPosition
+           }
+
+           & > img {
+               width: 100%;
+              
+           }
+        }
+      
+        & > * {
+            margin-bottom: 1rem;
+        }
+
+        
+    }
+
+}
+
+
+
+.sitemap {
+    font-weight: 400;
+    &__item {
+        font-size: 1.3rem;
+        text-align: center;
+        text-transform: uppercase;
+        list-style: none;
+        padding: .8rem 0;
+        line-height: 1.8rem;
+        font-weight: 400;
+    }
+}
+
+.logo-name {
+    color: $color-black;
+    font-size: 2.3rem;
+    font-family: 'Sirin Stencil', cursive;
+}
+
+.social-media_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    & p {
+        color: $color-black;
+        text-transform: uppercase;
+
+    }
+}
+
+.caption {
+    text-align: center;
+    line-height: 1.8;
+    font-size: 1.3rem;
+}
+
+.social-media_logos{
+    & img {
+        &:not(:last-child) {
+            margin-right:1rem;
+        }
+        height: 3.5rem;
+    }
+}
