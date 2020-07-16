@@ -6,7 +6,9 @@
         height: 31rem;
         padding-bottom: 2rem;
         margin-bottom: 2rem;
-        border-bottom: 1px solid $color-light-grey;
+        &:not(:last-child) {
+            border-bottom: 1px solid $color-light-grey;
+        }
     } 
 
     &__image-box{
@@ -41,8 +43,6 @@
     }
     &__category_name{
         padding :0 !important;
-        &--oneRecipe {
-        }
     }
 
     &__date {
@@ -78,8 +78,7 @@
         padding: .8rem;
         height:2rem;
         margin-right: 3px;
-        &--like {
-        }
+
         &:hover::before{
             position: absolute;
             content: "Liker l'article";

@@ -5,6 +5,7 @@ import Header from '../../components/Header'
 import Banner from '../../components/BannerCategory'
 import FilterRecipes from '../../components/FilterRecipes'
 import mail from '../../img/mail.svg'
+import Footer from '../../components/Footer'
 
 const RecipesPage = () => {
 
@@ -36,7 +37,7 @@ const RecipesPage = () => {
                     </div>
                 </div>
             </main>
-         
+         <Footer/>
         </div>
     )
 }
