@@ -618,9 +618,6 @@ header {
       width: 100%;
       height: 29rem; }
 
-.footer {
-  grid-area: footer; }
-
 .profile {
   display: flex;
   flex-direction: column;
