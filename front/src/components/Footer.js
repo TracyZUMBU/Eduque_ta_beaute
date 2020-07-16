@@ -42,8 +42,11 @@ const Footer = () => {
                 </div>
                 <div>
                     <div className="footer__compartment footer__compartment--right">
-                        <p classname="">ETB késako ? </p>
+                        <div className="tesst">
                         <img src={logoBrand}/>
+                            <p classname="">Le concept </p>
+
+                        </div>
                     </div>
                 </div>
             </div>

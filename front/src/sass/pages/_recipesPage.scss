@@ -37,7 +37,7 @@
 
     position: sticky;
     top: calc(#{$HTotalHeader} + 3rem);
-    //position: relative;
+   
     &::before{
         content: "";
         position:absolute; 

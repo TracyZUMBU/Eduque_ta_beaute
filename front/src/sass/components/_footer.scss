@@ -41,29 +41,58 @@
                 margin-bottom: 2rem;
             }
         }
-
-        &--right {
-          position: relative;
-          
-           & > p {
-            @include centringPosition
-           }
-
-           & > img {
-               width: 100%;
-              
-           }
-        }
       
         & > * {
             margin-bottom: 1rem;
-        }
-
-        
+        }      
     }
-
 }
 
+.tesst {
+    position: relative;
+    cursor: pointer; 
+    & > p {
+        @include centringPosition;
+        color:white;
+        font-size: 3rem;
+        z-index: 1;
+       }
+    & > img {
+        width: 100%;
+    }
+    &::before{
+
+        content: "";
+       position: absolute; 
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background-color: rgba(0,0,0,0.5); 
+       z-index: 1; 
+   }
+}
+
+.background-footer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url(../img/back_login.jpg);
+
+    &::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background-color: rgba(0,0,0,0.5);
+
+    }
+}
 
 
 .sitemap {
@@ -111,3 +140,6 @@
         height: 3.5rem;
     }
 }
+
+
+
