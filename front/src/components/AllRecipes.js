@@ -8,13 +8,9 @@ import hearted from '../img/hearted.png'
 import unhearted from '../img/unhearted.svg'
 
 const  AllRecipes = (props) => {
- 
-   
-    
-    // store user's id from decoded token
+    // Store user's id from decoded token
     const [userId, setUserId] = useState({})
-
-    //Stock response from back
+    // Store response from back
     const [response, setResponse] = useState();
 
     // amount of likes of recipe
@@ -70,7 +66,7 @@ const  AllRecipes = (props) => {
     // Check if recipes are favorited by the user
     const favoritededRecipes = recipeFavorited.find( ({recipe_id}) => recipe_id == props.id)  
 
-    // send the recipe favorited to the DB
+    // add or delete recipe favorited to the DB
     const handlePostFavorite = (recipeID) => {
         const alreadyFavorited = recipeFavorited.find( ({recipe_id}) => recipe_id == recipeID)
         if (alreadyFavorited){
@@ -86,7 +82,7 @@ const  AllRecipes = (props) => {
         }  
     }
 
-    // send the recipe liked to the DB
+    // add or delete the recipe liked to the DB
     const handlePostLike = (recipeID) => {
         //Check if recipe is already liked
         const alreadyLiked = recipeLiked.find( ({recipe_id}) => recipe_id == recipeID)

@@ -89,7 +89,7 @@ const FilterRecipes = () => {
   
     return (
     <div class="recipePage_blockLeft">
-        <div className="filtered_navigation">
+        {/* <div className="filtered_navigation">
 
             <div 
             onClick={()=> toggleDropDown()}
@@ -163,7 +163,7 @@ const FilterRecipes = () => {
                 </li>
                 )}
             </ul>
-        </nav> */}
+        </nav> */} 
 
         <div class="recipe-list-box">
                 { showAllRecipes === true ? 

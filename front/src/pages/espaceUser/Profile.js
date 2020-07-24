@@ -131,7 +131,7 @@ const Profile = (props) => {
                                     class="input_login" 
                                     id="password" 
                                     type="password" 
-                                    placeholder="Répéter le de mot de passe"
+                                    placeholder="Répéter le mot de passe"
                                     name="password" 
                                     onChange={(e) => setRepeatPassword(e.target.value)}/>
 

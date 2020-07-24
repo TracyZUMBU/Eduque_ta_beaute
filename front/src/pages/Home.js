@@ -12,6 +12,7 @@ import mode from '../img/slide_mode.jpg'
 import blog from '../img/slide_blog.jpeg'
 
 const Home = () => {
+    
     // retrieve the lastest recipes
     const [lastestRecipes, setLatestRecipes] = useState ([])
     // increment index's images array
@@ -20,7 +21,7 @@ const Home = () => {
     let imgSlide = document.getElementById.src
     
     // images of carrousel
-    let contentSlide = [
+    const contentSlide = [
         {
             photo: mainSlide,
             title: "Recette",
@@ -58,21 +59,20 @@ const Home = () => {
             setLatestRecipes(result.data)
             }
             getLatestRecipes();
-            
         }, [])
         
+        // Change slide every 4 sec
         const launchSlider = setTimeout(() => {
+            const changeImgSetTimeout = () => {
+                if (index < contentSlide.length - 1){
+                    setIndex( index +1)
+                } else {
+                    setIndex(0)
+                }
+            }
             changeImgSetTimeout()
         }, 4000)
      
-        // Change slide every 4 sec
-        const changeImgSetTimeout = () => {
-            if (index < contentSlide.length - 1){
-                setIndex( index +1)
-            } else {
-                setIndex(0)
-            }
-        }
         
         // change slide onClick
         const changeImg = () => {
@@ -82,6 +82,7 @@ const Home = () => {
                 setIndex(0)
             }
         }
+      
 
     return ( 
         <>
@@ -97,8 +98,6 @@ const Home = () => {
                             class="center__image"
                             onClick={() => changeImg()}
                         />
-                            
-                            
                     </div>
                     <div class="center__box">
                         <div class="aside-box">

@@ -5,7 +5,7 @@ const Upcoming = ({match}) => {
     return (
         <>
           <Header/>
-    <div className="background_upcomingPage">Cette partie du site est en construction {match.params.pages}</div>  
+    <div className="background_upcomingPage"></div>  
         </>
     )
 }
