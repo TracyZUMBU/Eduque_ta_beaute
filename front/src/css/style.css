@@ -44,7 +44,7 @@ a {
 
 .errorPage {
   height: 100vh;
-  background: url(../img/404page.jpg) no-repeat center;
+  background: url(../img/404page.png) no-repeat center;
   background-size: cover; }
 
 aside {
@@ -420,7 +420,8 @@ ul.dropdown__content--cat > li:hover .dropdown__content--interCat {
 .login_title {
   font-size: 5rem;
   color: #fff;
-  margin-bottom: 3rem; }
+  margin-bottom: 3rem;
+  z-index: 1; }
 
 p[class="login_title"] ~ input {
   z-index: 1;
@@ -442,9 +443,19 @@ p[class="login_title"] ~ input {
 .submit_login {
   color: #fff;
   background-color: #c9975f;
-  margin-top: 2rem; }
+  margin-top: 2rem;
+  text-transform: uppercase;
+  cursor: pointer; }
   .submit_login:hover {
     background-color: #d6b085; }
+
+.createAccount-btn {
+  background-color: white;
+  border: .5px solid #c9975f;
+  color: #c9975f;
+  margin-top: 3rem;
+  text-transform: uppercase;
+  cursor: pointer; }
 
 #logout {
   display: none; }
@@ -752,7 +763,7 @@ em {
   justify-content: center;
   width: 25%;
   margin-left: 5rem;
-  height: 55rem;
+  height: 59rem;
   background: url(../img/bathroocleaner.jpg) no-repeat;
   background-position: center;
   background-size: cover;
@@ -828,6 +839,6 @@ em {
     cursor: pointer; }
 
 .background_upcomingPage {
-  background: url(../img/upcomingPage.jpg) center no-repeat;
+  background: url(../img/page-en-construction.png) center no-repeat;
   background-size: cover;
   height: calc(100vh - calc(10rem + 5rem)); }

@@ -40,6 +40,7 @@
     font-size: 5rem;
     color: $color-white;
     margin-bottom: 3rem;
+    z-index: 1;
 }
    
 p[class="login_title"] ~ input {
@@ -71,10 +72,20 @@ p[class="login_title"] ~ input {
     color: $color-white;
     background-color: $color-orange;
     margin-top: 2rem;
+    text-transform: uppercase;
+    cursor: pointer;
     &:hover{
        background-color: lighten($color-orange, 10%);
-    }
-    
+    }    
+}
+
+.createAccount-btn {
+    background-color: white;
+    border: .5px solid #c9975f;
+    color: #c9975f;
+    margin-top: 3rem;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 #logout {

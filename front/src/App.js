@@ -26,7 +26,8 @@ import Footer from './components/Footer';
 
 
 function App() {
-
+  
+  
   // Check if the user if authentificated
   const checkAuth = () => {
     // 1. stock token from localstorage
@@ -59,12 +60,12 @@ function App() {
   )
 
 
-
+  
   return (
     
     <Router>
       <Switch>
-        <Route exact path="/" component={Home}/>
+        <Route exact path="/" component={Home} />
         <Route exact path="/categories" component={Categories}/>
         <Route exact path="/interCat/:id" component={InterCat}/>
 
@@ -89,6 +90,7 @@ function App() {
     </Router>
       
   );
+  
 }
 
 export default App;

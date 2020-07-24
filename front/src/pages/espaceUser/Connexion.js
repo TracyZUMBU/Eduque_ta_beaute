@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import {Redirect} from 'react-router-dom';
 import {useHistory} from 'react-router-dom'
 import Header from '../../components/Header'
 
@@ -66,7 +65,8 @@ const Connexion = (props) => {
                         </label>
                         <input class="input_login" id="password" type="password" name="password" onChange={(e)=> setPassword(e.target.value)} placeholder="**********"/>
                 
-                        <input  class="submit_login" type="button" value="SE CONNECTER" onClick={() => handlePost()} />   
+                        <input  class="submit_login" type="button" value="SE CONNECTER" onClick={() => handlePost()} />  
+                        <input  class="createAccount-btn" type="button" value="Créer un compte" onClick={() => history.push('/sign-up')} /> 
                 </form>
             </div>
         </>
