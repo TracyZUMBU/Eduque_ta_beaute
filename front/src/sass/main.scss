@@ -1,0 +1,23 @@
+@import "abstract/variables";
+@import "abstract/mixins";
+
+@import "base/base";
+@import "base/typography";
+
+@import "components/allRecipes";  
+@import "components/bannerCategory";
+@import "components/comments"; 
+@import "components/filterRecipes";
+@import "components/footer";  
+
+@import "pages/connexion";
+@import "pages/createArticle"; 
+@import "pages/Modal"; 
+@import "pages/home"; 
+@import "pages/profile";
+@import "pages/oneRecipePage"; 
+@import "pages/recipesPage";
+@import "pages/sectionRecipes";  
+@import "pages/sectionUsers";
+@import "pages/upcoming";    
+ 

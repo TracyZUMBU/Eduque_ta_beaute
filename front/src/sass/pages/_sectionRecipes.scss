@@ -1,0 +1,32 @@
+.admin_recipe-list-box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 2rem;
+    row-gap: 2rem;
+} 
+
+.admin_recipe-list {
+    border: 1px solid $color-orange;
+    display: flex;
+    flex-direction: column;
+    //height: 15rem;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+.admin_recipe-image {
+    width: 100%;
+    height: 20rem;
+}
+
+.admin_logo-delete {
+    cursor: pointer;
+    width: 2.5rem;
+}
+
+.admin_recipe-title {
+    font-size:2rem;
+    //display: block;
+
+}

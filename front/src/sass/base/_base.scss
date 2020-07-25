@@ -1,0 +1,53 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+} 
+  
+html {
+  font-size: 62.5%; }
+
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.main {
+  padding: 0 17rem;
+}
+
+h1 {
+  font-size: 6rem;
+}
+
+h4 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+h5 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+  
+figure {
+  margin-bottom: 1.3rem;
+}
+
+a {
+  cursor: pointer;
+}
+
+.errorPage {
+  height: 100vh;
+  background: url(../img/404page.png) no-repeat center;
+  background-size: cover;
+}

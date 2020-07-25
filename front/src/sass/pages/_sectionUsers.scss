@@ -1,0 +1,30 @@
+.user-list-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 3px solid $color-light-grey;
+    margin: 0 auto;
+    width: 80%;
+    padding: 3rem 5rem;
+    
+
+}
+
+.user-list {
+    display: flex;
+    font-size: 2rem;
+    border: 2px solid $color-light-grey;
+    margin-bottom: 2rem;
+    //width: 80%;
+    //margin: 0 auto 3 auto;
+    & > :not(:last-child) {
+        margin-right: 3rem;
+    }
+
+    &__name {
+        text-transform: uppercase;
+    }
+
+    &__delete {
+        cursor: pointer;
+    }
+}

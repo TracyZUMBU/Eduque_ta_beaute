@@ -1,0 +1,13 @@
+.banner-box {
+    height: calc(#{$HBannerHeader} + 1rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4rem;
+    background-image: url(../img/baking.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+  
+}
