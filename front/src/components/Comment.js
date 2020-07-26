@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 import logo_comment from '../img/chat.svg'
@@ -16,9 +16,10 @@ const Comment = (props) => {
     const [displayComment, setDisplayComment] = useState([])
      // Stock details of the token after decodeding
      const [decodedToken, setDecodedToken] = useState({})
+     // check if the user is logged in 
      const [isLoggedIn, setIsLoggedIn] = useState(false)
-     //
-     let form = useRef();
+    
+     
     
     useEffect(()=> {
 
@@ -30,7 +31,6 @@ const Comment = (props) => {
                 const base64Payload = tokenFromStorage.split('.')[1]
                 // 3. decoded payload's token and parse it so that we can get the user id
                  setDecodedToken(JSON.parse(window.atob(base64Payload)))
-                 //console.log(userId, decodedToken, decodedToken.id);
                  setIsLoggedIn(true)                 
             } else {
                 return 'not token to parse'
@@ -51,14 +51,13 @@ const Comment = (props) => {
 
 
     // Send user's comment to the back
-    const handlePost = () => {
+    const handlePostComment = () => {
         const userId = decodedToken.id
         valuesComment = {comment, idRecipe, userId}
         const url = 'http://localhost:4000/user/postComment'
         axios.post(url, valuesComment)
         .then(res => setResponse(res))
-        //! TypeError: form.current.reset is not a function
-            //form.current.reset();
+        document.getElementById("message").value = ""
     }
 
     return (
@@ -77,18 +76,18 @@ const Comment = (props) => {
             <div class="commentSection__writeComment">
                 <h4 class="">Laissez un commentaire</h4>
                 <textarea 
-                    ref={form} 
+                    id="message" 
                     class="type_comment" 
-                    name="comment" 
+                    name="comment"
                     onChange={(e)=> setComment(e.target.value)} 
-                    placeholder={isLoggedIn ? "Vous avez testé la recette ? Qu'en avez-vous pensé ? " : "Connectez-vous, pour laisser un commentaire"} 
+                    placeholder={isLoggedIn ? "Vous avez testé la recette ? Qu'en avez-vous pensé ? " : "Connectez-vous pour laisser un commentaire"} 
                     rows="5" 
                     cols="33"/>
                 <input  
                     class="submitComment"
                     type="button" 
                     value="Envoyer" 
-                    onClick={() => handlePost()} />
+                    onClick={() => handlePostComment()} />
             </div>
         </section>
         </>
