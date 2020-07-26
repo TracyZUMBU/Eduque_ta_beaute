@@ -27,7 +27,6 @@ import Footer from './components/Footer';
 
 function App() {
   
-  
   // Check if the user if authentificated
   const checkAuth = () => {
     // 1. stock token from localstorage
