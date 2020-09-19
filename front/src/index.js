@@ -4,20 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import {createStore, combineReducers} from 'redux';
-import {Provider} from 'react-redux';
 
-//import des reducers
-import getCatRecipesReducer from './reducer/getCatRecipesReducer'
-
-// 
-const rootReducer = combineReducers({
-  getCatRecipesReducer
-})
-
-const store = createStore(rootReducer)
-
-ReactDOM.render( <React.StrictMode> <Provider store={store}><App /></Provider></React.StrictMode>, document.getElementById('root')
+ReactDOM.render( <React.StrictMode> <App /></React.StrictMode>, document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

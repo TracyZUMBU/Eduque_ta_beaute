@@ -14,6 +14,7 @@ const CreateProfile = () => {
     
     const handlePost = () => {
         const url = 'http://localhost:4000/register/sign-up';
+        console.log(content);
         axios.post(url, content)
         .then(res => setResponse(res))
     }

@@ -25,7 +25,6 @@ module.exports = {
           msg: 'Both passwords must match'
         });
       }
-  
       next();
     },
 

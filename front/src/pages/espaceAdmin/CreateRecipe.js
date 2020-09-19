@@ -125,8 +125,7 @@ const CreateRecipe = (props) => {
                         value={el.id}
                         id="category-select">
                             {el.name}
-                        </option>
-                        
+                        </option>                        
                      ))}
                 </select>
 

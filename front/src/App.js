@@ -58,12 +58,10 @@ function App() {
     )}/>
   )
 
-
-  
   return (
-    
     <Router>
       <Switch>
+        
         <Route exact path="/" component={Home} />
         <Route exact path="/categories" component={Categories}/>
         <Route exact path="/interCat/:id" component={InterCat}/>
@@ -85,9 +83,7 @@ function App() {
         <Route exact path="/upcoming/:pages" component={Upcoming}/>
         <Route component={ErrorPage}/>
       </Switch>
-     
-    </Router>
-      
+    </Router>   
   );
   
 }

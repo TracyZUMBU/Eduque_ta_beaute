@@ -4,8 +4,6 @@ import {useHistory} from 'react-router-dom'
 import Header from '../../components/Header'
 
 
-
-
 const Connexion = (props) => {
 
        // state Admin
@@ -17,7 +15,6 @@ const Connexion = (props) => {
        const [email, setEmail] = useState();
        const [password, setPassword] = useState();
 
-       //
        let history = useHistory()
       
    

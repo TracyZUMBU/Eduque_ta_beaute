@@ -104,7 +104,7 @@ const  AllRecipes = (props) => {
     return (
 
         <div class="recipes-list">
-            <div key={props.id}class="recipes-list__items">
+            <div key={props.id} class="recipes-list__items">
                 <div class="recipes-list__image-box">
                     <Link to={`/recipe/${props.id}`}>
                     <img class="recipes-list__image" src={props.photo}/></Link>
