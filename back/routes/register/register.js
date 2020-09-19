@@ -21,24 +21,24 @@ app.use(expressJwt({ secret: secret }).unless({ path: ["/Connexion"] }));
 router.post("/sign-up", userMiddleware.validateRegister, (req, res, next) => {
   const content = req.body;
 
-  //check if the user typed is already existed
+  //check if the user's email typed is already existed
   connection.query(
     "SELECT * FROM ETB.users WHERE LOWER(username) = ?",
-    content.username,
+    content.email,
     (err, resultat) => {
-      //username is already in use
+      //email is already in use
       if (resultat.length) {
         return res.status(409).send({
-          msg: "This username is already in use!",
+          msg: "This email is already in use!",
         });
       } else {
-        // username is available
-        console.log("username is available");
+        // email is available
+        console.log("email is available");
       }
     }
   );
 
-  //script the password typed
+  //encryped the password typed
   const password = bcrypt.hashSync(content.password);
 
   // enter the user's details into the DBB
@@ -46,14 +46,41 @@ router.post("/sign-up", userMiddleware.validateRegister, (req, res, next) => {
     `INSERT INTO ETB.users (username, email, password) VALUES ('${content.username}', '${content.email}', '${password}')`,
     (err, result) => {
       if (err) {
-        console.log('err:', err)
+        console.log('err for inserting new user:', err)
         return res.status(500).send("Cannot register the user");
       } else {
-        res.status(200).send("the user has been registered");
+        connection.query(
+          `SELECT id FROM ETB.users WHERE email = ?`, content.email, (err,results) => {
+            if (err) {
+              console.log("err for getting the user's id:", err)
+              return res.status(500).send(err)
+            }else {
+              console.log("id of the user:", results);
+              res.status(200).send({
+               msg:"the user has been registered",
+               userId: results
+              })
+            }
+          }
+        )
       }
     }
   );
+
+  // get id form the new user
+  // connection.query(
+  //   `SELECT id FROM ETB.users WHERE email = ?`, content.email, (err,results) => {
+  //     if (err) {
+  //       console.log("err for getting the user's id:", err)
+  //       return res.status(500).send(err)
+  //     }else {
+  //       console.log(results);
+  //       res.status(200).json(results)
+  //     }
+  //   }
+  // )
 });
+
 
 
 //////////////////////////////// LOGIN ROUTE 
@@ -72,7 +99,6 @@ router.post("/login", (req, res) => {
     (err, result) => {
       if (err) {
         console.log("err 1");
-
         return res.status(500).send(err);
       } else if (!result[0]) {
         // on verifie la presnec d'un resultat dans la reponse
