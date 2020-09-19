@@ -66,19 +66,6 @@ router.post("/sign-up", userMiddleware.validateRegister, (req, res, next) => {
       }
     }
   );
-
-  // get id form the new user
-  // connection.query(
-  //   `SELECT id FROM ETB.users WHERE email = ?`, content.email, (err,results) => {
-  //     if (err) {
-  //       console.log("err for getting the user's id:", err)
-  //       return res.status(500).send(err)
-  //     }else {
-  //       console.log(results);
-  //       res.status(200).json(results)
-  //     }
-  //   }
-  // )
 });
 
 
