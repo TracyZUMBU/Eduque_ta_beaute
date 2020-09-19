@@ -1,24 +1,30 @@
 import React, {useState} from 'react'
+import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import Header from '../../components/Header';
 
 const CreateProfile = () => {
 
-    
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [password_repeat, setPassword_repeat] = useState();
     const [email, setEmail] = useState();
     const content = {username, email, password, password_repeat}
-    const [response, setResponse] = useState();
+    let history = useHistory()
+    //get the user's id to go into his profile page (to do)
+    const [userId, setUserId] = useState()
     
-    const handlePost = () => {
+    const handlePost = async () => {
         const url = 'http://localhost:4000/register/sign-up';
         console.log(content);
         axios.post(url, content)
-        .then(res => setResponse(res))
+        .then(res => res.data)
+        .then(data => {
+            setUserId(data.userId[0].id)
+        })
+        history.push('/connexion')
     }
-    
+
     return (
         <div>
             <Header/>
