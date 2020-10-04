@@ -5,23 +5,23 @@
     align-items: center;
   
     height: calc(100vh - #{$HTotalHeader});
-    //border: 25px solid blue;
     background: url(../img/back_login.jpeg) no-repeat center;
     background-size: cover;
-   
-    //opacity: 0.5;
-   
 } 
 
 .login_form {
     width: 30%;
     padding: 3rem;
-    //border: 2px solid white;
-    //padding: 18rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
+    @include respond(tab-land) {
+        width: max-content;
+      }
+      @include respond(tab-port) {
+        width: max-content;
+      }
     &::before {
         content: '';
         position: absolute;
@@ -30,9 +30,7 @@
         top:0;
         left:0;
         background-color: rgba(0,0,0,0.1);
-        
     }
-    
 }
 
 .login_title {

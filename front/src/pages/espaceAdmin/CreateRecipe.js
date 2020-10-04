@@ -168,8 +168,8 @@ const CreateRecipe = (props) => {
                     content_css : "./css/style.css",
                     theme_advanced_font_sizes: "10px,12px,13px,14px,16px,18px,20px",
                     font_size_style_values : "10px,12px,13px,14px,16px,18px,20px",
-                    height: 400,
-                    width: 1000,
+                    height: 300,
+                    width: 600,
                     menubar: false,
                     plugins: [
                         'advlist autolink lists link image charmap print preview anchor',
@@ -191,8 +191,8 @@ const CreateRecipe = (props) => {
                     content_css : "./css/style.css",
                     theme_advanced_font_sizes: "10px,12px,13px,14px,16px,18px,20px",
                     font_size_style_values : "10px,12px,13px,14px,16px,18px,20px",
-                    height: 400,
-                    width: 1000,
+                    height: 300,
+                    width: 600,
                     menubar: false,
                     plugins: [
                         'advlist autolink lists link image charmap print preview anchor',
@@ -214,8 +214,8 @@ const CreateRecipe = (props) => {
                     content_css : "./css/style.css",
                     theme_advanced_font_sizes: "10px,12px,13px,14px,16px,18px,20px",
                     font_size_style_values : "10px,12px,13px,14px,16px,18px,20px",
-                    height: 400,
-                    width: 1000,
+                    height: 300,
+                    width: 600,
                     menubar: false,
                     plugins: [
                         'advlist autolink lists link image charmap print preview anchor',

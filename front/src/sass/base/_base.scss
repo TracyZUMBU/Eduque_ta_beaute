@@ -3,33 +3,79 @@
 *::before {
   margin: 0;
   padding: 0;
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
-a, a:hover, a:focus, a:active {
-    text-decoration: none;
-    color: inherit;
-} 
-  
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
 html {
-  font-size: 62.5%; }
+  font-size: 62.5%;
+  @include respond(tab-land) {
+    // width < 1200?
+    font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
+  }
+
+  @include respond(tab-port) {
+    // width < 900?
+    font-size: 50%; //1 rem = 8px, 8/16 = 50%
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%; //1rem = 12, 12/16 
+  }
+}
 
 body {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .main {
   padding: 0 17rem;
+
+  @include respond(tab-land){
+    padding: 0 3rem;
+  }
+
+  @include respond(tab-port){
+    padding: 0 3rem;
+  }
+  @include respond(phone){
+    padding: 0 1rem;
+  }
 }
 
 h1 {
+  text-align: center;
   font-size: 6rem;
+  @include respond(tab-land) {
+    
+    font-size: 4.5rem;
+  }
+  @include respond(tab-land) {
+    font-size: 4.5rem;  }
+    @include respond(phone){
+      font-size:2rem;
 }
-
+}
 h4 {
   font-size: 1.6rem;
   margin-bottom: 1rem;
   font-weight: 400;
   line-height: 1.4;
+  @include respond(phone){
+    text-align: center;
+    margin: 0 auto;
+    width: 85%;
+    &:not(:last-child){
+      margin-bottom: 3rem;
+    }
+  }
 }
 
 h5 {
@@ -37,9 +83,12 @@ h5 {
   font-weight: 400;
   text-transform: uppercase;
 }
-  
+
 figure {
   margin-bottom: 1.3rem;
+  @include respond(phone){
+    text-align: center;
+  }
 }
 
 a {

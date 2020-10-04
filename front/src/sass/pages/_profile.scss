@@ -65,6 +65,17 @@
    grid-template-columns: repeat(3, 1fr);
    column-gap: 7rem;
    row-gap: 4rem;
+   @include respond(tab-land) {
+    padding: 3rem 2rem;
+}
+@include respond(tab-land) {
+    padding: 3rem 2rem;
+}
+@include respond(phone){
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+  }
 
 }
 
@@ -83,6 +94,12 @@
     &__image {
         width: 100%;
         height: 27rem;
+        @include respond(tab-land) {
+            height: 17rem;
+        }
+        @include respond(tab-port) {
+            height: 17rem;
+        }
     }
 
     &__subcat {

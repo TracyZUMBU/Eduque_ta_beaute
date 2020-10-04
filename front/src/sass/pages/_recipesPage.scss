@@ -7,10 +7,16 @@
 
 .recipePage_blockLeft {
     width: 75%;
+      @include respond(phone){
+        width: 100%;
+      }
 }
 .recipes-container{
     display: flex;
     width: 100%;
+      @include respond(phone){
+        flex-direction: column;
+      }
     
 }
 
@@ -48,6 +54,9 @@
         background-color: rgba(0,0,0,0.5); /* Black background with opacity */
         z-index: -1;
     }
+    @include respond(phone){
+width: 100%; 
+margin-left: 0rem;     }
 }
 
 
@@ -67,4 +76,8 @@
 
 .logo_mail {
     cursor: pointer;
+    @include respond(phone){
+        height: 11rem;
+        margin-top: 0;
+      }
 }

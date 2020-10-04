@@ -11,6 +11,9 @@ aside {
         color: $color-black;
         @include hoverLink;
     }
+    @include respond(phone){
+        text-align: center;
+      }
 }
 
 aside[class*="category_name"]{

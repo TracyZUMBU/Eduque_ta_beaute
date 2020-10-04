@@ -4,22 +4,48 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
     padding: 4rem 0;
 }
 
 .form_createRecipe {
-
     display: flex;
     flex-direction: column;
     align-items: center;
+    @include respond(tab-land) {
+        width: 100%;
+    }
+    
 
 }
 
 .input_form_createRecipe {
     width: 70%;
     height: 5rem;
-    &:not(:last-of-type) {
-        
-    }
+
 }
+
+.tox .tox-sidebar-wrap {
+    @include respond(tab-land) {
+ width: 45%;
+}
+@include respond(tab-port) {
+    width: 45%;
+   }
+
+   }
+   
+   div.tox:nth-child(13),
+   div.tox:nth-child(14),
+   div.tox:nth-child(15) {
+       @include respond(tab-land){
+        visibility: hidden;
+    width: 100%;
+    height: 300px;
+       }
+       @include respond(tab-port){
+        visibility: hidden;
+    width: 100%;
+    height: 300px;
+       }
+   }
+   
